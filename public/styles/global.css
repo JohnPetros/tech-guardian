@@ -1,0 +1,68 @@
+:root {
+  --purple-700: #996dff;
+
+  --yellow-700: #fba94c;
+
+  --green-700: #00875f;
+  --green-500: #00b37e;
+  --green-300: #04d361;
+
+  --gray-700: #121214;
+  --gray-600: #202024;
+  --gray-500: #29292e;
+  --gray-400: #323238;
+  --gray-300: #7c7c8a;
+  --gray-200: #c4c4cc;
+  --gray-100: #e1e1e6;
+
+  font-size: 62.5%; /* 10px */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+
+  background-color: var(--gray-700);
+
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+}
+
+@media (max-width: 1080px) {
+  body {
+    font-size: 94.75%;
+  }
+}
+
+@media (max-width: 720px) {
+  body {
+    font-size: 90.5%;
+  }
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+a {
+  transition: filter 0.3s;
+}
+
+button:hover,
+a:hover {
+  filter: brightness(1.2);
+}
