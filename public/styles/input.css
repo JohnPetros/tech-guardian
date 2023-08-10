@@ -1,0 +1,46 @@
+label.src-only {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+fieldset {
+  width: 100%;
+}
+
+.input-container {
+  background-color: var(--gray-700);
+  color: var(--gray-300);
+
+  width: 100%;
+
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.input-container .content {
+  display: flex;
+  align-items: center;
+}
+
+.input-container input {
+  color: var(--gray-200);
+  background-color: transparent;
+
+  outline: none;
+  border: none;
+
+  padding: 8px;
+
+  font-size: 1.6rem;
+}
+
+.input-container input::placeholder {
+  color: var(--gray-300);
+}
