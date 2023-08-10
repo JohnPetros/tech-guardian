@@ -2,8 +2,10 @@
   "name": "tech-guardian",
   "version": "1.0.0",
   "description": "Simple help desk app",
-  "main": "index.js",
-  "scripts": {},
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon ."
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JohnPetros/tech-guardian.git"
@@ -16,6 +18,10 @@
   },
   "homepage": "https://github.com/JohnPetros/tech-guardian#readme",
   "dependencies": {
+    "ejs": "^3.1.9",
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
