@@ -7,4 +7,6 @@ const loginRouter = Router()
 
 loginRouter.get('/', loginController.getLoginPage)
 
+loginRouter.post('/login', loginController.handleLogin)
+
 module.exports = loginRouter
