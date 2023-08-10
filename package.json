@@ -1,0 +1,19 @@
+{
+  "name": "tech-guardian",
+  "version": "1.0.0",
+  "description": "Simple help desk app",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnPetros/tech-guardian.git"
+  },
+  "keywords": [],
+  "author": "Jonh Petros",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/JohnPetros/tech-guardian/issues"
+  },
+  "homepage": "https://github.com/JohnPetros/tech-guardian#readme"
+}
