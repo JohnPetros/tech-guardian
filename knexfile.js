@@ -15,11 +15,11 @@ module.exports = {
     seeds: {
       directory: path.resolve(__dirname, 'src', 'database', 'seeds'),
     },
-    // pool: {
-    //   afterCreate: (connection, callback) => {
-    //     connection.run('PRAGMA foreign_keys=ON', callback)
-    //   },
-    // },
     useNullAdsDefault: true,
+    pool: {
+      max: 3,
+      min: 0,
+      idleTimeoutMillis: 1000,
+    },
   },
 }
