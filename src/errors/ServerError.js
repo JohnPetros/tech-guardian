@@ -1,10 +1,9 @@
 class ServerError {
-  message
-  statusCode
-
-  constructor(message, statusCode = 500) {
+  constructor(page, message, pageData, status = 400) {
+    this.page = page
     this.message = message
-    this.statusCode = statusCode
+    this.pageData = pageData
+    this.status = status
   }
 }
 
