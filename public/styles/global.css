@@ -16,6 +16,8 @@
   --gray-100: #e1e1e6;
 
   font-size: 62.5%; /* 10px */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
