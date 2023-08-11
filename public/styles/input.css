@@ -20,7 +20,7 @@ fieldset {
 
   width: 100%;
 
-  padding: 8px;
+  padding: 8px 1.2rem;
   border-radius: 8px;
 }
 
@@ -37,6 +37,8 @@ fieldset {
   border: none;
 
   padding: 8px;
+
+  width: 100%;
 
   font-size: 1.6rem;
 }
