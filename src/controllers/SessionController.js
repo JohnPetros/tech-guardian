@@ -1,3 +1,4 @@
+const ServerError = require('../errors/ServerError')
 const LoginUser = require('../services/session/LoginUser')
 
 class SessionController {
@@ -5,19 +6,27 @@ class SessionController {
     response.render('pages/login.ejs')
   }
 
-  loginUser(request, response) {
+  async loginUser(request, response, next) {
     const { email, password } = request.body
     const loginUser = new LoginUser()
 
-    const loggedUser = loginUser.execute(email, password)
+    const loggedUser = await loginUser.execute(email, password)
 
     if (!loggedUser) {
-      response.render('pages/login.ejs', { message: 'Usuário não encontrado' })
+      response.render('pages/login.ejs', {
+        message: {
+          type: 'error',
+          body: 'Usuário não encontrado',
+        },
+        email,
+        password,
+      })
+      return
     }
 
     request.session.user = loggedUser
 
-    response.render('pages/dashboard/order.ejs')
+    response.redirect('/open-orders')
   }
 }
 
