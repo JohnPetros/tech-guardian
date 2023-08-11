@@ -16,13 +16,14 @@
     <%- include("../partials/header.ejs") %>
 
     <main>
-      <form action="">
+      <form action="/login" method="POST">
         <fieldset>
           <legend>Acesse sua conta</legend>
 
           <div class="inputs">
             <%- include("../partials/input.ejs", {type: 'email', placeholder:
-            'E-mail', icon: 'mail'}) %> <%- include("../partials/input.ejs",
+            'E-mail', icon: 'mail'}) %> 
+            <%- include("../partials/input.ejs",
             {type: 'password', placeholder: 'Senha', icon: 'key'}) %>
           </div>
         </fieldset>
