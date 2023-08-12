@@ -16,3 +16,13 @@ main.container {
   width: 100%;
   height: calc(100% - 7.2rem);
 }
+
+.toasts {
+  position: absolute;
+  top: 4rem;
+  right: 2.4rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
