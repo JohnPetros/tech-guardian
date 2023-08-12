@@ -18,10 +18,10 @@ class LoginUser {
     }
 
     if (!user.password) {
-      return null
+      return { errors: ['usuário não encontrado'], user: null }
     }
 
-    return user
+    return { errors: null, user }
   }
 }
 
