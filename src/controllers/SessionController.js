@@ -15,6 +15,22 @@ class SessionController {
     })
   }
 
+  renderRegisterPage(request, response) {
+    const queryParams = request.query
+    const { errorMessages, name, email, password, passwordConfirmation } = queryParams
+
+    const formatedErrorMessages = formatMessages('error', errorMessages)
+
+    response.render('pages/register.ejs', {
+      messages: formatedErrorMessages,
+      name: name ?? '',
+      email: email ?? '',
+      password: password ?? '',
+      passwordConfirmation: passwordConfirmation ?? '',
+      password: password ?? '',
+    })
+  }
+
   async loginUser(request, response) {
     const { email, password } = request.body
 
