@@ -1,5 +1,7 @@
 const formatMessages = require('../helpers/formatMessages')
+const formatUrlParams = require('../helpers/formatUrlParams')
 const LoginUser = require('../services/session/LoginUser')
+const RegisterUser = require('../services/session/registerUser')
 
 class SessionController {
   renderLoginPage(request, response) {
@@ -17,7 +19,8 @@ class SessionController {
 
   renderRegisterPage(request, response) {
     const queryParams = request.query
-    const { errorMessages, name, email, password, passwordConfirmation } = queryParams
+    const { errorMessages, name, email, password, passwordConfirmation } =
+      queryParams
 
     const formatedErrorMessages = formatMessages('error', errorMessages)
 
@@ -42,7 +45,7 @@ class SessionController {
       response.redirect(
         `/?errorMessages=${errors
           .map((error) => error.split(' ').join('-'))
-          .join(';')}&email=${email}&password=${password}`
+          .join(';')}&${formatUrlParams({ email, password })}`
       )
       return
     }
@@ -55,6 +58,37 @@ class SessionController {
     }
 
     response.redirect('/open-orders')
+  }
+
+  async registerUser(request, response) {
+    const { name, email, password, passwordConfirmation } = request.body
+
+    console.log(name, email, password, passwordConfirmation);
+
+    const registerUser = new RegisterUser()
+
+    const { errors, user } = await registerUser.execute({
+      name,
+      email,
+      password,
+      passwordConfirmation,
+    })
+
+    if (errors) {
+      response.redirect(
+        `/register?errorMessages=${errors
+          .map((error) => error.split(' ').join('-'))
+          .join(';')}&${formatUrlParams({
+          name,
+          email,
+          password,
+          passwordConfirmation,
+        })}`
+      )
+      return
+    }
+
+    response.send('ok')
   }
 }
 
