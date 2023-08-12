@@ -22,9 +22,7 @@ class SessionController {
 
     const { errors, user } = await loginUser.execute(email, password)
 
-    console.log(errors);
-
-    if (errors.length) {
+    if (errors) {
       response.redirect(
         `/?errorMessages=${errors
           .map((error) => error.split(' ').join('-'))
@@ -33,7 +31,12 @@ class SessionController {
       return
     }
 
-    request.session.user = user
+    request.session.user = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+    }
 
     response.redirect('/open-orders')
   }
