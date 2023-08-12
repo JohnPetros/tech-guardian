@@ -1,11 +1,19 @@
 <div class="input-container">
-  <label class="sr-only" for="<%= type %>"></label>
+  <label class="sr-only" for="<%= id %>"></label>
   <div class="content">
     <% if (typeof icon !== 'undefined') { %>
-    <img src="/assets/icons/<%= icon %>.svg" width="24" height="24" alt="" />
-    <% } %> <input type="<%= type %>" name="<%= type %>" id="<%= type %>"
-    placeholder="<%= placeholder %>" value="<%= value %>" <%
-    validations.forEach(validation => { %> data-validate-<%= validation %> <% })
-    %> />
+      <img src="/assets/icons/<%= icon %>.svg" width="24" height="24" alt="" />
+    <% } %>
+
+    <input
+      id="<%= id %>"
+      type="<%= type %>"
+      name="<%= type %>"
+      placeholder="<%= placeholder %>"
+      value="<%= value %>"
+      <% validations.forEach(validation => { %>
+        data-validate-<%= validation.type %>="<%= validation.value ?? '' %>"
+      <% }) %>
+    />
   </div>
 </div>
