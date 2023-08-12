@@ -12,9 +12,12 @@
 
     <main class="container">
 
-      <% messages.forEach(message => { %>
-        <%- include("../partials/toast.ejs", { type: message.type, body: message.body }) %>
-    <% }) %>
+      <div class="toasts">
+        <% messages.forEach(message => { %>
+          <%- include("../partials/toast.ejs", { type: message.type, body: message.body }) %>
+        <% }) %>
+      </div>
+   
 
       <form action="/login" method="POST" data-form>
         <fieldset>
@@ -29,7 +32,7 @@
                   placeholder: 'E-mail',
                   icon: 'mail',
                   value: email,
-                  validations: ['string', 'required', 'email']
+                  validations: ['required', 'email']
                  }
               )
              %>
@@ -41,7 +44,7 @@
                   placeholder: 'Senha',
                   icon: 'key',
                   value: password,
-                  validations: ['string', 'required', 'password']
+                  validations: ['required', 'password']
                 }
               ) 
             %>
