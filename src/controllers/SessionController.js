@@ -1,26 +1,28 @@
-const ServerError = require('../errors/ServerError')
+const formatMessage = require('../helpers/formatMessage')
 const LoginUser = require('../services/session/LoginUser')
 
 class SessionController {
-  renderLoginPage(_, response) {
-    response.render('pages/login.ejs')
+  renderLoginPage(request, response) {
+    const queryParams = request.query
+    const { message, email, password } = queryParams
+
+    response.render('pages/login.ejs', {
+      message: message ? formatMessage(message) : '',
+      email: email ?? '',
+      password: password ?? '',
+    })
   }
 
-  async loginUser(request, response, next) {
+  async loginUser(request, response) {
     const { email, password } = request.body
     const loginUser = new LoginUser()
 
     const loggedUser = await loginUser.execute(email, password)
 
     if (!loggedUser) {
-      response.render('pages/login.ejs', {
-        message: {
-          type: 'error',
-          body: 'Usuário não encontrado',
-        },
-        email,
-        password,
-      })
+      response.redirect(
+        `/?message=error:usuário-não-encontrado&email=${email}&password=${password}`
+      )
       return
     }
 
