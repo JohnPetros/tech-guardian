@@ -1,26 +1,27 @@
 const express = require('express')
-const session = require('express-session')
-const bodyParser = require('body-parser')
-const routes = require('./routes')
-const path = require('path')
+
+require('express-async-errors')
+
+const handleServerError = require('./middlewares/handleServerError')
+const setSession = require('./middlewares/setSession')
 
 const server = express()
 
-server.use(express.static('public'))
+const path = require('path')
 
-server.use(
-  session({
-    secret: 'naidrugahtceht',
-    resave: false,
-    saveUninitialized: true,
-  })
-)
+const routes = require('./routes')
+
+server.use(express.static('public'))
 
 server.set('view engine', 'ejs')
 server.set('views', path.join(__dirname, 'views'))
 
 server.use(express.urlencoded({ extended: false }))
 
+server.use(setSession)
+
 server.use(routes)
+
+server.use(handleServerError)
 
 server.listen(3000, () => console.log('Server is Running'))
