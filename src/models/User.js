@@ -2,14 +2,15 @@ const knex = require('../database')
 const ServerError = require('../errors/ServerError')
 
 class User {
-  async findByEmail(email) {
-    try {
-      const user = await knex('users').where({ email }).first()
 
-      return user
-    } catch (error) {
-      throw new ServerError(error)
-    }
+  async create({ id, name, email, password }) {
+    return knex('users').insert({ id, name, email, password })
+  }
+
+  async findByEmail(email) {
+    const user = await knex('users').where({ email }).first()
+
+    return user
   }
 }
 
