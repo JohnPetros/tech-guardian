@@ -1,16 +1,14 @@
 .toast {
-  position: absolute;
-  top: 4rem;
-  right: 2.4rem;
-
   font-weight: 700;
 
   border-radius: 8px;
 
-  transition: transform 1s ease;
+  transition: transform 1.5s ease;
   transform: translateX(150%);
 
   overflow: hidden;
+
+  max-width: 360px;
 }
 
 .toast.open {
@@ -24,7 +22,6 @@
   position: relative;
 
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 8px;
 }
