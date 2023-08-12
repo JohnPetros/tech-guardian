@@ -1,18 +1,26 @@
 export class Toast {
   constructor(toast) {
-    this.toast = document.querySelector(toast)
-    this.closeButton = this.toast.querySelector('.close')
+    this.toasts = document.querySelectorAll(toast)
 
-    this.close = this.close.bind(this)
-    this.closeButton.addEventListener('click', this.close)
+    this.closeButtons = [...this.toasts].map((toast) => {
+      return toast.querySelector('.close')
+    })
+
+    this.closeButtons.forEach((button) => {
+      button.addEventListener('click', this.close)
+    })
+  }
+
+  closeAll() {
+    this.toasts.forEach((toast) => toast.classList.remove('open'))
   }
 
   close() {
-    this.toast.classList.remove('open')
+    this.parentElement.parentElement.classList.remove('open')
   }
 
   open() {
-    this.toast.classList.add('open')
-    setTimeout(() => this.close(), 3000)
+    this.toasts.forEach((toast) => toast.classList.add('open'))
+    setTimeout(() => this.closeAll(), 3000)
   }
 }
