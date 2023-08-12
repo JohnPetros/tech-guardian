@@ -19,6 +19,10 @@ export class Form {
     this.form.addEventListener('submit', this.onSubmit)
   }
 
+  hasErrors() {
+    return Boolean(this.form.querySelectorAll('.error').length)
+  }
+
   createError(errorMessage) {
     const error = document.createElement('p')
     error.classList.add('error')
@@ -26,30 +30,33 @@ export class Form {
     return error
   }
 
-  showError(errorMessage, input) {
-    const error = this.createError(errorMessage)
-    console.log(error)
-
-    input.parentElement.insertAdjacentElement('afterend', error)
+  removeErrors(input) {
+    const errors = input.parentElement.parentElement.querySelectorAll('.error')
+    errors.forEach((error) => error.remove())
   }
 
-  validateString(input) {
-    if (this.stringRegex.test(input.value)) {
-      return true
-    }
+  showError(errorMessage, input) {
+    const inputContainer = input.parentElement
+    this.removeErrors(input)
 
-    this.showError('Insira um texto válido', input)
-    return false
+    const error = this.createError(errorMessage)
+
+    inputContainer.insertAdjacentElement('afterend', error)
   }
 
   validateRequired(input) {
-    if (!input.value) {
+    if (input.value) {
       this.showError('Preencha esse campo', input)
+      return true
     }
+
+    this.removeErrors(input)
+    return false
   }
 
   validateEmail(input) {
     if (this.emailRegex.test(input.value)) {
+      this.removeErrors(input)
       return true
     }
 
@@ -59,6 +66,7 @@ export class Form {
 
   validatePassword(input) {
     if (this.passwordRegex.test(input.value)) {
+      this.removeErrors(input)
       return true
     }
 
@@ -72,10 +80,12 @@ export class Form {
   validateInput(input) {
     const validations = input.dataset
 
-    let validatedInputs = []
-
     for (const validation of Object.keys(validations)) {
       this[validation](input)
+    }
+
+    if (!this.hasErrors()) {
+      this.form.submit()
     }
   }
 
