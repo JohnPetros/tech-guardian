@@ -1,13 +1,15 @@
-const formatMessage = require('../helpers/formatMessage')
+const formatMessages = require('../helpers/formatMessages')
 const LoginUser = require('../services/session/LoginUser')
 
 class SessionController {
   renderLoginPage(request, response) {
     const queryParams = request.query
-    const { message, email, password } = queryParams
+    const { errorMessages, email, password } = queryParams
+
+    const formatedErrorMessages = formatMessages('error', errorMessages)
 
     response.render('pages/login.ejs', {
-      message: message ? formatMessage(message) : '',
+      messages: formatedErrorMessages,
       email: email ?? '',
       password: password ?? '',
     })
@@ -15,18 +17,23 @@ class SessionController {
 
   async loginUser(request, response) {
     const { email, password } = request.body
+
     const loginUser = new LoginUser()
 
-    const loggedUser = await loginUser.execute(email, password)
+    const { errors, user } = await loginUser.execute(email, password)
 
-    if (!loggedUser) {
+    console.log(errors);
+
+    if (errors.length) {
       response.redirect(
-        `/?message=error:usuário-não-encontrado&email=${email}&password=${password}`
+        `/?errorMessages=${errors
+          .map((error) => error.split(' ').join('-'))
+          .join(';')}&email=${email}&password=${password}`
       )
       return
     }
 
-    request.session.user = loggedUser
+    request.session.user = user
 
     response.redirect('/open-orders')
   }
