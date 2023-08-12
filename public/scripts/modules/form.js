@@ -19,6 +19,10 @@ export class Form {
     this.form.addEventListener('submit', this.onSubmit)
   }
 
+  getInput(inputId) {
+    return Array.from(this.inputs).find((input) => input.id === inputId)
+  }
+
   hasErrors() {
     return Boolean(this.form.querySelectorAll('.error').length)
   }
@@ -61,6 +65,18 @@ export class Form {
     }
 
     this.showError('Nome de usuário deve ter pelo menos 3 characteres', input)
+    return false
+  }
+
+  validateEqual(input, targetInputId) {
+    const targetInput = this.getInput(targetInputId)
+
+    if (input.value === targetInput) {
+      this.removeErrors(input)
+      return true
+    }
+
+    this.showError('Senhas não conferem', input)
     return false
   }
 
