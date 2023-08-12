@@ -54,6 +54,16 @@ export class Form {
     return false
   }
 
+  validateMinLength(input, min) {
+    if (input.value.length >= min) {
+      this.removeErrors(input)
+      return true
+    }
+
+    this.showError('Nome de usuário deve ter pelo menos 3 characteres', input)
+    return false
+  }
+
   validateEmail(input) {
     if (this.emailRegex.test(input.value)) {
       this.removeErrors(input)
@@ -80,8 +90,12 @@ export class Form {
   validateInput(input) {
     const validations = input.dataset
 
-    for (const validation of Object.keys(validations)) {
-      this[validation](input)
+    console.log(validations)
+
+    for (const [validationType, validationValue] of Object.entries(
+      validations
+    )) {
+      this[validationType](input, validationValue)
     }
 
     if (!this.hasErrors()) {
