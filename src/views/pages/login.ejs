@@ -10,29 +10,60 @@
     <link rel="stylesheet" href="/styles/input.css" />
     <link rel="stylesheet" href="/styles/button.css" />
     <link rel="stylesheet" href="/styles/link.css" />
+    <link rel="stylesheet" href="/styles/toast.css" />
+    <link rel="stylesheet" href="/styles/login-page.css" />
+
+   
     <title>Tech Guardian | login</title>
   </head>
   <body>
     <%- include("../partials/header.ejs") %>
 
-    <main>
-      <form action="/login" method="POST">
+    <main class="container">
+
+      <% messages.forEach(message => { %>
+        <%- include("../partials/toast.ejs", { type: message.type, body: message.body }) %>
+    <% }) %>
+
+      <form action="/login" method="POST" data-form>
         <fieldset>
           <legend>Acesse sua conta</legend>
 
           <div class="inputs">
-            <%- include("../partials/input.ejs", {type: 'email', placeholder:
-            'E-mail', icon: 'mail'}) %> 
-            <%- include("../partials/input.ejs",
-            {type: 'password', placeholder: 'Senha', icon: 'key'}) %>
+            <%-
+             include(
+                "../partials/input.ejs",
+                {
+                  type: 'email',
+                  placeholder: 'E-mail',
+                  icon: 'mail',
+                  value: email,
+                  validations: ['string', 'required', 'email']
+                 }
+              )
+             %>
+            <%- 
+              include(
+                "../partials/input.ejs",
+                { 
+                  type: 'password',
+                  placeholder: 'Senha',
+                  icon: 'key',
+                  value: password,
+                  validations: ['string', 'required', 'password']
+                }
+              ) 
+            %>
           </div>
         </fieldset>
 
-        <%- include("../partials/button.ejs", {type: 'submit', title: 'Entrar'})
+        <%- include("../partials/button.ejs", { type: 'submit', title: 'Entrar',  })
         -%>
       </form>
 
-      <%- include("../partials/link.ejs", {href: 'register', title: 'Criar conta'}) -%>
+      <%- include("../partials/link.ejs", { href: 'register', title: 'Criar conta' }) -%>
     </main>
+
+    <script src="/scripts/login-page.mjs" type="module"></script>
   </body>
 </html>
