@@ -1,9 +1,16 @@
+require('dotenv').config()
+
 const express = require('express')
 
 require('express-async-errors')
 
 const handleServerError = require('./middlewares/handleServerError')
-const setSession = require('./middlewares/setSession')
+
+const session = require('express-session')
+
+const knex = require('./database')
+const KnexSessionStore = require('connect-session-knex')(session)
+const store = new KnexSessionStore({ knex })
 
 const server = express()
 
@@ -18,10 +25,21 @@ server.set('views', path.join(__dirname, 'views'))
 
 server.use(express.urlencoded({ extended: false }))
 
-server.use(setSession)
+server.use(
+  session({
+    name: 'tech-guardian@session',
+    secret: 'naidrugahtceht',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false, maxAge: 1000 * 60 * 60 }, // 1 hour
+    store,
+  })
+)
 
 server.use(routes)
 
 server.use(handleServerError)
 
-server.listen(3000, () => console.log('Server is Running'))
+server.listen(process.env.PORT ?? 3000, () =>
+  console.log(`Server is running on port ${process.env.PORT}`)
+)
