@@ -2,10 +2,19 @@
   position: absolute;
   top: 4rem;
   right: 2.4rem;
-  
+
   font-weight: 700;
-  
+
   border-radius: 8px;
+
+  transition: transform 1s ease;
+  transform: translateX(150%);
+
+  overflow: hidden;
+}
+
+.toast.open {
+  transform: translateX(0%);
 }
 
 .toast-content {
@@ -36,4 +45,25 @@
   background-color: transparent;
 
   color: var(--gray-100);
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  background-color: var(--gray-100);
+}
+
+.toast.open .progress {
+  height: 4px;
+  width: 100%;
+
+  animation: progress 3s linear forwards;
+}
+
+@keyframes progress {
+  100% {
+    width: 0%;
+  }
 }
