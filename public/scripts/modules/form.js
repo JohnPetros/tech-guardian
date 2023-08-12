@@ -49,30 +49,33 @@ export class Form {
   }
 
   validateRequired(input) {
-    if (input.value) {
-      this.showError('Preencha esse campo', input)
+    this.removeErrors(input)
+
+    if (!input.value) {
       return true
     }
 
-    this.removeErrors(input)
+    this.showError('Preencha esse campo', input)
     return false
   }
 
   validateMinLength(input, min) {
+    this.removeErrors(input)
+
     if (input.value.length >= min) {
-      this.removeErrors(input)
       return true
     }
 
-    this.showError('Nome de usuário deve ter pelo menos 3 characteres', input)
+    this.showError('Nome de usuário deve ter pelo menos 3 caracteres', input)
     return false
   }
 
   validateEqual(input, targetInputId) {
     const targetInput = this.getInput(targetInputId)
 
-    if (input.value === targetInput) {
-      this.removeErrors(input)
+    this.removeErrors(input)
+
+    if (input.value === targetInput.value) {
       return true
     }
 
@@ -81,8 +84,9 @@ export class Form {
   }
 
   validateEmail(input) {
+    this.removeErrors(input)
+
     if (this.emailRegex.test(input.value)) {
-      this.removeErrors(input)
       return true
     }
 
@@ -91,8 +95,9 @@ export class Form {
   }
 
   validatePassword(input) {
+    this.removeErrors(input)
+
     if (this.passwordRegex.test(input.value)) {
-      this.removeErrors(input)
       return true
     }
 
@@ -113,10 +118,6 @@ export class Form {
     )) {
       this[validationType](input, validationValue)
     }
-
-    if (!this.hasErrors()) {
-      this.form.submit()
-    }
   }
 
   sanitizeInputs(input) {
@@ -130,5 +131,11 @@ export class Form {
 
     this.inputs.forEach(this.sanitizeInputs, this)
     this.inputs.forEach(this.validateInput, this)
+
+    const hasErrors = this.hasErrors()
+
+    if (!hasErrors) {
+      this.form.submit()
+    }
   }
 }
