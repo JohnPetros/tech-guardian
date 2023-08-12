@@ -1,3 +1,11 @@
+@import './modules/global.css';
+@import './modules/header.css';
+@import './modules/form.css';
+@import './modules/input.css';
+@import './modules/button.css';
+@import './modules/link.css';
+@import './modules/toast.css';
+
 main.container {
   display: flex;
   flex-direction: column;
