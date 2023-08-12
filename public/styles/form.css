@@ -2,10 +2,9 @@ form {
   background-color: var(--gray-500);
 
   padding: 3.2rem 2.4rem;
-  margin: 16rem auto 1.2rem;
   border-radius: 4px;
 
-  max-width: 360px;
+  max-width: 364px;
   width: 90%;
 
   display: flex;
