@@ -67,11 +67,27 @@
                   value: password,
                   validations: [
                     { type: 'required' },
-                    { type: 'email' },
+                    { type: 'password' },
                   ]
                 }
               ) 
             %>
+            <%- 
+            include(
+              "../partials/input.ejs",
+              { 
+                id: 'password-confirmation',
+                type: 'password',
+                placeholder: 'Confirme sua senha',
+                icon: 'key',
+                value: passwordConfirmation,
+                validations: [
+                  { type: 'required' },
+                  { type: 'equal', value: 'password' },
+                ]
+              }
+            ) 
+          %>
           </div>
         </fieldset>
 
