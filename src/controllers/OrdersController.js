@@ -1,6 +1,12 @@
 class OrdersController {
   renderOpenOrdersPage(request, response) {
-    response.render('pages/open-orders.ejs', { user: request.session.user })
+    const { user } = request.session
+
+    if (!user) {
+      return response.redirect('/')
+    }
+    
+    response.render('pages/open-orders.ejs', { user })
   }
 }
 
