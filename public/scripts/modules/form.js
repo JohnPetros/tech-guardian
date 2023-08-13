@@ -21,7 +21,7 @@ export class Form {
       )
     }
 
-    this.onSubmit = this.onSubmit.bind(this)
+    this.onKeyDown = this.onSubmit.bind(this)
     this.onSubmit = this.onKeyDown.bind(this)
     this.form.addEventListener('submit', this.onSubmit)
   }
