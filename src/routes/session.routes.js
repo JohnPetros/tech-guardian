@@ -14,4 +14,6 @@ loginRouter.get('/register', sessionController.renderRegisterPage)
 
 loginRouter.post('/register-user', sessionController.registerUser)
 
+loginRouter.get('/logout-user', sessionController.logoutUser)
+
 module.exports = loginRouter
