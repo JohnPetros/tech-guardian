@@ -1,7 +1,10 @@
 const yup = require('yup')
 
 const loginValidation = yup.object().shape({
-  email: yup.string().required('Por favor, insira um e-mail').email('Por favor, insira um e-mail válido'),
+  email: yup
+    .string()
+    .required('Por favor, insira um e-mail')
+    .email('Por favor, insira um e-mail válido'),
   password: yup
     .string()
     .required('Por favor, insira uma senha')
@@ -12,8 +15,14 @@ const loginValidation = yup.object().shape({
 })
 
 const registerValidation = yup.object().shape({
-  name: yup.string().required('Por favor, insira um nome de usuário').min(3, 'Nome de usuário deve ter pelo menos 3 caracteres'),
-  email: yup.string().required('Por favor, insira um e-mail').email('Por favor, insira um e-mail válido'),
+  name: yup
+    .string()
+    .required('Por favor, insira um nome de usuário')
+    .min(3, 'Nome de usuário deve ter pelo menos 3 caracteres'),
+  email: yup
+    .string()
+    .required('Por favor, insira um e-mail')
+    .email('Por favor, insira um e-mail válido'),
   password: yup
     .string()
     .required('Por favor, insira uma senha')
@@ -25,6 +34,7 @@ const registerValidation = yup.object().shape({
     .string()
     .required('Por favor, confirme sua senha')
     .oneOf([yup.ref('password')], 'Senhas não conferem'),
+  roleId: yup.string().required('Por favor, escolha uma função'),
 })
 
 class Validator {
@@ -42,10 +52,16 @@ class Validator {
     )
   }
 
-  async validateRegister({ name, email, password, passwordConfirmation }) {
+  async validateRegister({
+    name,
+    email,
+    password,
+    passwordConfirmation,
+    roleId,
+  }) {
     return this.validate(() =>
       registerValidation.validate(
-        { name, email, password, passwordConfirmation },
+        { name, email, password, passwordConfirmation, roleId },
         { abortEarly: false }
       )
     )
