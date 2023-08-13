@@ -22,11 +22,14 @@ export class Form {
     }
 
     this.onSubmit = this.onSubmit.bind(this)
+    this.onSubmit = this.onKeyDown.bind(this)
     this.form.addEventListener('submit', this.onSubmit)
   }
 
-  onKeyDown() {
-    this.click()
+  onKeyDown(event) {
+    if (event.key === 'Enter') {
+      event.currentTarget.click()
+    }
   }
 
   getInput(inputId) {
