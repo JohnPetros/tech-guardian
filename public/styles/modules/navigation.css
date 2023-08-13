@@ -1,0 +1,52 @@
+.navigation {
+  width: max-content;
+}
+
+.navigation > div {
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.navigation h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--gray-100);
+}
+
+.navigation .amount {
+  font-size: 1.6rem;
+
+  color: var(--gray-200);
+}
+
+.navigation nav ul {
+  display: flex;
+  align-items: center;
+  gap: 4.8rem;
+
+  margin-top: 4rem;
+}
+
+.navigation .nav-link {
+  background-color: var(--gray-600);
+
+  border-radius: 8px;
+  border: 1px solid var(--gray-100);
+  padding: 8px 3.2rem;
+
+  font-size: 1.4rem;
+
+  color: var(--gray-100);
+  text-transform: uppercase;
+}
+
+.navigation .nav-link.yellow {
+  border-color: var(--yellow-700);
+  color: var(--yellow-700);
+}
+
+.navigation .nav-link.green {
+  border-color: var(--yellow-300);
+}
