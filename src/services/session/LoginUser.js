@@ -1,5 +1,6 @@
 const User = require('../../models/user')
 const Validator = require('../../utils/Validator')
+const bcryptjs = require('bcryptjs')
 
 class LoginUser {
   async execute(email, password) {
@@ -17,9 +18,14 @@ class LoginUser {
       return { errors: ['usuário não encontrado'], user: null }
     }
 
-    if (!user.password) {
+    const isPasswordCorrect = await bcryptjs.compare(password, user.password)
+
+    if (!isPasswordCorrect) {
       return { errors: ['usuário não encontrado'], user: null }
     }
+
+    console.log(user);
+
 
     return { errors: null, user }
   }
