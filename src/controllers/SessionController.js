@@ -41,6 +41,7 @@ class SessionController {
 
     const { errors, user } = await loginUser.execute(email, password)
 
+
     if (errors) {
       response.redirect(
         `/?errorMessages=${errors
@@ -50,20 +51,15 @@ class SessionController {
       return
     }
 
-    request.session.user = {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      avatar: user.avatar,
-    }
+    request.session.user = {}
+   
+    Object.assign(request.session.user, user)
 
     response.redirect('/open-orders')
   }
 
   async registerUser(request, response) {
     const { name, email, password, passwordConfirmation } = request.body
-
-    console.log(name, email, password, passwordConfirmation);
 
     const registerUser = new RegisterUser()
 
@@ -88,7 +84,11 @@ class SessionController {
       return
     }
 
-    response.send('ok')
+    request.session.user = {}
+
+    Object.assign(request.session.user, user)
+
+    response.redirect('/open-orders')
   }
 }
 
