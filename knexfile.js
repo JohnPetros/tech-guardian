@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config()
 const path = require('path')
 
 /**
@@ -8,7 +8,7 @@ module.exports = {
   development: {
     client: process.env.DATABASE_CLIENT,
     connection: process.env.DATABASE_URL,
-  
+
     migrations: {
       tableName: 'knex_migrations',
       directory: path.resolve(__dirname, 'src', 'database', 'migrations'),
