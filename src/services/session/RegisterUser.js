@@ -28,16 +28,14 @@ class RegisterUser {
 
     const hashedPassword = await bcrypt.hash(password, 8)
 
-    console.log(hashedPassword);
-
-    const createdUser = user.create({
+    const createdUser = await user.create({
       id: uuid.v4(),
       name,
       email,
       password: hashedPassword,
     })
 
-    return { errors: null, user: createdUser }
+    return { errors: null, user: createdUser[0] }
   }
 }
 
