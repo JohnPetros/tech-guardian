@@ -25,7 +25,7 @@ class SessionController {
     if (user) return response.redirect('/open-orders')
 
     const queryParams = request.query
-    const { errorMessages, name, email } = queryParams
+    const { errorMessages, name, email, roleId } = queryParams
 
     const formatedErrorMessages = formatMessages('error', errorMessages)
 
@@ -35,9 +35,10 @@ class SessionController {
 
     response.render('pages/register.ejs', {
       messages: formatedErrorMessages,
-      name: name ?? '',
-      email: email ?? '',
+      name: name.split('-').join(' ') ?? '',
+      email: email.split('-').join(' ') ?? '',
       roles,
+      paramRoleId: roleId ?? '',
     })
   }
 
@@ -66,7 +67,8 @@ class SessionController {
   }
 
   async registerUser(request, response) {
-    const { name, email, password, passwordConfirmation } = request.body
+    const { name, email, password, passwordConfirmation, roleId } = request.body
+
 
     const userModel = new User()
     const registerUser = new RegisterUser(userModel)
@@ -76,6 +78,7 @@ class SessionController {
       email,
       password,
       passwordConfirmation,
+      roleId,
     })
 
     if (errors) {
@@ -85,6 +88,7 @@ class SessionController {
           .join(';')}&${formatUrlParams({
           name,
           email,
+          roleId,
         })}`
       )
       return
