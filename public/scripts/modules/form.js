@@ -13,8 +13,20 @@ export class Form {
     this.form = document.querySelector(form)
     this.inputs = document.querySelectorAll('input')
 
+    this.radios = document.querySelectorAll('[data-radio]')
+
+    if (this.radios.length) {
+      this.radios.forEach((radio) =>
+        radio.addEventListener('keydown', this.onKeyDown)
+      )
+    }
+
     this.onSubmit = this.onSubmit.bind(this)
     this.form.addEventListener('submit', this.onSubmit)
+  }
+
+  onKeyDown() {
+    this.click()
   }
 
   getInput(inputId) {
