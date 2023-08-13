@@ -13,7 +13,7 @@
       <div class="navigation">
         <div>
           <h1>Solicitações</h1>
-          <span class="amount">0</span>
+          <span class="amount"><%= openOrders.length %></span>
         </div>
 
         <nav>
@@ -26,6 +26,19 @@
             </li>
           </ul>
         </nav>
+      </div>
+
+      <div class="order-cards">
+        <% openOrders.forEach(order => { %>
+          <%- include("../partials/order-card.ejs", { 
+            isOpen: true,
+            id: order.id,   
+            title: order.title,   
+            createdBy: order.created_by,   
+            patrimonyNumber: order.patrimony_number,   
+            createdAt: order.created_at,   
+          }) %>
+        <% }) %>
       </div>
     </main>
   </body>
