@@ -1,8 +1,7 @@
 export class Form {
   stringRegex = /^[a-zA-Z\s]*$/
   emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{6,}$/g
+  passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/g
   specialChars = {
     '&': '&amp;',
     '<': '&lt;',
@@ -34,14 +33,13 @@ export class Form {
     return error
   }
 
-  removeErrors(input) {
-    const errors = input.parentElement.parentElement.querySelectorAll('.error')
+  removeErrors() {
+    const errors = this.form.querySelectorAll('.error')
     errors.forEach((error) => error.remove())
   }
 
   showError(errorMessage, input) {
     const inputContainer = input.parentElement
-    this.removeErrors(input)
 
     const error = this.createError(errorMessage)
 
@@ -49,9 +47,7 @@ export class Form {
   }
 
   validateRequired(input) {
-    this.removeErrors(input)
-
-    if (!input.value) {
+    if (input.value) {
       return true
     }
 
@@ -73,8 +69,6 @@ export class Form {
   validateEqual(input, targetInputId) {
     const targetInput = this.getInput(targetInputId)
 
-    this.removeErrors(input)
-
     if (input.value === targetInput.value) {
       return true
     }
@@ -84,8 +78,6 @@ export class Form {
   }
 
   validateEmail(input) {
-    this.removeErrors(input)
-
     if (this.emailRegex.test(input.value)) {
       return true
     }
@@ -95,12 +87,11 @@ export class Form {
   }
 
   validatePassword(input) {
-    this.removeErrors(input)
-
     if (this.passwordRegex.test(input.value)) {
       return true
     }
 
+    console.log(input.value)
     this.showError(
       'Senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial.',
       input
@@ -110,8 +101,6 @@ export class Form {
 
   validateInput(input) {
     const validations = input.dataset
-
-    console.log(validations)
 
     for (const [validationType, validationValue] of Object.entries(
       validations
@@ -128,6 +117,8 @@ export class Form {
 
   onSubmit(event) {
     event.preventDefault()
+
+    this.removeErrors()
 
     this.inputs.forEach(this.sanitizeInputs, this)
     this.inputs.forEach(this.validateInput, this)
