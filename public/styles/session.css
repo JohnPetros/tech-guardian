@@ -5,6 +5,7 @@
 @import './modules/button.css';
 @import './modules/link.css';
 @import './modules/toast.css';
+@import './modules/radios.css';
 
 main.container {
   display: flex;
@@ -25,4 +26,17 @@ main.container {
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
+}
+
+p {
+  margin-top: 1.2rem;
+  color: var(--gray-100);
+  font-weight: 700;
+}
+
+.radios {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+  margin-top: 1.2rem;
 }
