@@ -6,21 +6,19 @@ const RegisterUser = require('../services/session/registerUser')
 class SessionController {
   renderLoginPage(request, response) {
     const queryParams = request.query
-    const { errorMessages, email, password } = queryParams
+    const { errorMessages, email } = queryParams
 
     const formatedErrorMessages = formatMessages('error', errorMessages)
 
     response.render('pages/login.ejs', {
       messages: formatedErrorMessages,
       email: email ?? '',
-      password: password ?? '',
     })
   }
 
   renderRegisterPage(request, response) {
     const queryParams = request.query
-    const { errorMessages, name, email, password, passwordConfirmation } =
-      queryParams
+    const { errorMessages, name, email } = queryParams
 
     const formatedErrorMessages = formatMessages('error', errorMessages)
 
@@ -28,9 +26,6 @@ class SessionController {
       messages: formatedErrorMessages,
       name: name ?? '',
       email: email ?? '',
-      password: password ?? '',
-      passwordConfirmation: passwordConfirmation ?? '',
-      password: password ?? '',
     })
   }
 
@@ -40,7 +35,6 @@ class SessionController {
     const loginUser = new LoginUser()
 
     const { errors, user } = await loginUser.execute(email, password)
-
 
     if (errors) {
       response.redirect(
@@ -52,7 +46,7 @@ class SessionController {
     }
 
     request.session.user = {}
-   
+
     Object.assign(request.session.user, user)
 
     response.redirect('/open-orders')
@@ -77,8 +71,6 @@ class SessionController {
           .join(';')}&${formatUrlParams({
           name,
           email,
-          password,
-          passwordConfirmation,
         })}`
       )
       return
