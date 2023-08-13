@@ -41,20 +41,20 @@
               )
              %>
              <%-
-             include(
-                "../partials/input.ejs",
-                {
-                  id: 'email',
-                  type: 'email',
-                  placeholder: 'E-mail',
-                  icon: 'mail',
-                  value: email,
-                  validations: [
-                    { type: 'required' },
-                    { type: 'email' },
-                  ]
-                }
-              )
+              include(
+                  "../partials/input.ejs",
+                  {
+                    id: 'email',
+                    type: 'email',
+                    placeholder: 'E-mail',
+                    icon: 'mail',
+                    value: email,
+                    validations: [
+                      { type: 'required' },
+                      { type: 'email' },
+                    ]
+                  }
+                )
              %>
             <%- 
               include(
@@ -73,21 +73,43 @@
               ) 
             %>
             <%- 
-            include(
-              "../partials/input.ejs",
-              { 
-                id: 'passwordConfirmation',
-                type: 'password',
-                placeholder: 'Confirme sua senha',
-                icon: 'key',
-                value: '',
-                validations: [
-                  { type: 'required' },
-                  { type: 'equal', value: 'password' },
-                ]
-              }
-            ) 
+              include(
+                "../partials/input.ejs",
+                { 
+                  id: 'passwordConfirmation',
+                  type: 'password',
+                  placeholder: 'Confirme sua senha',
+                  icon: 'key',
+                  value: '',
+                  validations: [
+                    { type: 'required' },
+                    { type: 'equal', value: 'password' },
+                  ]
+                }
+              ) 
           %>
+          <div>
+            <p>Você prefere ser um Tech ou Guardian?</p>
+            <div class="radios">
+              <%- 
+              include("../partials/radio.ejs", 
+                { 
+                  id: roles[0].id,
+                  title: roles[0].title,
+                  color: 'purple',
+                  isChecked: true 
+                }) 
+              %>
+              <%- include("../partials/radio.ejs",
+                { 
+                  id: roles[1].id,
+                  title: roles[1].title,
+                  color: 'green',
+                  isChecked: false
+                }) 
+              %>
+            </div>
+          </div>
           </div>
         </fieldset>
 
