@@ -1,5 +1,11 @@
 <div class="radio-container <%= color %>" >
-  <input type="radio" name="role" value="<%= id %>" id="<%= id %>" <%= isChecked ? 'checked' : '' %> >
+  <input 
+    type="radio" 
+    name="roleId" 
+    value="<%= id %>" 
+    id="<%= id %>" 
+    <%= paramRoleId === id ? 'checked' : isChecked ? 'checked' : '' %> 
+  >
   <label for="<%= id %>" data-radio tabindex="0">
     <span class="radio"></span>
     <%= title %>
