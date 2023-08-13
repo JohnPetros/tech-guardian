@@ -1,8 +1,6 @@
 class ServerError {
-  constructor(page, message, pageData, status = 400) {
-    this.page = page
+  constructor(message, status = 400) {
     this.message = message
-    this.pageData = pageData
     this.status = status
   }
 }
