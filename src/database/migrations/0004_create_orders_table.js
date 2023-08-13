@@ -6,7 +6,8 @@ exports.up = (knex) => {
   return knex.schema
     .createTable('orders', (table) => {
       table.uuid('id').primary().index()
-      table.boolean('is_open').notNullable().defaultTo(false)
+      table.text('title').notNullable()
+      table.boolean('is_open').notNullable().defaultTo(true)
       table.text('description', 'longtext')
       table.text('solution', 'longtext')
       table.timestamp('created_at').notNullable().defaultTo(knex.fn.now())
