@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/login-page.css" />
-    <script src="/scripts/login-page.mjs" defer type="module"></script>
+    <link rel="stylesheet" href="/styles/session.css" />
+    <script src="/scripts/session.mjs" defer type="module"></script>
     <title>Tech Guardian | Cadastro</title>
   </head>
   <body>
-    <%- include("../partials/header.ejs") %>
+    <%- include("../partials/header.ejs", { user: null }) %>
 
     <main class="container">
 
