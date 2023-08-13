@@ -3,9 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/open-orders.css" />
     <title>TechGuardian | Open Orders</title>
   </head>
   <body>
-    <h1><%= user.name %></h1>
+    <%- include("../partials/header.ejs", { user: user }) %>
+
+    <main class="container">
+      <div class="navigation">
+        <div>
+          <h1>Solicitações</h1>
+          <span class="amount">0</span>
+        </div>
+
+        <nav>
+          <ul>
+            <li>
+              <a href="/open-orders" class="nav-link yellow">Em andamento</a>
+            </li>
+            <li>
+              <a href="/closed-orders" class="nav-link">Finalizados</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </main>
   </body>
 </html>
