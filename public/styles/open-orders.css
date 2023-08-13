@@ -1,0 +1,10 @@
+@import './modules/global.css';
+@import './modules/header.css';
+@import './modules/navigation.css';
+
+main.container {
+  width: 90%;
+  max-width: 1200px;
+
+  margin: 4rem auto;
+}
