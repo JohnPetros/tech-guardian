@@ -1,6 +1,7 @@
 const User = require('../../models/user')
 const Validator = require('../../utils/Validator')
 const uuid = require('uuid')
+const bcrypt = require('bcryptjs')
 
 class RegisterUser {
   async execute({ name, email, password, passwordConfirmation }) {
@@ -17,24 +18,26 @@ class RegisterUser {
       return { errors, user: null }
     }
 
-    const userModel = new User()
+    const user = new User()
 
-    const userAlreadyExist = await userModel.findByEmail(email)
-
-    console.log(userAlreadyExist)
+    const userAlreadyExist = await user.findByEmail(email)
 
     if (userAlreadyExist) {
       return { errors: ['E-mail já em uso'], user: null }
     }
 
-    const user = userModel.create({
+    const hashedPassword = await bcrypt.hash(password, 8)
+
+    console.log(hashedPassword);
+
+    const createdUser = user.create({
       id: uuid.v4(),
       name,
       email,
-      password,
+      password: hashedPassword,
     })
 
-    return { errors: null, user: user }
+    return { errors: null, user: createdUser }
   }
 }
 
