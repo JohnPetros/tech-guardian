@@ -1,10 +1,19 @@
 @import './modules/global.css';
 @import './modules/header.css';
 @import './modules/navigation.css';
+@import './modules/order-card.css';
 
 main.container {
   width: 90%;
   max-width: 1200px;
 
   margin: 4rem auto;
+}
+
+.order-cards {
+  margin-top: 6.4rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
 }
