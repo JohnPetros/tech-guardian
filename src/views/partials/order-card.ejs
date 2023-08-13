@@ -1,0 +1,18 @@
+<a href="/orders/<%= id %>" class="order-card <%= isOpen ? 'open' : 'closed' %>">
+  <div class="info">
+    <strong class="title"><%= title %></strong>
+    <small class="patrimony">Patrimônio <%= patrimonyNumber %></small>
+    <time class="time">
+      <img src="/assets/icons/time.svg" width="20" height="20" alt="" />
+      <span><%= createdBy %></span> | <%= createdAt %></time
+    >
+  </div>
+  <div class="icon">
+    <img
+      src="/assets/icons/<%= isOpen ? 'open' : 'closed' %>.svg"
+      width="32"
+      height="32"
+      alt="Solicitação <%= isOpen ? 'aberta' : 'fechada' %>"
+    />
+  </div>
+</a>
