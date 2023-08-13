@@ -1,5 +1,4 @@
 export class Form {
-  stringRegex = /^[a-zA-Z\s]*$/
   emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/g
   specialChars = {
@@ -91,7 +90,6 @@ export class Form {
       return true
     }
 
-    console.log(input.value)
     this.showError(
       'Senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial.',
       input
