@@ -1,14 +1,13 @@
 const formatMessages = require('../helpers/formatMessages')
 const formatUrlParams = require('../helpers/formatUrlParams')
+const Role = require('../models/Role')
+const User = require('../models/user')
 const LoginUser = require('../services/session/LoginUser')
+const GetUnrestrictRoles = require('../services/session/getUnrestrictRoles')
 const RegisterUser = require('../services/session/registerUser')
 
 class SessionController {
   renderLoginPage(request, response) {
-    const { user } = request.session
-
-    if (user) return response.redirect('/open-orders')
-
     const queryParams = request.query
     const { errorMessages, email } = queryParams
 
@@ -20,7 +19,7 @@ class SessionController {
     })
   }
 
-  renderRegisterPage(request, response) {
+  async renderRegisterPage(request, response) {
     const { user } = request.session
 
     if (user) return response.redirect('/open-orders')
@@ -30,17 +29,23 @@ class SessionController {
 
     const formatedErrorMessages = formatMessages('error', errorMessages)
 
+    const role = new Role()
+    const getUnrestrictedRoles = new GetUnrestrictRoles(role)
+    const roles = await getUnrestrictedRoles.execute()
+
     response.render('pages/register.ejs', {
       messages: formatedErrorMessages,
       name: name ?? '',
       email: email ?? '',
+      roles,
     })
   }
 
   async loginUser(request, response) {
     const { email, password } = request.body
 
-    const loginUser = new LoginUser()
+    const userModel = new User()
+    const loginUser = new LoginUser(userModel)
 
     const { errors, user } = await loginUser.execute(email, password)
 
@@ -63,7 +68,8 @@ class SessionController {
   async registerUser(request, response) {
     const { name, email, password, passwordConfirmation } = request.body
 
-    const registerUser = new RegisterUser()
+    const userModel = new User()
+    const registerUser = new RegisterUser(userModel)
 
     const { errors, user } = await registerUser.execute({
       name,
@@ -89,6 +95,17 @@ class SessionController {
     Object.assign(request.session.user, user)
 
     response.redirect('/open-orders')
+  }
+
+  logoutUser(request, response) {
+    request.session.destroy((error) => {
+      if (error) {
+        console.error(error)
+        return response.redirect('back')
+      }
+
+      return response.redirect('/')
+    })
   }
 }
 
