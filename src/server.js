@@ -1,8 +1,8 @@
+require('express-async-errors')
 require('dotenv').config()
 
 const express = require('express')
 
-require('express-async-errors')
 
 const handleServerError = require('./middlewares/handleServerError')
 
@@ -17,6 +17,7 @@ const server = express()
 const path = require('path')
 
 const routes = require('./routes')
+const checkSession = require('./middlewares/checkSession')
 
 server.use(express.static('public'))
 
