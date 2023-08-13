@@ -7,7 +7,7 @@ class RegisterUser {
     this.user = user
   }
 
-  async execute({ name, email, password, passwordConfirmation }) {
+  async execute({ name, email, password, passwordConfirmation, roleId }) {
     const validator = new Validator()
 
     const errors = await validator.validateRegister({
@@ -15,6 +15,7 @@ class RegisterUser {
       email,
       password,
       passwordConfirmation,
+      roleId
     })
 
     if (errors) {
@@ -34,6 +35,7 @@ class RegisterUser {
       name,
       email,
       password: hashedPassword,
+      roleId
     })
 
     return { errors: null, user: createdUser[0] }
