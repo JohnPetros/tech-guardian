@@ -3,7 +3,6 @@ const formatUrlParams = require('../helpers/formatUrlParams')
 const Role = require('../models/Role')
 const User = require('../models/user')
 const LoginUser = require('../services/session/LoginUser')
-const GetUnrestrictRoles = require('../services/session/getUnrestrictRoles')
 const RegisterUser = require('../services/session/registerUser')
 
 class SessionController {
@@ -29,9 +28,7 @@ class SessionController {
 
     const formatedErrorMessages = formatMessages('error', errorMessages)
 
-    const role = new Role()
-    const getUnrestrictedRoles = new GetUnrestrictRoles(role)
-    const roles = await getUnrestrictedRoles.execute()
+    const roles = await new Role().getUnrestrictedRoles()
 
     response.render('pages/register.ejs', {
       messages: formatedErrorMessages,
