@@ -1,18 +1,18 @@
-header {
+#header {
   background-color: var(--gray-600);
 
   height: 7.2rem;
 }
 
-header {
+#header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 1.2rem 2.4rem;
+  padding: 1.2rem 3.2rem;
 }
 
-header .logo {
+#header .logo {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -20,10 +20,10 @@ header .logo {
   font-size: 1.6rem;
 }
 
-header .logo h1 {
+#header .logo h1 {
   color: var(--purple-700);
 }
 
-header .logo h1 span {
+#header .logo h1 span {
   color: var(--green-500);
 }
