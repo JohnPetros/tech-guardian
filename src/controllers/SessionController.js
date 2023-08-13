@@ -5,6 +5,10 @@ const RegisterUser = require('../services/session/registerUser')
 
 class SessionController {
   renderLoginPage(request, response) {
+    const { user } = request.session
+
+    if (user) return response.redirect('/open-orders')
+
     const queryParams = request.query
     const { errorMessages, email } = queryParams
 
@@ -17,6 +21,10 @@ class SessionController {
   }
 
   renderRegisterPage(request, response) {
+    const { user } = request.session
+
+    if (user) return response.redirect('/open-orders')
+
     const queryParams = request.query
     const { errorMessages, name, email } = queryParams
 
