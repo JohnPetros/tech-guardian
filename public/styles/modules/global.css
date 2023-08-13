@@ -57,6 +57,8 @@ body {
 button {
   cursor: pointer;
   border: none;
+
+  background-color: transparent;
 }
 
 a {
@@ -72,4 +74,8 @@ a {
 button:hover,
 a:hover {
   filter: brightness(1.2);
+}
+
+ul {
+  list-style: none;
 }
