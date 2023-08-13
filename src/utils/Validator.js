@@ -1,25 +1,25 @@
 const yup = require('yup')
 
 const loginValidation = yup.object().shape({
-  email: yup.string().required('Por favor, insira um e-mail').email(),
+  email: yup.string().required('Por favor, insira um e-mail').email('Por favor, insira um e-mail válido'),
   password: yup
     .string()
     .required('Por favor, insira uma senha')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{6,}$/g,
-      'Sua senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial.'
+      'Sua senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial'
     ),
 })
 
 const registerValidation = yup.object().shape({
-  name: yup.string().required().min(3, 'Nome de usuário deve ter pelo menos 3 caracteres'),
-  email: yup.string().required('Por favor, insira um e-mail').email(),
+  name: yup.string().required('Por favor, insira um nome de usuário').min(3, 'Nome de usuário deve ter pelo menos 3 caracteres'),
+  email: yup.string().required('Por favor, insira um e-mail').email('Por favor, insira um e-mail válido'),
   password: yup
     .string()
     .required('Por favor, insira uma senha')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{6,}$/g,
-      'Sua senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial.'
+      'Sua senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial'
     ),
   passwordConfirmation: yup
     .string()
@@ -43,7 +43,6 @@ class Validator {
   }
 
   async validateRegister({ name, email, password, passwordConfirmation }) {
-    console.log(passwordConfirmation);
     return this.validate(() =>
       registerValidation.validate(
         { name, email, password, passwordConfirmation },
