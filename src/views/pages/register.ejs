@@ -89,24 +89,27 @@
               ) 
           %>
           <div>
-            <p>Você prefere ser um Tech ou Guardian?</p>
+            <p class="roles-question">Você prefere ser um Tech ou Guardian?</p>
             <div class="radios">
               <%- 
-              include("../partials/radio.ejs", 
-                { 
-                  id: roles[0].id,
-                  title: roles[0].title,
-                  color: 'purple',
-                  isChecked: true 
-                }) 
+                include("../partials/radio.ejs", 
+                  { 
+                    id: roles[0].id,
+                    title: roles[0].title,
+                    color: 'purple',
+                    isChecked: true,
+                    paramRoleId: paramRoleId
+                  }) 
               %>
-              <%- include("../partials/radio.ejs",
-                { 
-                  id: roles[1].id,
-                  title: roles[1].title,
-                  color: 'green',
-                  isChecked: false
-                }) 
+              <%- 
+                include("../partials/radio.ejs",
+                  { 
+                    id: roles[1].id,
+                    title: roles[1].title,
+                    color: 'green',
+                    isChecked: false,
+                    paramRoleId: paramRoleId
+                  }) 
               %>
             </div>
           </div>
