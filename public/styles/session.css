@@ -28,7 +28,7 @@ main.container {
   gap: 2.4rem;
 }
 
-p {
+.roles-question {
   margin-top: 1.2rem;
   color: var(--gray-100);
   font-weight: 700;
