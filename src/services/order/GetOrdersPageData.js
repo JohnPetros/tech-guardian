@@ -1,3 +1,0 @@
-class GetOrdersPageData {
-  execute() {}
-}
