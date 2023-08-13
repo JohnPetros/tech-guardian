@@ -1,10 +1,10 @@
 const knex = require('../database')
-const ServerError = require('../errors/ServerError')
 
 class User {
-
   async create({ id, name, email, password }) {
-    return knex('users').insert({ id, name, email, password })
+    return knex('users')
+      .returning(['id', 'name', 'email', 'avatar'])
+      .insert({ id, name, email, password })
   }
 
   async findByEmail(email) {
