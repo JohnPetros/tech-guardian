@@ -15,7 +15,7 @@ class LoginUser {
       return { errors, user: null }
     }
 
-    const user = await this.user.findByEmail(email)
+    const user = await this.user.getByEmail(email)
 
     if (!user) {
       return { errors: ['usuário não encontrado'], user: null }
@@ -27,7 +27,9 @@ class LoginUser {
       return { errors: ['usuário não encontrado'], user: null }
     }
 
-    return { errors: null, user }
+    const roleName = await this.role.getRoleName(user.roleId)
+
+    return { errors: null, user: { ...user, role: roleName } }
   }
 }
 
