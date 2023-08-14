@@ -27,6 +27,28 @@ class Order {
 
     return roles
   }
+
+  async getOrderById(id) {
+    return await this.execute(() =>
+      knex
+        .select(
+          'orders.id',
+          'orders.title',
+          'orders.created_at',
+          'orders.solution',
+          'orders.description',
+          'orders.is_open',
+          'patrimonies.number as patrimony_number',
+          'users.id as creator_id',
+          'users.name as creator_name',
+          'users.avatar as creator_avatar'
+        )
+        .from('orders')
+        .join('patrimonies', 'patrimonies.id', '=', 'orders.patrimony_id')
+        .join('users', 'users.id', '=', 'orders.created_by')
+        .where('orders.id', id).first()
+    )
+  }
 }
 
 module.exports = Order
