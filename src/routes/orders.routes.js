@@ -7,4 +7,6 @@ const ordersController = new OrdersController()
 
 ordersRouter.get('/open-orders', ordersController.renderOpenOrdersPage)
 
+ordersRouter.get('/orders/:orderId', ordersController.renderOrderPage)
+
 module.exports = ordersRouter
