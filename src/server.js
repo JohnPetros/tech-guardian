@@ -17,7 +17,6 @@ const server = express()
 const path = require('path')
 
 const routes = require('./routes')
-const checkSession = require('./middlewares/checkSession')
 
 server.use(express.static('public'))
 
