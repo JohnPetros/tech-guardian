@@ -11,11 +11,15 @@ class Role {
   }
 
   async getUnrestrictedRoles() {
-    const roles = await this.execute(() =>
+    return await this.execute(() =>
       knex.select('id', 'title').from('roles').where({ is_restrict: false })
     )
+  }
 
-    return roles
+  async getRoleName(id) {
+    return await this.execute(() =>
+      knex.select('name').from('roles').where({ id })
+    )
   }
 }
 
