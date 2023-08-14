@@ -1,5 +1,8 @@
 const yup = require('yup')
 
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{6,}$/g
+
 const loginValidation = yup.object().shape({
   email: yup
     .string()
@@ -9,7 +12,7 @@ const loginValidation = yup.object().shape({
     .string()
     .required('Por favor, insira uma senha')
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{6,}$/g,
+      passwordRegex,
       'Sua senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial'
     ),
 })
@@ -27,7 +30,7 @@ const registerValidation = yup.object().shape({
     .string()
     .required('Por favor, insira uma senha')
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W\S]{6,}$/g,
+      passwordRegex,
       'Sua senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial'
     ),
   passwordConfirmation: yup
