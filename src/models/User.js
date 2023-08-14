@@ -13,14 +13,14 @@ class User {
   async create({ id, name, email, password, roleId }) {
     const createdUser = await this.execute(() =>
       knex('users')
-        .returning(['id', 'name', 'email', 'avatar'])
+        .returning(['id', 'name', 'email', 'avatar', 'role_id'])
         .insert({ id, name, email, password, role_id: roleId })
     )
 
     return createdUser
   }
 
-  async findByEmail(email) {
+  async getByEmail(email) {
     const user = await this.execute(() =>
       knex('users').where({ email }).first()
     )
