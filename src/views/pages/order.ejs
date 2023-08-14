@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/order.css" />
+    <script type="module" src="/scripts/order.mjs" defer></script>
+    <title>TechGuardian | Order</title>
+  </head>
+  <body>
+    <%- include("../partials/header.ejs", { user: user }) %>
+    
+    <%- include("../partials/order-status.ejs", { isOpen: order.is_open }) %>
+
+    <main class="container">
+      <form action="/order/resolve" method="post" data-form>
+        <%- 
+          include("../partials/text-field.ejs", 
+            { 
+              id: 'title',
+              title: 'Título',
+              isDisabled: order.creator_id !== user.id,
+              text: order.title,
+            })
+        %>
+
+        <%- 
+          include("../partials/text-field.ejs", 
+            { 
+              id: 'patrimony',
+              title: 'Equipamento',
+              isDisabled: order.creator_id !== user.id,
+              text: 'Patrimônio ' + order.patrimony_number,
+            })
+        %>
+
+        <%- 
+          include("../partials/text-field.ejs", 
+            { 
+              id: 'description',
+              title: 'Descrição do problema',
+              isDisabled: order.creator_id !== user.id,
+              text: order.description ?? 'Problema sem descrição',
+            })
+         %>
+
+         <% if (user.role === 'guardian') { %>
+          <%- 
+          include("../partials/text-field.ejs", 
+            { 
+              id: 'solution',
+              title: 'Solução',
+              isDisabled: false,
+              text: '',
+              hasAutoFocus: true,
+            })
+         %>
+        <% } %>
+
+      </form>
+    </main>
+  </body>
+</html>
