@@ -27,6 +27,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -78,4 +80,18 @@ a:hover {
 
 ul {
   list-style: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(217, 217, 217, 0.8);
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
 }
