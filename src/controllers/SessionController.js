@@ -43,7 +43,8 @@ class SessionController {
     const { email, password } = request.body
 
     const userModel = new User()
-    const loginUser = new LoginUser(userModel)
+    const roleModel = new User()
+    const loginUser = new LoginUser(userModel, roleModel)
 
     const { errors, user } = await loginUser.execute(email, password)
 
@@ -66,9 +67,9 @@ class SessionController {
   async registerUser(request, response) {
     const { name, email, password, passwordConfirmation, roleId } = request.body
 
-
     const userModel = new User()
-    const registerUser = new RegisterUser(userModel)
+    const roleModel = new User()
+    const registerUser = new RegisterUser(userModel, roleModel)
 
     const { errors, user } = await registerUser.execute({
       name,
