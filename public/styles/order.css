@@ -1,0 +1,23 @@
+@import './modules/global.css';
+@import './modules/header.css';
+@import './modules/text-field.css';
+@import './modules/order-status.css';
+
+main.container {
+  width: 90%;
+  max-width: 540px;
+
+  margin: 3.2rem auto;
+}
+
+form {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2.4rem;
+
+  padding-bottom: 4rem;
+}
