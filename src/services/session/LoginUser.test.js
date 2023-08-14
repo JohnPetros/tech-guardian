@@ -30,7 +30,7 @@ describe('Login user service', () => {
     expect(user).toBe(null)
   })
 
-  it.only('should not login user when password is incorrect', async () => {
+  it('should not login user when password is incorrect', async () => {
     const email = 'johndoe@mock.com'
     const password = 'jonhDOE88$'
 
