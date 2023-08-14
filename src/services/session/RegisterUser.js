@@ -3,8 +3,9 @@ const uuid = require('uuid')
 const bcrypt = require('bcryptjs')
 
 class RegisterUser {
-  constructor(user) {
+  constructor(user, role) {
     this.user = user
+    this.role = role
   }
 
   async execute({ name, email, password, passwordConfirmation, roleId }) {
@@ -15,14 +16,14 @@ class RegisterUser {
       email,
       password,
       passwordConfirmation,
-      roleId
+      roleId,
     })
 
     if (errors) {
       return { errors, user: null }
     }
 
-    const userAlreadyExist = await this.user.findByEmail(email)
+    const userAlreadyExist = await this.user.getByEmail(email)
 
     if (userAlreadyExist) {
       return { errors: ['E-mail já em uso'], user: null }
@@ -35,10 +36,12 @@ class RegisterUser {
       name,
       email,
       password: hashedPassword,
-      roleId
+      roleId,
     })
 
-    return { errors: null, user: createdUser[0] }
+    const roleName = await this.role.getRoleName(createdUser[0].roleId)
+
+    return { errors: null, user: { ...createdUser[0], role: roleName } }
   }
 }
 
