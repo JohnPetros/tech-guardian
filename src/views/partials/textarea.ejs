@@ -1,0 +1,15 @@
+<div class="input-container">
+  <label class="sr-only" for="<%= id %>"></label>
+  <div class="content">
+    <Textarea
+      id="<%= id %>"
+      name="<%= id %>"
+      placeholder="<%= placeholder %>"
+      value="<%= value %>"
+      <% validations.forEach(validation => { %>
+        data-validate-<%= validation.type %>="<%= validation.value ?? '' %>"
+        <% }) %>
+      data-input
+    ></Textarea>
+  </div>
+</div>
