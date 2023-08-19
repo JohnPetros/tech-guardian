@@ -15,8 +15,8 @@
 
     <h2>Nova solicitação</h2>
 
-   <form class="form">
-    <div class="inputs">
+   <form method="post" action="/orders/create" class="form" data-form>
+    <fieldset class="inputs">
       <%-
         include(
           "../partials/input.ejs",
@@ -58,6 +58,7 @@
       %>
     </div>
     
+    <%- include("../partials/button.ejs", { type: 'submit', title: 'Enviar solicitação',  }) -%>
     </form>
   </main>
 </body>
