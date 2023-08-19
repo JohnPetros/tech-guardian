@@ -31,11 +31,13 @@
 
   overflow-y: auto;
 
-  min-height: 4.8rem;
-  max-height: 48rem;
   line-height: 24px;
 
   font-size: 1.6rem;
 
   color: var(--gray-100);
+}
+
+.order-field textarea.big {
+  min-height: 24rem;
 }

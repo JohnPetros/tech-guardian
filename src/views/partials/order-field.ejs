@@ -10,6 +10,7 @@
     <%= isDisabled ? 'disabled' : '' %>
     <%= typeof hasAutoFocus !== 'undefined' && hasAutoFocus ? 'autofocus' : '' %>
     placeholder="<%= typeof placeholder !== 'undefined' && placeholder ? placeholder: '' %>"
+    class="<%= isBig ? 'big' : '' %>"
   >
     <%= text %>
   </textarea>

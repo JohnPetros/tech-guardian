@@ -21,6 +21,7 @@
               title: 'Título',
               isDisabled: order.creator_id !== user.id,
               text: order.title,
+              isBig: false,
             })
         %>
 
@@ -31,6 +32,7 @@
               title: 'Equipamento',
               isDisabled: order.creator_id !== user.id,
               text: 'Patrimônio ' + order.patrimony_number,
+              isBig: false,
             })
         %>
 
@@ -41,6 +43,7 @@
               title: 'Descrição do problema',
               isDisabled: order.creator_id !== user.id,
               text: order.description ?? 'Problema sem descrição',
+              isBig: false,
             })
          %>
 
@@ -54,6 +57,7 @@
               text: '',
               hasAutoFocus: true,
               placeholder: 'Escreva uma solução para o problema',
+              isBig: true,
             })
          %>
         <% } %>
