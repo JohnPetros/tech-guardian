@@ -13,7 +13,8 @@
       value="<%= value %>"
       <% validations.forEach(validation => { %>
         data-validate-<%= validation.type %>="<%= validation.value ?? '' %>"
-      <% }) %>
+        <% }) %>
+      data-input
     />
   </div>
 </div>
