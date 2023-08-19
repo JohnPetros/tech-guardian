@@ -3,9 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/new-order.css" />
+  <script type="module" src="/scripts/new-order.mjs" defer></script>
   <title>TechGuardian | Nova solicitação</title>
 </head>
 <body>
-    <h1>New order page</h1>
+
+  <%- include("../partials/header.ejs", { user: user }) %>
+
+  <main class="container">
+
+    <h2>Nova solicitação</h2>
+
+   <form class="form">
+    <div class="inputs">
+      <%-
+        include(
+          "../partials/input.ejs",
+          {
+            id: 'title',
+            type: 'text',
+            placeholder: 'Título da solicitação',
+            value: '',
+            validations: [
+              { type: 'required' },
+            ]
+          }
+        )
+      %>
+
+      <%-
+        include(
+          "../partials/select.ejs",
+          {
+            id: 'patrimony-number',
+          }
+        )
+      %>
+
+      <%-
+        include(
+          "../partials/textarea.ejs",
+          {
+            id: 'description',
+            type: 'text',
+            placeholder: 'Descrição do problema',
+            value: '',
+            validations: [
+              { type: 'required' },
+              { type: 'min-length', value: 6 },
+            ]
+          }
+        )
+      %>
+    </div>
+    
+    </form>
+  </main>
 </body>
 </html>
