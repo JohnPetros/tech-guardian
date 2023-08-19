@@ -15,7 +15,7 @@
     <main class="container">
       <form action="/order/resolve" method="post" data-form>
         <%- 
-          include("../partials/text-field.ejs", 
+          include("../partials/order-field.ejs", 
             { 
               id: 'title',
               title: 'Título',
@@ -25,7 +25,7 @@
         %>
 
         <%- 
-          include("../partials/text-field.ejs", 
+          include("../partials/order-field.ejs", 
             { 
               id: 'patrimony',
               title: 'Equipamento',
@@ -35,7 +35,7 @@
         %>
 
         <%- 
-          include("../partials/text-field.ejs", 
+          include("../partials/order-field.ejs", 
             { 
               id: 'description',
               title: 'Descrição do problema',
@@ -46,17 +46,19 @@
 
          <% if (user.role === 'guardian') { %>
           <%- 
-          include("../partials/text-field.ejs", 
+          include("../partials/order-field.ejs", 
             { 
               id: 'solution',
               title: 'Solução',
               isDisabled: false,
               text: '',
               hasAutoFocus: true,
+              placeholder: 'Escreva uma solução para o problema',
             })
          %>
         <% } %>
 
+        <button class="button" type="submit">Finalizar</button>
       </form>
     </main>
   </body>
