@@ -2,10 +2,15 @@
   <div class="content">
     <select data-select class="select" name="<%= id %>" id="<%= id %>">
       <option class="option" value="null">Número do patrimônio</option>
-      <option data-option class="option" value="">123456</option>
-      <option data-option class="option" value="">987456</option>
-      <option data-option class="option" value="">321456</option>
-      <option data-option class="option" value="">741258</option>
+      <% options.forEach(option => { %>
+        <option 
+        data-option 
+        class="option" 
+        value="<%= option.id %>"
+        >
+        <%= option.value %>
+      </option>
+      <% }) %>
     </select>
     <img
       class="icon"

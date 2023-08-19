@@ -1,4 +1,5 @@
 const Order = require('../models/Order')
+const Patrimony = require('../models/Patrimony')
 const GetOrderById = require('../services/order/GetOrderById')
 const GetOrders = require('../services/order/GetOrders')
 
@@ -17,10 +18,12 @@ class OrdersController {
 
   async renderNewOrderPage(request, response) {
     const { user } = request.session
+    
+    const patrimony = new Patrimony()
 
-    console.log('new-order-page');
+    const patrimonies = await patrimony.getPatrimonies()
 
-    response.render('pages/new-order.ejs', { user })
+    response.render('pages/new-order.ejs', { user, patrimonies })
   }
 
   async renderOrderPage(request, response) {
@@ -33,6 +36,11 @@ class OrdersController {
     console.log(order)
 
     response.render('pages/order.ejs', { user, order })
+  }
+
+  async createOrder() {
+    const { name, email, password, passwordConfirmation, roleId } = request.body
+
   }
 }
 

@@ -37,6 +37,7 @@
           "../partials/select.ejs",
           {
             id: 'patrimony-number',
+            options: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number }))
           }
         )
       %>
