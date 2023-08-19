@@ -50,6 +50,7 @@ describe('Validator', () => {
       email: 'johnpetros@gmial.com',
       password: 'johnPETROS777$',
       passwordConfirmation: 'johnPETROS777$',
+      roleId: 'bc1cebbc-f20e-409d-ad7f-f567490c0953',
     }
 
     const errors = await validator.validateRegister(correctInput)
@@ -63,6 +64,7 @@ describe('Validator', () => {
       email: '',
       password: '',
       passwordConfirmation: '',
+      roleId: '',
     }
 
     const errors = await validator.validateRegister(correctInput)
@@ -74,6 +76,7 @@ describe('Validator', () => {
       'Por favor, confirme sua senha',
       'Por favor, insira uma senha',
       'Sua senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial',
+      'Por favor, escolha uma função'
     ])
   })
 
@@ -83,6 +86,7 @@ describe('Validator', () => {
       email: 'johnpetros.com',
       password: '777',
       passwordConfirmation: 'johnPETROS777$',
+      roleId: '555',
     }
 
     const errors = await validator.validateRegister(correctInput)
