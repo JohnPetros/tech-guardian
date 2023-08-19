@@ -2,6 +2,7 @@
 @import './modules/header.css';
 @import './modules/navigation.css';
 @import './modules/order-card.css';
+@import './modules/button.css';
 
 main.container {
   width: 90%;
@@ -16,4 +17,12 @@ main.container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4rem;
+}
+
+.new-order-button {
+  margin-top: 1.2rem;
+  width: max-content;
+  margin-left: auto;
+
+  font-size: 1.4rem;
 }
