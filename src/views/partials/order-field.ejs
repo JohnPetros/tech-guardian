@@ -1,9 +1,10 @@
-<div class="text-field">
+<div class="order-field">
   <strong class="title">
     <img src="/assets/icons/<%= id %>.svg" width="24" height="24" alt="" />
     <%= title %>
   </strong>
   <textarea 
+    data-textarea
     name="<%= id %>"
     id="<%= id %>"
     <%= isDisabled ? 'disabled' : '' %>
