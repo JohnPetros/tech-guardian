@@ -12,17 +12,37 @@ main.container {
 }
 
 .order-cards {
-  margin-top: 6.4rem;
+  margin-top: 4rem;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4rem;
+  gap: 2.4rem;
+}
+
+@media (max-width: 1024px) {
+  .order-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .order-cards {
+    grid-template-columns: 1fr;
+  }
 }
 
 .new-order-button {
-  margin-top: 1.2rem;
+  margin-top: 2.4rem;
   width: max-content;
   margin-left: auto;
 
-  font-size: 1.4rem;
+  background-color: var(--green-700);
+  color: var(--gray-100);
+
+  padding: 1.2rem 1.4rem;
+  border-radius: 8px;
+
+
+  display: grid;
+  place-content: center;
 }

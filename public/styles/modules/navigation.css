@@ -24,7 +24,9 @@
 .navigation nav ul {
   display: flex;
   align-items: center;
-  gap: 4.8rem;
+  gap: 2.4rem;
+
+  flex-wrap: wrap;
 
   margin-top: 4rem;
 }
@@ -47,6 +49,24 @@
   color: var(--yellow-700);
 }
 
+
 .navigation .nav-link.green {
   border-color: var(--yellow-300);
+}
+
+@media (max-width: 420px) {
+  .navigation {
+    width: 100%;
+  }
+
+  .navigation nav ul {
+    justify-content: center;
+    gap: 2.4rem;
+    width: 100%;
+  }
+
+  .navigation .nav-link {
+    display: block;
+    font-size: 1.2rem;
+  }
 }
