@@ -1,7 +1,6 @@
 @import './modules/global.css';
 @import './modules/header.css';
-@import './modules/order-field.css';
-@import './modules/order-status.css';
+@import './modules/new-order-field.css';
 @import './modules/button.css';
 
 main.container {
