@@ -1,13 +1,16 @@
-const MockedUser = require('../../mock/mockedUser')
+const MockRole = require('../../mocks/MockRole')
+const MockUser = require('../../mocks/mockUser')
 const LoginUser = require('./LoginUser')
 
 describe('Login user service', () => {
-  let mockedUser = null
+  let mockRole = null
+  let mockUser = null
   let loginUser = null
 
   beforeEach(() => {
-    mockedUser = new MockedUser()
-    loginUser = new LoginUser(mockedUser)
+    mockRole = new MockRole()
+    mockUser = new MockUser()
+    loginUser = new LoginUser(mockUser, mockRole)
   })
 
   it('should login user when email and password are correct', async () => {

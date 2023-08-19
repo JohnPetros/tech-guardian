@@ -2,8 +2,9 @@ const Validator = require('../../utils/Validator')
 const bcryptjs = require('bcryptjs')
 
 class LoginUser {
-  constructor(user) {
+  constructor(user, role) {
     this.user = user
+    this.role = role
   }
 
   async execute(email, password) {
