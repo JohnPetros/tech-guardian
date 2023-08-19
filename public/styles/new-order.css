@@ -1,0 +1,27 @@
+@import './modules/global.css';
+@import './modules/header.css';
+@import './modules/input.css';
+@import './modules/button.css';
+@import './modules/form.css';
+
+main.container {
+  width: 90%;
+  max-width: 540px;
+
+  margin: 4rem auto;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 2rem;
+
+  color: var(--gray-100);
+
+  margin-bottom: 2.4rem;
+  text-align: center;
+}
+
+/* .form {
+  border-radius: 8px;
+  background-color: var();
+}  */
