@@ -1,4 +1,4 @@
-.text-field {
+.order-field {
   background-color: var(--gray-600);
 
   border-radius: 8px;
@@ -12,7 +12,7 @@
   gap: 1.2rem;
 }
 
-.text-field .title {
+.order-field .title {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -24,14 +24,14 @@
   color: var(--gray-300);
 }
 
-.text-field textarea {
+.order-field textarea {
   background-color: transparent;
   border: none;
   resize: none;
 
   overflow-y: auto;
 
-  height: 8px;
+  min-height: 4.8rem;
   max-height: 48rem;
   line-height: 24px;
 
