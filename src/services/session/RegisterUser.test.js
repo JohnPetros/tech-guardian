@@ -1,13 +1,16 @@
-const MockedUser = require('../../mock/mockedUser')
+const MockRole = require('../../mocks/MockRole')
+const MockUser = require('../../mocks/mockUser')
 const RegisterUser = require('./registerUser')
 
 describe('Register user service', () => {
-  let mockedUser = null
+  let mockRole = null
+  let mockUser = null
   let registerUser = null
 
   beforeEach(() => {
-    mockedUser = new MockedUser()
-    registerUser = new RegisterUser(mockedUser)
+    mockUser = new MockUser()
+    mockRole = new MockRole()
+    registerUser = new RegisterUser(mockUser, mockRole)
   })
 
   it('should not create user whose email already exists', async () => {
@@ -16,6 +19,7 @@ describe('Register user service', () => {
       email: 'johndoe@mock.com',
       password: 'jonhDOE77$',
       passwordConfirmation: 'jonhDOE77$',
+      roleId: 'ixtxutxouxyil',
     }
 
     const { errors, user } = await registerUser.execute(input)
@@ -24,18 +28,19 @@ describe('Register user service', () => {
     expect(user).toBe(null)
   })
 
-  it.only('should create user when all input is correct', async () => {
+  it('should create user when all input is correct', async () => {
     const input = {
       name: 'john doe',
       email: 'johndoe@mock3.com',
       password: 'jonhDOE77$',
       passwordConfirmation: 'jonhDOE77$',
+      roleId: 'ixtxutxouxyil',
     }
 
     const { errors, user } = await registerUser.execute(input)
 
     expect(errors).toBe(null)
-    
+
     expect(user).toEqual(
       expect.objectContaining({
         name: input.name,
