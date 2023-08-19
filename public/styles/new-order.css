@@ -1,6 +1,7 @@
 @import './modules/global.css';
 @import './modules/header.css';
 @import './modules/input.css';
+@import './modules/select.css';
 @import './modules/button.css';
 @import './modules/form.css';
 
@@ -20,8 +21,3 @@ h2 {
   margin-bottom: 2.4rem;
   text-align: center;
 }
-
-/* .form {
-  border-radius: 8px;
-  background-color: var();
-}  */
