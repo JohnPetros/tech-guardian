@@ -1,5 +1,11 @@
 export class Form {
-  validations = ['email', 'password', 'required', 'min-length', 'equal']
+  validations = [
+    'validateEmail',
+    'validatePassword',
+    'validateRequired',
+    'validateMin-length',
+    'validateEqual',
+  ]
 
   emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   passwordRegex =
@@ -18,6 +24,7 @@ export class Form {
     this.inputs = this.form.querySelectorAll('[data-input]')
     this.textareas = this.form.querySelectorAll('[data-textarea]')
     this.radios = this.form.querySelectorAll('[data-radio]')
+    this.selects = this.form.querySelectorAll('[data-select]')
 
     this.onTextareaKeyup = this.onTextareaKeyup.bind(this)
     this.onRadioKeyDown = this.onRadioKeyDown.bind(this)
@@ -71,6 +78,8 @@ export class Form {
 
   showError(errorMessage, input) {
     const inputContainer = input.parentElement
+    
+    console.log(inputContainer);
 
     const error = this.createError(errorMessage)
 
@@ -129,6 +138,17 @@ export class Form {
     return false
   }
 
+  validateSelect(select) {
+    const hasSelectedOption = select.value !== 'null'
+
+    if (hasSelectedOption) {
+      return true
+    }
+
+    this.showError('Selecione uma opção', select)
+    return false
+  }
+
   validateInput(input) {
     const validations = input.dataset
 
@@ -167,10 +187,15 @@ export class Form {
       this.inputs.forEach(this.validateInput, this)
     }
 
+    if (this.selects.length) {
+      this.selects.forEach(this.validateSelect, this)
+    }
+
     const hasErrors = this.hasErrors()
 
     if (!hasErrors) {
-      this.form.submit()
+      alert('oo')
+      // this.form.submit()
     }
   }
 }
