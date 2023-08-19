@@ -16,24 +16,24 @@ class OrdersController {
   }
 
   async renderNewOrderPage(request, response) {
-    // const { user } = request.session
+    const { user } = request.session
 
     console.log('new-order-page');
 
-    response.render('pages/new-order.ejs')
+    response.render('pages/new-order.ejs', { user })
   }
 
-  // async renderOrderPage(request, response) {
-  //   const { user } = request.session
+  async renderOrderPage(request, response) {
+    const { user } = request.session
 
-  //   const getOrderById = new GetOrderById(new Order())
+    const getOrderById = new GetOrderById(new Order())
 
-  //   const order = await getOrderById.execute(request.params.orderId)
+    const order = await getOrderById.execute(request.params.orderId)
 
-  //   console.log(order)
+    console.log(order)
 
-  //   response.render('pages/order.ejs', { user, order })
-  // }
+    response.render('pages/order.ejs', { user, order })
+  }
 }
 
 module.exports = OrdersController
