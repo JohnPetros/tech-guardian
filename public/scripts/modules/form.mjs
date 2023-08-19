@@ -3,7 +3,7 @@ export class Form {
     'validateEmail',
     'validatePassword',
     'validateRequired',
-    'validateMin-length',
+    'validateMinLength',
     'validateEqual',
   ]
 
@@ -78,8 +78,8 @@ export class Form {
 
   showError(errorMessage, input) {
     const inputContainer = input.parentElement
-    
-    console.log(inputContainer);
+
+    console.log(inputContainer)
 
     const error = this.createError(errorMessage)
 
@@ -102,7 +102,10 @@ export class Form {
       return true
     }
 
-    this.showError('Nome de usuário deve ter pelo menos 3 caracteres', input)
+    this.showError(
+      `${input.placeholder} deve ter pelo menos ${min} caracteres`,
+      input
+    )
     return false
   }
 
