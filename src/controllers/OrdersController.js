@@ -5,7 +5,6 @@ const GetOrders = require('../services/order/GetOrders')
 class OrdersController {
   async renderOpenOrdersPage(request, response) {
     const { user } = request.session
-    if (!user) return response.redirect('/')
 
     const order = new Order()
 
@@ -16,19 +15,25 @@ class OrdersController {
     response.render('pages/open-orders.ejs', { user, openOrders })
   }
 
-  async renderOrderPage(request, response) {
-    const { user } = request.session
+  async renderNewOrderPage(request, response) {
+    // const { user } = request.session
 
-    if (!user) return response.redirect('/')
+    console.log('new-order-page');
 
-    const getOrderById = new GetOrderById(new Order())
-
-    const order = await getOrderById.execute(request.params.orderId)
-
-    console.log(order)
-
-    response.render('pages/order.ejs', { user, order })
+    response.render('pages/new-order.ejs')
   }
+
+  // async renderOrderPage(request, response) {
+  //   const { user } = request.session
+
+  //   const getOrderById = new GetOrderById(new Order())
+
+  //   const order = await getOrderById.execute(request.params.orderId)
+
+  //   console.log(order)
+
+  //   response.render('pages/order.ejs', { user, order })
+  // }
 }
 
 module.exports = OrdersController

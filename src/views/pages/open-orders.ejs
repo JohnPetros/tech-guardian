@@ -28,17 +28,26 @@
         </nav>
       </div>
 
+      <% if (user !== 'guardian') { %>
+        <div class="new-order-button">
+          <a class="button" href="/new-order">Abrir nova solicitação</a>
+        </div>
+      <% } %>
+     
+
       <div class="order-cards">
-        <% openOrders.forEach(order => { %>
-          <%- include("../partials/order-card.ejs", { 
-            isOpen: true,
-            id: order.id,   
-            title: order.title,   
-            createdBy: order.created_by,   
-            patrimonyNumber: order.patrimony_number,   
-            createdAt: order.created_at,   
-          }) %>
-        <% }) %>
+        <% openOrders.forEach(order => { %> 
+          <%-
+            include("../partials/order-card.ejs", 
+              { 
+                isOpen: true,
+                id: order.id,
+                title: order.title,
+                createdBy: order.created_by,
+                patrimonyNumber: order.patrimony_number,
+                createdAt: order.created_at,
+              }) %> 
+          <% }) %>
       </div>
     </main>
   </body>
