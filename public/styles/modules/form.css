@@ -4,8 +4,9 @@ form {
   padding: 3.2rem 2.4rem;
   border-radius: 4px;
 
-  max-width: 364px;
-  width: 90%;
+  max-width: 365px;
+  width: 100%;
+  margin: 0 auto;
 
   display: flex;
   flex-direction: column;

@@ -29,7 +29,8 @@ fieldset {
   align-items: center;
 }
 
-.input-container input {
+.input-container input,
+textarea {
   color: var(--gray-200);
   background-color: transparent;
 
@@ -43,13 +44,24 @@ fieldset {
   font-size: 1.6rem;
 }
 
-.input-container input::placeholder {
+.input-container textarea {
+  min-height: 16rem;
+}
+
+.input-container:focus-within {
+  box-shadow: 0 0 0 2px var(--purple-700);
+}
+
+.input-container input::placeholder,
+textarea::placeholder {
+  color: var(--gray-200);
+  background-color: transparent;
   color: var(--gray-300);
 }
 
 .input-container .error {
   display: flex;
-  
+
   color: var(--red-400);
 
   font-size: 1.2rem;
@@ -59,6 +71,6 @@ fieldset {
 }
 
 .input-container .error::before {
-  content: ">";
+  content: '>';
   margin-right: 8px;
 }
