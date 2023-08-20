@@ -10,14 +10,9 @@
   <body>
     <%- include("../partials/header.ejs", { user: null }) %>
 
-    <main class="container">
+    <%- include("../partials/toasts.ejs", { messages: getFlashMessages('error') }) %>
 
-      <div class="toasts">
-        <% messages.forEach(message => { %>
-          <%- include("../partials/toast.ejs", { type: message.type, body: message.body }) %>
-        <% }) %>
-      </div>
-   
+    <main class="container">
 
       <form action="/login-user" method="POST" data-form>
         <fieldset>
@@ -32,7 +27,7 @@
                   type: 'email',
                   placeholder: 'E-mail',
                   icon: 'mail',
-                  value: email,
+                  value: getFlashMessages('email')[0] ?? '',
                   validations: [
                     { type: 'required' },
                     { type: 'email' },
