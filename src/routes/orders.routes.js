@@ -22,4 +22,12 @@ ordersRouter.post(
   ordersController.createOrder
 )
 
+ordersRouter.post(
+  '/order/:user_id/edit',
+  checkRole('tech', 'Você precisa ser um tech para editar uma solicitação'),
+  ordersController.editOrder
+)
+
+
+
 module.exports = ordersRouter
