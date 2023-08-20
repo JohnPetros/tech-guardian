@@ -16,7 +16,7 @@ class SessionController {
 
     const roleModel = new RoleModel()
 
-    const roles = await roleModel.getUnrestrictedRoles()
+    const roles = await roleModel.getUnrestrictedOnes()
 
     response.render('pages/register.ejs', {
       roles,
@@ -55,7 +55,7 @@ class SessionController {
   }
 
   async registerUser(request, response) {
-    const { name, email, password, passwordConfirmation, roleId } = request.body
+    const { name, email, password, password_confirmation, role_id } = request.body
 
     const userModel = new UserModel()
     const roleModel = new RoleModel()
@@ -65,8 +65,8 @@ class SessionController {
       name,
       email,
       password,
-      passwordConfirmation,
-      roleId,
+      password_confirmation,
+      role_id,
     })
 
     if (errors) {
@@ -76,7 +76,7 @@ class SessionController {
         flashMessage.add('error', error)
       }
 
-      flashMessage.addMultipleByRoute('/register', { name, email, roleId })
+      flashMessage.addMultipleByRoute('/register', { name, email, role_id })
 
       return response.redirect('/register')
     }
