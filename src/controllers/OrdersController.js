@@ -4,6 +4,7 @@ const GetOrderByIdService = require('../services/orderServices/GetOrderByIdServi
 const GetOrdersService = require('../services/orderServices/GetOrdersService')
 const CreateOrderService = require('../services/orderServices/CreateOrderService')
 const FlashMessage = require('../utils/FlashMessage')
+const GetOrderFormAction = require('../services/orderServices/GetOrderFormAction')
 
 class OrdersController {
   async renderOpenOrdersPage(request, response) {
@@ -34,9 +35,12 @@ class OrdersController {
     const orderModel = new OrderModel()
     const getOrderById = new GetOrderByIdService(orderModel)
 
+    const getOrderFormAction = new GetOrderFormAction(user)
+
+    const action = getOrderFormAction.execute()
     const order = await getOrderById.execute(request.params.orderId)
 
-    response.render('pages/order.ejs', { user, order })
+    response.render('pages/order.ejs', { user, order, action })
   }
 
   async createOrder(request, response) {
