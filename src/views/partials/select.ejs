@@ -7,6 +7,7 @@
         data-option 
         class="option" 
         value="<%= option.id %>"
+        <%= option.id === selectedOptionId ? 'selected' : '' %>
         >
         <%= option.value %>
       </option>
