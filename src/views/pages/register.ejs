@@ -10,14 +10,10 @@
   <body>
     <%- include("../partials/header.ejs", { user: null }) %>
 
-    <main class="container">
+    <%- include("../partials/toasts.ejs", { messages: getFlashMessages('error') }) %>
 
-      <div class="toasts">
-        <% messages.forEach(message => { %>
-          <%- include("../partials/toast.ejs", { type: message.type, body: message.body }) %>
-        <% }) %>
-      </div>
-   
+
+    <main class="container">
 
       <form action="/register-user" method="POST" data-form>
         <fieldset>
