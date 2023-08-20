@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/open-orders.css" />
-    <title>TechGuardian | Open Orders</title>
+  <script type="module" src="/scripts/open-orders.mjs" defer></script>
+  <title>TechGuardian | Open Orders</title>
   </head>
   <body>
     <%- include("../partials/header.ejs", { user: user }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'success', messages: getFlashMessages('success') }) %>
 
     <main class="container">
       <div class="navigation">
@@ -30,7 +33,7 @@
 
       <% if (user !== 'guardian') { %>
         <div class="new-order-button">
-</div>          <a href="/new-order">Abrir nova solicitação</a>
+         <a href="/new-order">Abrir nova solicitação</a>
         </div>
       <% } %>
      
