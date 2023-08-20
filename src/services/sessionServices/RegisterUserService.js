@@ -34,7 +34,7 @@ class RegisterUserService {
       name,
       email,
       password: hashedPassword,
-      roleId,
+      role_id,
     })[0]
 
     const role = await this.roleModel.getTitleById(createdUser.role_id)
