@@ -3,10 +3,11 @@ require('dotenv').config()
 
 const express = require('express')
 
+const session = require('express-session')
+
+const flash = require('express-flash-message').default
 
 const handleServerError = require('./middlewares/handleServerError')
-
-const session = require('express-session')
 
 const knex = require('./database')
 const KnexSessionStore = require('connect-session-knex')(session)
@@ -36,10 +37,16 @@ server.use(
   })
 )
 
+server.use(
+  flash({
+    sessionKeyName: 'techguardian-flash-message',
+  })
+)
+
 server.use(routes)
 
 server.use(handleServerError)
 
-server.listen(process.env.PORT ?? 3000, () =>
+server.listen(process.env.PORT ?? 3333, () =>
   console.log(`Server is running on port ${process.env.PORT}`)
 )
