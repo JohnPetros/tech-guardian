@@ -15,7 +15,7 @@
 
     <h2>Nova solicitação</h2>
 
-   <form method="post" action="/orders/create" class="form" data-form>
+   <form action="/order/create" method="post" class="form" data-form>
     <fieldset class="inputs">
       <%-
         include(
@@ -37,7 +37,7 @@
         include(
           "../partials/select.ejs",
           {
-            id: 'patrimony-number',
+            id: 'patrimony_id',
             options: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number }))
           }
         )
@@ -57,9 +57,12 @@
           }
         )
       %>
-    </div>
+    </fieldset>
+
+      <input type="hidden" name="user_id" value="<%= user.id %>">
     
-    <%- include("../partials/button.ejs", { type: 'submit', title: 'Enviar solicitação',  }) -%>
+      <%- include("../partials/button.ejs", { type: 'submit', title: 'Enviar solicitação',  }) -%>
+
     </form>
   </main>
 </body>
