@@ -7,7 +7,13 @@
   width: 100%;
   padding: 1.6rem;
 
+  outline: none;
+
   border-radius: 8px;
 
   font-weight: 700;
+}
+
+.button:focus {
+  box-shadow: var(--outline);
 }
