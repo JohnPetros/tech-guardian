@@ -8,15 +8,15 @@ class RegisterUserService {
     this.roleModel = roleModel
   }
 
-  async execute({ name, email, password, passwordConfirmation, roleId }) {
+  async execute({ name, email, password, password_confirmation, role_id }) {
     const validator = new Validator()
 
     const errors = await validator.validateRegister({
       name,
       email,
       password,
-      passwordConfirmation,
-      roleId,
+      password_confirmation,
+      role_id,
     })
 
     if (errors) {
