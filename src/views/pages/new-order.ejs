@@ -11,7 +11,15 @@
 
   <%- include("../partials/header.ejs", { user: user }) %>
 
+  <% getFlashMessages('error').forEach(message => { %>
+    <%- include("../partials/toast.ejs", { type: 'error', body: message }) %>
+  <% }) %>
+
   <main class="container">
+
+    <div class="toasts">
+    
+    </div>
 
     <h2>Nova solicitação</h2>
 
@@ -24,7 +32,7 @@
             id: 'title',
             type: 'text',
             placeholder: 'Título da solicitação',
-            value: '',
+            value: getFlashMessages('title')[0] ?? '',
             validations: [
               { type: 'required' },
               { type: 'min-length', value: 4 },
@@ -38,6 +46,7 @@
           "../partials/select.ejs",
           {
             id: 'patrimony_id',
+            selectedOptionId: getFlashMessages('patrimony_id')[0] ?? '',
             options: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number }))
           }
         )
@@ -50,7 +59,7 @@
             id: 'description',
             type: 'text',
             placeholder: 'Descrição do problema',
-            value: '',
+            value: getFlashMessages('description')[0] ?? '',
             validations: [
               { type: 'required' },
             ]
