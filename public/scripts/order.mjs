@@ -1,5 +1,6 @@
 import { Form } from './modules/form.mjs'
 import { Toast } from './modules/toast.mjs'
+import './modules/header.mjs'
 
 const buttons = document.querySelectorAll('[data-button]')
 
