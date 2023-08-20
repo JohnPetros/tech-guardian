@@ -1,10 +1,14 @@
 const OrderModel = require('../models/OrderModel')
+const UserModel = require('../models/UserModel')
 const PatrimonyModel = require('../models/PatrimonyModel')
+
 const GetOrderByIdService = require('../services/orderServices/GetOrderByIdService')
 const GetOrdersService = require('../services/orderServices/GetOrdersService')
 const CreateOrderService = require('../services/orderServices/CreateOrderService')
+const GetOrderFormActionService = require('../services/orderServices/GetOrderFormActionService')
+const EditOrderService = require('../services/orderServices/EditOrderService')
+
 const FlashMessage = require('../utils/FlashMessage')
-const GetOrderFormAction = require('../services/orderServices/GetOrderFormAction')
 
 class OrdersController {
   async renderOpenOrdersPage(request, response) {
@@ -35,9 +39,9 @@ class OrdersController {
     const orderModel = new OrderModel()
     const getOrderById = new GetOrderByIdService(orderModel)
 
-    const getOrderFormAction = new GetOrderFormAction(user)
+    const getOrderFormActionService = new GetOrderFormActionService(user)
 
-    const action = getOrderFormAction.execute()
+    const action = getOrderFormActionService.execute()
 
     const patrimonyModel = new PatrimonyModel()
 
@@ -52,8 +56,9 @@ class OrdersController {
     const { title, description, patrimony_id, user_id } = request.body
 
     const orderModel = new OrderModel()
+    const userModel = new UserModel()
 
-    const createOrderService = new CreateOrderService(orderModel)
+    const createOrderService = new CreateOrderService(orderModel, userModel)
 
     const errors = await createOrderService.execute({
       title,
@@ -84,10 +89,39 @@ class OrdersController {
   }
 
   async editOrder(request, response) {
-    const { user_id } = request.params
-    const { title, patrimony, description } = request.body
+    const { order_id } = request.params
+    const { title, patrimony_id, description } = request.body
 
-    return response.send('ok')
+    const orderModel = new OrderModel()
+
+    const editOderService = new EditOrderService(orderModel)
+
+    const errors = await editOderService.execute({
+      order_id,
+      title,
+      patrimony_id,
+      description,
+    })
+
+    const flashMessage = new FlashMessage(response.flash)
+
+    if (errors) {
+      for (const error of errors) {
+        flashMessage.add('error', error)
+      }
+
+      flashMessage.addMultipleByRoute('/order', {
+        title,
+        description,
+        patrimony_id,
+      })
+
+      return response.redirect('/order/' + order_id)
+    }
+
+    flashMessage.add('success', 'Solicitação editada com sucesso')
+
+    return response.redirect('/order/' + order_id)
   }
 }
 

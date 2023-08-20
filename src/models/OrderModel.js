@@ -53,17 +53,28 @@ class OrderModel {
     )
   }
 
-  async create({ title, description, patrimony_id, user_id }) {
+  async edit({ id, title, description, patrimony_id }) {
     return await this.execute(() =>
       knex
         .from('orders')
-        .insert({
-          id: uuid.v4(),
+        .update({
           title,
           description,
           patrimony_id,
-          created_by: user_id,
         })
+        .where({ id })
+    )
+  }
+
+  async create({ title, description, patrimony_id, user_id }) {
+    return await this.execute(() =>
+      knex.from('orders').insert({
+        id: uuid.v4(),
+        title,
+        description,
+        patrimony_id,
+        created_by: user_id,
+      })
     )
   }
 }
