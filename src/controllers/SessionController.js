@@ -70,11 +70,13 @@ class SessionController {
     })
 
     if (errors) {
+      const flashMessage = new FlashMessage(response.flash)
+
       for (const error of errors) {
-        this.flashMessage.add('error', error)
+        flashMessage.add('error', error)
       }
 
-      this.flashMessage.addMultipleByRoute('/register', { name, email, roleId })
+      flashMessage.addMultipleByRoute('/register', { name, email, roleId })
 
       return response.redirect('/register')
     }

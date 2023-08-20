@@ -10,7 +10,7 @@ class PatrimonyModel {
     }
   }
 
-  async getPatrimonies() {
+  async getAll() {
     return await this.execute(() => knex.from('patrimonies'))
   }
 }

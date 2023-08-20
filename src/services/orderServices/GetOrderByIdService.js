@@ -6,7 +6,7 @@ class GetOrderByIdService {
   }
 
   async execute(orderId) {
-    const order = await this.orderModel.getOrderById(orderId)
+    const order = await this.orderModel.getById(orderId)
 
     return {
       ...order,

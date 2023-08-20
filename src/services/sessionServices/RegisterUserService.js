@@ -32,17 +32,15 @@ class RegisterUserService {
     const hashedPassword = await bcrypt.hash(password, 8)
 
     const createdUser = await this.userModel.create({
-      id: uuid.v4(),
       name,
       email,
       password: hashedPassword,
       roleId,
-    })
+    })[0]
 
-    console.log(this.roleModel);
-    const roleName = await this.roleModel.getRoleNameById(createdUser[0].roleId)
+    const role = await this.roleModel.getTitleById(createdUser.role_id)
 
-    return { errors: null, user: { ...createdUser[0], role: roleName } }
+    return { errors: null, user: { ...createdUser, role: role.title } }
   }
 }
 

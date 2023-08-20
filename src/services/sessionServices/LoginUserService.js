@@ -28,9 +28,9 @@ class LoginUserService {
       return { errors: ['usuário não encontrado'], user: null }
     }
 
-    const roleTitle = await this.roleModel.getRoleTitleById(user.role_id)
+    const role = await this.roleModel.getTitleById(user.role_id)
 
-    return { errors: null, user: { ...user, role: roleTitle } }
+    return { errors: null, user: { ...user, role: role.title } }
   }
 }
 
