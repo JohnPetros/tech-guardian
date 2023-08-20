@@ -24,6 +24,11 @@
   color: var(--gray-300);
 }
 
+.order-field .icon {
+  font-size: 1.8rem;
+  color: var(--purple-700);
+}
+
 .order-field textarea {
   background-color: transparent;
   border: none;
