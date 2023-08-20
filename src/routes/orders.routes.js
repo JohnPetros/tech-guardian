@@ -11,7 +11,11 @@ ordersRouter.use(checkSession)
 
 ordersRouter.get('/open-orders', ordersController.renderOpenOrdersPage)
 
-ordersRouter.get('/new-order', ordersController.renderNewOrderPage)
+ordersRouter.get(
+  '/new-order',
+  checkRole('tech', 'Você precisa ser um tech para abrir uma solicitação'),
+  ordersController.renderNewOrderPage
+)
 
 ordersRouter.get('/order/:orderId', ordersController.renderOrderPage)
 
