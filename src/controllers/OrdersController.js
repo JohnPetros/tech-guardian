@@ -90,7 +90,18 @@ class OrdersController {
 
   async editOrder(request, response) {
     const { order_id } = request.params
-    const { title, patrimony_id, description } = request.body
+    const { title, patrimony_id, description, user_id } = request.body
+
+    const flashMessage = new FlashMessage(response.flash)
+
+    if (user_id !== request.session.user.id) {
+      flashMessage.add(
+        'error',
+        'Somente o usuário que criou a solicitação pode editá-lo'
+      )
+
+      return response.redirect('order/' + order_id)
+    }
 
     const orderModel = new OrderModel()
 
@@ -102,8 +113,6 @@ class OrdersController {
       patrimony_id,
       description,
     })
-
-    const flashMessage = new FlashMessage(response.flash)
 
     if (errors) {
       for (const error of errors) {
