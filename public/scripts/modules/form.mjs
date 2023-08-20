@@ -58,7 +58,6 @@ export class Form {
   }
 
   adjustTextareaSize(textarea) {
-    console.log(textarea)
     textarea.style.height = 'auto'
     textarea.style.height = textarea.scrollHeight + 'px'
   }
@@ -164,16 +163,8 @@ export class Form {
     return false
   }
 
-  validateTextarea(textarea) {
-    console.log(textarea.value);
-
-
-  }
-
   validateInput(input) {
     const validations = input.dataset
-
-    console.log(input.value);
 
     for (const [validationType, validationValue] of Object.entries(
       validations
