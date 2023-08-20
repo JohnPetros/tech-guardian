@@ -1,21 +1,12 @@
-const formatMessages = require('../helpers/formatMessages')
-const formatUrlParams = require('../helpers/formatUrlParams')
-const Role = require('../models/Role')
-const User = require('../models/user')
-const LoginUser = require('../services/session/LoginUser')
-const RegisterUser = require('../services/session/registerUser')
+const RoleModel = require('../models/RoleModel')
+const UserModel = require('../models/UserModel')
+const LoginUserService = require('../services/sessionServices/LoginUserService')
+const RegisterUserService = require('../services/sessionServices/RegisterUserService')
+const FlashMessage = require('../utils/FlashMessage')
 
 class SessionController {
-  renderLoginPage(request, response) {
-    const queryParams = request.query
-    const { errorMessages, email } = queryParams
-
-    const formatedErrorMessages = formatMessages('error', errorMessages)
-
-    response.render('pages/login.ejs', {
-      messages: formatedErrorMessages,
-      email: email ?? '',
-    })
+  renderLoginPage(_, response) {
+    response.render('pages/login.ejs')
   }
 
   async renderRegisterPage(request, response) {
@@ -23,39 +14,38 @@ class SessionController {
 
     if (user) return response.redirect('/open-orders')
 
-    const queryParams = request.query
-    const { errorMessages, name, email, roleId } = queryParams
+    const roleModel = new RoleModel()
 
-    const formatedErrorMessages = formatMessages('error', errorMessages)
-
-    const roles = await new Role().getUnrestrictedRoles()
+    const roles = await roleModel.getUnrestrictedRoles()
 
     response.render('pages/register.ejs', {
-      messages: formatedErrorMessages,
-      name: name.split('-').join(' ') ?? '',
-      email: email.split('-').join(' ') ?? '',
       roles,
-      paramRoleId: roleId ?? '',
     })
   }
 
   async loginUser(request, response) {
     const { email, password } = request.body
 
-    const userModel = new User()
-    const roleModel = new User()
-    const loginUser = new LoginUser(userModel, roleModel)
+    const userModel = new UserModel()
+    const roleModel = new RoleModel()
+
+    const loginUser = new LoginUserService(userModel, roleModel)
 
     const { errors, user } = await loginUser.execute(email, password)
 
+    const flashMessage = new FlashMessage(response.flash)
+
     if (errors) {
-      response.redirect(
-        `/?errorMessages=${errors
-          .map((error) => error.split(' ').join('-'))
-          .join(';')}&${formatUrlParams({ email, password })}`
-      )
-      return
+      for (const error of errors) {
+        flashMessage.add('error', error)
+      }
+
+      flashMessage.addMultipleByRoute('/', { email })
+
+      return response.redirect('/')
     }
+
+    flashMessage.add('success', 'Bem vindo ' + user.name)
 
     request.session.user = {}
 
@@ -67,11 +57,11 @@ class SessionController {
   async registerUser(request, response) {
     const { name, email, password, passwordConfirmation, roleId } = request.body
 
-    const userModel = new User()
-    const roleModel = new User()
-    const registerUser = new RegisterUser(userModel, roleModel)
+    const userModel = new UserModel()
+    const roleModel = new RoleModel()
+    const registerUserService = new RegisterUserService(userModel, roleModel)
 
-    const { errors, user } = await registerUser.execute({
+    const { errors, user } = await registerUserService.execute({
       name,
       email,
       password,
@@ -80,21 +70,20 @@ class SessionController {
     })
 
     if (errors) {
-      response.redirect(
-        `/register?errorMessages=${errors
-          .map((error) => error.split(' ').join('-'))
-          .join(';')}&${formatUrlParams({
-          name,
-          email,
-          roleId,
-        })}`
-      )
-      return
+      for (const error of errors) {
+        this.flashMessage.add('error', error)
+      }
+
+      this.flashMessage.addMultipleByRoute('/register', { name, email, roleId })
+
+      return response.redirect('/register')
     }
 
     request.session.user = {}
 
     Object.assign(request.session.user, user)
+
+    response.flash('success', 'Bem vindo ' + user.name)
 
     response.redirect('/open-orders')
   }

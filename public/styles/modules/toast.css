@@ -1,11 +1,17 @@
+.toasts {
+  position: absolute;
+  top: 4rem;
+  right: 2.4rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
 .toast {
   font-weight: 700;
 
   border-radius: 8px;
-
-  position: absolute;
-  top: 2.4rem;
-  right: 2.4rem;
 
   transition: transform 1.5s ease;
   transform: translateX(150%);
@@ -13,6 +19,8 @@
   overflow: hidden;
 
   max-width: 360px;
+
+  color: var(--gray-100);
 }
 
 .toast.open {
@@ -32,7 +40,10 @@
 
 .toast.error {
   background-color: var(--red-700);
-  color: var(--gray-100);
+}
+
+.toast.success {
+  background-color: var(--green-700);
 }
 
 .toast .close {
