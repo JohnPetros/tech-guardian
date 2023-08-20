@@ -13,6 +13,10 @@
     
     <%- include("../partials/order-status.ejs", { isOpen: order.is_open }) %>
 
+    <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'success', messages: getFlashMessages('success') }) %>
+
     <main class="container">
       <form action="/order/<%= action %>" method="post" data-form>
         <%- 
@@ -20,6 +24,7 @@
             { 
               id: 'title',
               title: 'Título',
+              icon: 'flag-pennant',
               isDisabled: order.creator_id !== user.id,
               text: order.title,
               isBig: false,
@@ -32,8 +37,9 @@
         <%- 
           include("../partials/order-field-select.ejs", 
             { 
-              id: 'patrimony',
-              title: 'Equipamento',
+              id: 'patrimony_id',
+              title: 'Patrimônio',
+              icon: 'desktop-tower',
               isDisabled: order.creator_id !== user.id,
               options: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number })),
               selectedOptionId: order.patrimony_id
@@ -45,6 +51,7 @@
             { 
               id: 'description',
               title: 'Descrição do problema',
+              icon: 'clipboard-text',
               isDisabled: order.creator_id !== user.id,
               text: order.description ?? 'Problema sem descrição',
               isBig: false,
@@ -56,21 +63,24 @@
 
          <% if (user.role === 'guardian') { %>
           <%- 
-          include("../partials/order-field.ejs", 
-            { 
-              id: 'solution',
-              title: 'Solução',
-              isDisabled: false,
-              text: '',
-              hasAutoFocus: true,
-              placeholder: 'Escreva uma solução para o problema',
-              isBig: true,
-              validations: [
-                { type: 'required' },
-              ]
-            })
-         %>
+            include("../partials/order-field.ejs", 
+              { 
+                id: 'solution',
+                title: 'Solução',
+                icon: 'seal-check',
+                isDisabled: false,
+                text: '',
+                hasAutoFocus: true,
+                placeholder: 'Escreva uma solução para o problema',
+                isBig: true,
+                validations: [
+                  { type: 'required' },
+                ]
+              })
+          %>
         <% } %>
+
+        <input type="hidden" name="user_id" value="<%= user.id %>">
 
         <% if (order.creator_id === user.id) { %>
           <div class="buttons">
