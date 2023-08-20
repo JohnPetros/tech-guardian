@@ -3,7 +3,7 @@ const Validator = require('../../utils/Validator')
 class CreateOrderService {
   constructor(orderModel, userModel) {
     this.orderModel = orderModel
-    this.orderModel = userModel
+    this.userModel = userModel
   }
 
   async execute({ title, description, patrimony_id, user_id }) {
@@ -17,7 +17,7 @@ class CreateOrderService {
 
     if (errors) return errors
 
-    const user = await userModel.getById()
+    const user = await this.userModel.getById(user_id)
 
     if (!user) {
       return ['Toda solicitação deve estar associada a um usuário']
