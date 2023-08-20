@@ -1,0 +1,5 @@
+<div class="toasts">
+  <% messages.forEach(message => { %>
+    <%- include("../partials/toast.ejs", { type: type, body: message }) %>
+  <% }) %>
+</div>
