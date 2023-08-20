@@ -33,11 +33,11 @@ const registerValidation = yup.object().shape({
       passwordRegex,
       'Sua senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial'
     ),
-  passwordConfirmation: yup
+  password_confirmation: yup
     .string()
     .required('Por favor, confirme sua senha')
     .oneOf([yup.ref('password')], 'Senhas não conferem'),
-  roleId: yup.string().required('Por favor, escolha uma função'),
+  role_id: yup.string().required('Por favor, escolha uma função'),
 })
 
 const orderValidation = yup.object().shape({
@@ -69,12 +69,12 @@ class Validator {
     name,
     email,
     password,
-    passwordConfirmation,
-    roleId,
+    password_confirmation,
+    role_id,
   }) {
     return this.validate(() =>
       registerValidation.validate(
-        { name, email, password, passwordConfirmation, roleId },
+        { name, email, password, password_confirmation, role_id },
         { abortEarly: false }
       )
     )
