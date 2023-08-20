@@ -5,10 +5,10 @@
   </a>
 
   <% if (user) { %>
-  <div>
-    <a href="/logout-user">
+    <button data-logout-button>
       <img src="/assets/icons/logout.svg" width="24" height="24" alt="" />
-    </a>
-  </div>
+    </button>
+
+    <%- include("../partials/modal.ejs", { id: 'logout-modal' }) %>
   <% } %>
 </header>
