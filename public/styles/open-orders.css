@@ -4,6 +4,7 @@
 @import './modules/order-card.css';
 @import './modules/button.css';
 @import './modules/toast.css';
+@import './modules/modal.css';
 
 main.container {
   width: 90%;
