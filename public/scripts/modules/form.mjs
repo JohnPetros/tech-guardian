@@ -45,6 +45,18 @@ export class Form {
     }
   }
 
+  setAction(action) {
+    this.form.action = action
+  }
+
+  submit() {
+    const hasErrors = this.hasErrors()
+
+    if (!hasErrors) {
+      this.form.submit()
+    }
+  }
+
   adjustTextareaSize(textarea) {
     console.log(textarea)
     textarea.style.height = 'auto'
@@ -152,8 +164,16 @@ export class Form {
     return false
   }
 
+  validateTextarea(textarea) {
+    console.log(textarea.value);
+
+
+  }
+
   validateInput(input) {
     const validations = input.dataset
+
+    console.log(input.value);
 
     for (const [validationType, validationValue] of Object.entries(
       validations
@@ -165,6 +185,23 @@ export class Form {
       }
 
       this[validationType](input, validationValue)
+    }
+  }
+
+  validateFields() {
+    if (this.inputs.length) {
+      this.inputs.forEach(this.sanitizeInputs, this)
+      this.inputs.forEach(this.validateInput, this)
+    }
+
+    if (this.textareas.length) {
+      this.textareas.forEach(this.sanitizeInputs, this)
+      this.textareas.forEach(this.validateInput, this)
+    }
+
+    if (this.selects.length) {
+      this.selects.forEach(this.sanitizeInputs, this)
+      this.selects.forEach(this.validateSelect, this)
     }
   }
 
@@ -185,20 +222,8 @@ export class Form {
 
     this.removeErrors()
 
-    if (this.inputs.length) {
-      this.inputs.forEach(this.sanitizeInputs, this)
-      this.inputs.forEach(this.validateInput, this)
-    }
+    this.validateFields()
 
-    if (this.selects.length) {
-      this.selects.forEach(this.sanitizeInputs, this)
-      this.selects.forEach(this.validateSelect, this)
-    }
-
-    const hasErrors = this.hasErrors()
-
-    if (!hasErrors) {
-      this.form.submit()
-    }
+    this.submit()
   }
 }
