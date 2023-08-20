@@ -38,9 +38,14 @@ class OrdersController {
     const getOrderFormAction = new GetOrderFormAction(user)
 
     const action = getOrderFormAction.execute()
+
+    const patrimonyModel = new PatrimonyModel()
+
+    const patrimonies = await patrimonyModel.getAll()
+
     const order = await getOrderById.execute(request.params.orderId)
 
-    response.render('pages/order.ejs', { user, order, action })
+    response.render('pages/order.ejs', { user, order, action, patrimonies })
   }
 
   async createOrder(request, response) {
@@ -76,6 +81,13 @@ class OrdersController {
     flashMessage.add('success', 'Solicitação aberta com sucesso')
 
     return response.redirect('/open-orders')
+  }
+
+  async editOrder(request, response) {
+    const { user_id } = request.params
+    const { title, patrimony, description } = request.body
+
+    return response.send('ok')
   }
 }
 

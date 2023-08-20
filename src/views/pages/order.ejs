@@ -23,17 +23,20 @@
               isDisabled: order.creator_id !== user.id,
               text: order.title,
               isBig: false,
+              validations: [
+                { type: 'required' },
+              ]
             })
         %>
 
         <%- 
-          include("../partials/order-field.ejs", 
+          include("../partials/order-field-select.ejs", 
             { 
               id: 'patrimony',
               title: 'Equipamento',
               isDisabled: order.creator_id !== user.id,
-              text: 'Patrimônio ' + order.patrimony_number,
-              isBig: false,
+              options: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number })),
+              selectedOptionId: order.patrimony_id
             })
         %>
 
@@ -45,6 +48,9 @@
               isDisabled: order.creator_id !== user.id,
               text: order.description ?? 'Problema sem descrição',
               isBig: false,
+              validations: [
+                { type: 'required' },
+              ]
             })
          %>
 
@@ -59,17 +65,20 @@
               hasAutoFocus: true,
               placeholder: 'Escreva uma solução para o problema',
               isBig: true,
+              validations: [
+                { type: 'required' },
+              ]
             })
          %>
         <% } %>
 
         <% if (order.creator_id === user.id) { %>
           <div class="buttons">
-            <button class="button purple" type="submit">
+            <button class="button purple" name="action" value="<%= order.id %>/edit" type="button" data-button>
               <i class="ph-bold ph-note-pencil"></i>
               Editar solicitação
             </button>
-            <button class="button red" type="submit">
+            <button class="button red" name="action" value="<%= order.id %>/delete" type="button" data-button>
               <i class="ph-bold ph-trash"></i>
               Apagar solicitação
             </button>
