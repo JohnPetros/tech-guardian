@@ -5,6 +5,7 @@
 @import './modules/order-field.css';
 @import './modules/order-field-select.css';
 @import './modules/button.css';
+@import './modules/modal.css';
 
 main.container {
   width: 90%;
