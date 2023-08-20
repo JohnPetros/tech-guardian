@@ -8,6 +8,7 @@ const session = require('express-session')
 const flash = require('express-flash-message').default
 
 const handleServerError = require('./middlewares/handleServerError')
+const checkSession = require('./middlewares/checkSession')
 
 const knex = require('./database')
 const KnexSessionStore = require('connect-session-knex')(session)
@@ -42,6 +43,8 @@ server.use(
     sessionKeyName: 'techguardian-flash-message',
   })
 )
+
+server.use(checkSession)
 
 server.use(routes)
 
