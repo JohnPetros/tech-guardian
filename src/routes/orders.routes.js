@@ -1,13 +1,10 @@
 const { Router } = require('express')
 const OrdersController = require('../controllers/OrdersController')
-const checkSession = require('../middlewares/checkSession')
 const checkRole = require('../middlewares/checkRole')
 
 const ordersRouter = new Router()
 
 const ordersController = new OrdersController()
-
-ordersRouter.use(checkSession)
 
 ordersRouter.get('/open-orders', ordersController.renderOpenOrdersPage)
 

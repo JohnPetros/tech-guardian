@@ -9,8 +9,6 @@ class OrdersController {
   async renderOpenOrdersPage(request, response) {
     const { user } = request.session
 
-    console.log(user);
-
     const orderModel = new OrderModel()
 
     const getOrdersService = new GetOrdersService(orderModel)
