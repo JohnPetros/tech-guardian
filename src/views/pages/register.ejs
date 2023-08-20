@@ -28,7 +28,7 @@
                   type: 'text',
                   placeholder: 'Nome de usuário',
                   icon: 'user',
-                  value: name,
+                  value: getFlashMessages('name')[0] ?? '',
                   validations: [
                     { type: 'required' },
                     { type: 'min-length', value: 3 },
@@ -44,7 +44,7 @@
                     type: 'email',
                     placeholder: 'E-mail',
                     icon: 'mail',
-                    value: email,
+                    value: getFlashMessages('email')[0] ?? '',
                     validations: [
                       { type: 'required' },
                       { type: 'email' },
@@ -94,7 +94,7 @@
                     title: roles[0].title,
                     color: 'purple',
                     isChecked: true,
-                    paramRoleId: paramRoleId
+                    checkedRadioId: getFlashMessages('role_id')[0] ?? ''
                   }) 
               %>
               <%- 
@@ -104,7 +104,7 @@
                     title: roles[1].title,
                     color: 'green',
                     isChecked: false,
-                    paramRoleId: paramRoleId
+                    checkedRadioId: getFlashMessages('role_id')[0] ?? ''
                   }) 
               %>
             </div>
@@ -112,10 +112,11 @@
           </div>
         </fieldset>
 
-        <%- include("../partials/button.ejs", { type: 'submit', title: 'Cadastrar', }) -%>
+
+        <button class="button" type="submit">Cadastrar</button>
       </form>
 
-      <%- include("../partials/link.ejs", { href: '', title: 'Entre na sua conta' }) -%>
+      <a class="link" href="/">Entre na sua conta</a>
     </main>
 
   </body>
