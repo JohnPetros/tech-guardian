@@ -40,12 +40,14 @@ const registerValidation = yup.object().shape({
   roleId: yup.string().required('Por favor, escolha uma função'),
 })
 
-const orderCreationValidation = yup.object().shape({
-  title: yup.string().required('Por favor, insira título para solicitação'),
+const orderValidation = yup.object().shape({
+  title: yup.string().required('Uma solicitação deve ter um título'),
   description: yup
     .string()
-    .required('Por favor, escreva uma breve descrição do problema'),
-  patrimony_id: yup.string().required('Por favor, selecione um patrimônio'),
+    .required('Uma solicitação deve ter uma breve descrição do problema'),
+  patrimony_id: yup
+    .string()
+    .required('Uma solicitção deve estar associado a um patrimônio'),
 })
 
 class Validator {
@@ -78,13 +80,12 @@ class Validator {
     )
   }
 
-  async validateOrderCreation({ title, description, patrimony_id, user_id }) {
+  async validateOrder({ title, description, patrimony_id, user_id }) {
     return this.validate(() =>
-      orderCreationValidation.validate({
+      orderValidation.validate({
         title,
         description,
         patrimony_id,
-        user_id,
       })
     )
   }
