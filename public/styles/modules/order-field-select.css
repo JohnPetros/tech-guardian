@@ -1,0 +1,40 @@
+.order-field .content {
+  border-radius: 8px;
+
+  padding-right: 8px;
+
+  width: max-content;
+}
+
+.order-field .content:focus-within {
+  box-shadow: var(--outline);
+}
+
+.order-field .select {
+  background-color: transparent;
+
+  color: var(--gray-100);
+
+  border: none;
+  outline: none;
+
+  padding: 8px 1.2rem;
+
+  font-size: 1.6rem;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.order-field .select::-ms-expand {
+  display: none;
+}
+
+.order-field .select:disabled {
+  color: var(--gray-100) !important;
+}
+
+.order-field .select .option {
+  background-color: var(--gray-600);
+  border: none;
+}
