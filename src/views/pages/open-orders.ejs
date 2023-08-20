@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/open-orders.css" />
   <script type="module" src="/scripts/open-orders.mjs" defer></script>
-  <title>TechGuardian | Open Orders</title>
+  <title>TechGuardian | Solicitações abertas</title>
   </head>
   <body>
     <%- include("../partials/header.ejs", { user: user }) %>
@@ -31,12 +31,9 @@
         </nav>
       </div>
 
-      <% if (user !== 'guardian') { %>
-        <div class="new-order-button">
-         <a href="/new-order">Abrir nova solicitação</a>
-        </div>
+      <% if (user.role === 'tech') { %>
+         <a class="new-order-button" href="/new-order">Abrir nova solicitação</a>
       <% } %>
-     
 
       <div class="order-cards">
         <% openOrders.forEach(order => { %> 

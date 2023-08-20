@@ -17,7 +17,7 @@ class CreateOrderService {
 
     if (errors) return errors
 
-    this.order.create({
+    await this.orderModel.create({
       title,
       description,
       patrimony_id,
