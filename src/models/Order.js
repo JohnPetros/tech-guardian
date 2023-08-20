@@ -46,7 +46,17 @@ class Order {
         .from('orders')
         .join('patrimonies', 'patrimonies.id', '=', 'orders.patrimony_id')
         .join('users', 'users.id', '=', 'orders.created_by')
-        .where('orders.id', id).first()
+        .where('orders.id', id)
+        .first()
+    )
+  }
+
+  async createOrder({ title, description, patrimonyId }) {
+    return await this.execute(() =>
+      knex
+
+        .from('orders')
+        .insert({ title, description, patrimony_id: patrimonyId })
     )
   }
 }
