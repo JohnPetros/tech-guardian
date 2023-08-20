@@ -30,6 +30,11 @@
   resize: none;
   outline: none;
 
+  margin-top: 1.2rem;
+  padding: 0 8px;
+
+  width: 100%;
+
   border-radius: 8px;
 
   overflow-y: auto;
@@ -47,4 +52,13 @@
 
 .order-field textarea.big {
   min-height: 24rem;
+}
+
+.order-field .error {
+  color: var(--red-400);
+
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 8px;
+
 }
