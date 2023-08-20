@@ -21,6 +21,8 @@ class GetOrdersService {
   async execute(isOpen = true) {
     const openOrders = await this.orderModel.getAll(isOpen)
 
+    console.log(openOrders);
+
     return openOrders.map((order) => ({
       ...order,
       created_at: this.formatTime(order.created_at),

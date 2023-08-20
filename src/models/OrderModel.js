@@ -16,6 +16,7 @@ class OrderModel {
       knex
         .select(
           'orders.id',
+          'orders.title',
           'orders.created_at',
           'patrimonies.number as patrimony_number',
           'users.name as created_by'
