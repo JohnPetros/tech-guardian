@@ -1,0 +1,27 @@
+<div class="order-field">
+  <strong class="title">
+    <img src="/assets/icons/<%= id %>.svg" width="20" height="20" alt="" />
+    <%= title %>
+  </strong>
+  <div class="content">
+    <select data-select class="select" name="<%= id %>" id="<%= id %>">
+      <% options.forEach(option => { %>
+        <option 
+        data-option 
+        class="option" 
+        value="<%= option.id %>"
+        <%= option.id === selectedOptionId ? 'selected' : '' %>
+        >
+        <%= option.value %>
+      </option>
+      <% }) %>
+    </select>
+    <img
+      class="icon"
+      src="/assets/icons/arrow-down.svg"
+      width="16"
+      height="16"
+      alt=""
+    />
+  </div>
+</div>

@@ -1,4 +1,6 @@
 <div class="order-field">
+  <div>
+
   <strong class="title">
     <img src="/assets/icons/<%= id %>.svg" width="20" height="20" alt="" />
     <%= title %>
@@ -11,7 +13,9 @@
     <%= typeof hasAutoFocus !== 'undefined' && hasAutoFocus ? 'autofocus' : '' %>
     placeholder="<%= typeof placeholder !== 'undefined' && placeholder ? placeholder: '' %>"
     class="<%= isBig ? 'big' : '' %>"
-  >
-    <%= text %>
-  </textarea>
+    <% validations.forEach(validation => { %>
+      data-validate-<%= validation.type %>="<%= validation.value ?? '' %>"
+      <% }) %>
+  ><%= text %></textarea>
+  </div>
 </div>
