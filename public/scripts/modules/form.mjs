@@ -197,8 +197,7 @@ export class Form {
     const hasErrors = this.hasErrors()
 
     if (!hasErrors) {
-      alert('oo')
-      // this.form.submit()
+      this.form.submit()
     }
   }
 }
