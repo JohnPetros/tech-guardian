@@ -1,10 +1,10 @@
 const Validator = require('../../utils/Validator')
 const bcryptjs = require('bcryptjs')
 
-class LoginUser {
-  constructor(user, role) {
-    this.user = user
-    this.role = role
+class LoginUserService {
+  constructor(userModel, roleModel) {
+    this.userModel = userModel
+    this.roleModel = roleModel
   }
 
   async execute(email, password) {
@@ -16,7 +16,7 @@ class LoginUser {
       return { errors, user: null }
     }
 
-    const user = await this.user.getByEmail(email)
+    const user = await this.userModel.getByEmail(email)
 
     if (!user) {
       return { errors: ['usuário não encontrado'], user: null }
@@ -28,10 +28,10 @@ class LoginUser {
       return { errors: ['usuário não encontrado'], user: null }
     }
 
-    const roleName = await this.role.getRoleName(user.roleId)
+    const roleTitle = await this.roleModel.getRoleTitleById(user.role_id)
 
-    return { errors: null, user: { ...user, role: roleName } }
+    return { errors: null, user: { ...user, role: roleTitle } }
   }
 }
 
-module.exports = LoginUser
+module.exports = LoginUserService

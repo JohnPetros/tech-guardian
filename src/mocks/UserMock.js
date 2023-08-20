@@ -1,4 +1,4 @@
-  class MockUser {
+  class UserMock {
   users = [
     {
       id: '31be399e-431e-4237-b7b3-db6b6387c4c5',
@@ -31,4 +31,4 @@
   }
 }
 
-module.exports = MockUser
+module.exports = UserMock

@@ -1,6 +1,6 @@
-class GetOrders {
-  constructor(order) {
-    this.order = order
+class GetOrdersService {
+  constructor(orderModel) {
+    this.orderModel = orderModel
   }
 
   formatTime(time) {
@@ -19,7 +19,7 @@ class GetOrders {
   }
 
   async execute(isOpen = true) {
-    const openOrders = await this.order.getOrders(isOpen)
+    const openOrders = await this.orderModel.getOrders(isOpen)
 
     return openOrders.map((order) => ({
       ...order,
@@ -28,4 +28,4 @@ class GetOrders {
   }
 }
 
-module.exports = GetOrders
+module.exports = GetOrdersService

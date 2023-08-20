@@ -1,7 +1,7 @@
 const knex = require('../database')
 const ServerError = require('../errors/ServerError')
 
-class Order {
+class OrderModel {
   async execute(method) {
     try {
       return await method()
@@ -54,11 +54,10 @@ class Order {
   async createOrder({ title, description, patrimonyId }) {
     return await this.execute(() =>
       knex
-
         .from('orders')
         .insert({ title, description, patrimony_id: patrimonyId })
     )
   }
 }
 
-module.exports = Order
+module.exports = OrderModel

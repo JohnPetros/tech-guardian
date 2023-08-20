@@ -1,7 +1,7 @@
 const knex = require('../database')
 const ServerError = require('../errors/ServerError')
 
-class User {
+class UserModel {
   async execute(method) {
     try {
       return await method()
@@ -21,12 +21,8 @@ class User {
   }
 
   async getByEmail(email) {
-    const user = await this.execute(() =>
-      knex('users').where({ email }).first()
-    )
-
-    return user
+    return await this.execute(() => knex('users').where({ email }).first())
   }
 }
 
-module.exports = User
+module.exports = UserModel

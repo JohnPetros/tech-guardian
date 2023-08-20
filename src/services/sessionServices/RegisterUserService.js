@@ -2,10 +2,10 @@ const Validator = require('../../utils/Validator')
 const uuid = require('uuid')
 const bcrypt = require('bcryptjs')
 
-class RegisterUser {
-  constructor(user, role) {
-    this.user = user
-    this.role = role
+class RegisterUserService {
+  constructor(userModel, roleModel) {
+    this.userModel = userModel
+    this.roleModel = roleModel
   }
 
   async execute({ name, email, password, passwordConfirmation, roleId }) {
@@ -23,7 +23,7 @@ class RegisterUser {
       return { errors, user: null }
     }
 
-    const userAlreadyExist = await this.user.getByEmail(email)
+    const userAlreadyExist = await this.userModel.getByEmail(email)
 
     if (userAlreadyExist) {
       return { errors: ['E-mail já em uso'], user: null }
@@ -31,7 +31,7 @@ class RegisterUser {
 
     const hashedPassword = await bcrypt.hash(password, 8)
 
-    const createdUser = await this.user.create({
+    const createdUser = await this.userModel.create({
       id: uuid.v4(),
       name,
       email,
@@ -39,10 +39,11 @@ class RegisterUser {
       roleId,
     })
 
-    const roleName = await this.role.getRoleName(createdUser[0].roleId)
+    console.log(this.roleModel);
+    const roleName = await this.roleModel.getRoleNameById(createdUser[0].roleId)
 
     return { errors: null, user: { ...createdUser[0], role: roleName } }
   }
 }
 
-module.exports = RegisterUser
+module.exports = RegisterUserService

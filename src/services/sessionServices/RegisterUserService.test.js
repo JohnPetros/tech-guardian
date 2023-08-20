@@ -1,16 +1,16 @@
-const MockRole = require('../../mocks/MockRole')
-const MockUser = require('../../mocks/mockUser')
-const RegisterUser = require('./registerUser')
+const RoleMock = require('../../mocks/RoleMock')
+const UserMock = require('../../mocks/UserMock')
+const RegisterUserService = require('./RegisterUserService')
 
 describe('Register user service', () => {
-  let mockRole = null
+  let roleMock = null
   let mockUser = null
   let registerUser = null
 
   beforeEach(() => {
-    mockUser = new MockUser()
-    mockRole = new MockRole()
-    registerUser = new RegisterUser(mockUser, mockRole)
+    mockUser = new UserMock()
+    roleMock = new RoleMock()
+    registerUser = new RegisterUserService(UserMock, RoleMock)
   })
 
   it('should not create user whose email already exists', async () => {

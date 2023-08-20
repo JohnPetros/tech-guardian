@@ -1,7 +1,7 @@
 const knex = require('../database')
 const ServerError = require('../errors/ServerError')
 
-class Patrimony {
+class PatrimonyModel {
   async execute(method) {
     try {
       return await method()
@@ -15,4 +15,4 @@ class Patrimony {
   }
 }
 
-module.exports = Patrimony
+module.exports = PatrimonyModel

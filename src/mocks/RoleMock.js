@@ -1,4 +1,4 @@
-class MockRole {
+class RoleMock {
   roles = [
     {
       id: '427bdd37-e893-45d3-bdf5-cc77d9f666db',
@@ -26,4 +26,4 @@ class MockRole {
   }
 }
 
-module.exports = MockRole
+module.exports = RoleMock

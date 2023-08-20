@@ -1,7 +1,7 @@
 const knex = require('../database')
 const ServerError = require('../errors/ServerError')
 
-class Role {
+class RoleModel {
   async execute(method) {
     try {
       return await method()
@@ -16,11 +16,11 @@ class Role {
     )
   }
 
-  async getRoleName(id) {
+  async getRoleTitleById(id) {
     return await this.execute(() =>
-      knex.select('name').from('roles').where({ id })
+      knex.select('title').from('roles').where({ id })
     )
   }
 }
 
-module.exports = Role
+module.exports = RoleModel
