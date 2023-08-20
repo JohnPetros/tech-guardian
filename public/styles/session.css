@@ -28,6 +28,6 @@ main.container {
 .radios {
   display: flex;
   align-items: center;
-  gap: 2.4rem;
+  gap: 1.2rem;
   margin-top: 1.2rem;
 }
