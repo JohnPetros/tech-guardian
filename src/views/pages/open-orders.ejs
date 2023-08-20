@@ -15,7 +15,7 @@
     <main class="container">
       <div class="navigation">
         <div>
-          <h1>Solicitações</h1>
+          <h2>Solicitações</h2>
           <span class="amount"><%= openOrders.length %></span>
         </div>
 
@@ -32,7 +32,10 @@
       </div>
 
       <% if (user.role === 'tech') { %>
-         <a class="new-order-button" href="/new-order">Abrir nova solicitação</a>
+         <a class="new-order-button" href="/new-order">
+          <img src="assets/icons/plus.svg" width="16" height="16" alt="">
+          Abrir nova solicitação
+        </a>
       <% } %>
 
       <div class="order-cards">

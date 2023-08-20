@@ -12,8 +12,27 @@ main.container {
   margin: 4rem auto;
 }
 
+.new-order-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  margin-top: 2rem;
+  width: max-content;
+  margin-left: auto;
+
+  font-size: 1.2rem;
+  font-weight: 700;
+
+  background-color: var(--green-700);
+  color: var(--gray-100);
+
+  padding: 1.2rem 1.4rem;
+  border-radius: 8px;
+}
+
 .order-cards {
-  margin-top: 4rem;
+  margin-top: 2.4rem;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -30,20 +49,4 @@ main.container {
   .order-cards {
     grid-template-columns: 1fr;
   }
-}
-
-.new-order-button {
-  margin-top: 2.4rem;
-  width: max-content;
-  margin-left: auto;
-
-  background-color: var(--green-700);
-  color: var(--gray-100);
-
-  padding: 1.2rem 1.4rem;
-  border-radius: 8px;
-
-
-  display: grid;
-  place-content: center;
 }

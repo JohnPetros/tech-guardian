@@ -33,7 +33,7 @@
 }
 
 .order-card .info .title {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
 
   color: var(--gray-100);
@@ -41,7 +41,7 @@
 
 .order-card .info .patrimony {
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 
   color: var(--gray-200);
 }
