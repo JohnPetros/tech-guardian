@@ -1,4 +1,4 @@
-class GetOrderFormAction {
+class GetOrderFormActionService {
   constructor(user) {
     this.user = user
   }
@@ -15,4 +15,4 @@ class GetOrderFormAction {
   }
 }
 
-module.exports = GetOrderFormAction
+module.exports = GetOrderFormActionService
