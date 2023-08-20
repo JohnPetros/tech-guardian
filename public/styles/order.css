@@ -1,6 +1,7 @@
 @import './modules/global.css';
 @import './modules/header.css';
-@import './modules/new-order-field.css';
+@import './modules/order-status.css';
+@import './modules/order-field.css';
 @import './modules/button.css';
 
 main.container {
@@ -20,4 +21,10 @@ form {
   gap: 2.4rem;
 
   padding-bottom: 4rem;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
 }
