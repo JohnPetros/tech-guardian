@@ -1,6 +1,9 @@
 const { Router } = require('express')
+
 const OrdersController = require('../controllers/OrdersController')
+
 const checkRole = require('../middlewares/checkRole')
+const checkUserId = require('../middlewares/checkUserId')
 
 const ordersRouter = new Router()
 
@@ -23,11 +26,17 @@ ordersRouter.post(
 )
 
 ordersRouter.post(
-  '/order/:user_id/edit',
+  '/order/:order_id/edit',
   checkRole('tech', 'Você precisa ser um tech para editar uma solicitação'),
+  checkUserId('Somente o criador da solicitação pode editá-lo'),
   ordersController.editOrder
 )
 
-
+ordersRouter.post(
+  '/order/:order_id/delete',
+  checkRole('tech', 'Você precisa ser um tech para deletar uma solicitação'),
+  checkUserId('Somente o criador da solicitação pode deletá-lo'),
+  ordersController.editOrder
+)
 
 module.exports = ordersRouter
