@@ -3,6 +3,7 @@
 @import './modules/navigation.css';
 @import './modules/order-card.css';
 @import './modules/button.css';
+@import './modules/toast.css';
 
 main.container {
   width: 90%;
