@@ -1,4 +1,5 @@
 const knex = require('../database')
+const uuid = require('uuid')
 const ServerError = require('../errors/ServerError')
 
 class OrderModel {
@@ -10,7 +11,7 @@ class OrderModel {
     }
   }
 
-  async getOrders(isOpen = true) {
+  async getAll(isOpen = true) {
     const roles = await this.execute(() =>
       knex
         .select(
@@ -28,7 +29,7 @@ class OrderModel {
     return roles
   }
 
-  async getOrderById(id) {
+  async getById(id) {
     return await this.execute(() =>
       knex
         .select(
@@ -51,11 +52,17 @@ class OrderModel {
     )
   }
 
-  async createOrder({ title, description, patrimonyId }) {
+  async create({ title, description, patrimony_id, user_id }) {
     return await this.execute(() =>
       knex
         .from('orders')
-        .insert({ title, description, patrimony_id: patrimonyId })
+        .insert({
+          id: uuid.v4(),
+          title,
+          description,
+          patrimony_id,
+          created_by: user_id,
+        })
     )
   }
 }

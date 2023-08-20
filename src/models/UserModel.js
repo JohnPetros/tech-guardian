@@ -1,4 +1,5 @@
 const knex = require('../database')
+const uuid = require('uuid')
 const ServerError = require('../errors/ServerError')
 
 class UserModel {
@@ -14,7 +15,7 @@ class UserModel {
     const createdUser = await this.execute(() =>
       knex('users')
         .returning(['id', 'name', 'email', 'avatar', 'role_id'])
-        .insert({ id, name, email, password, role_id: roleId })
+        .insert({ id: uuid.v4(), name, email, password, role_id: roleId })
     )
 
     return createdUser

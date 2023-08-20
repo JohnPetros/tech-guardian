@@ -10,15 +10,15 @@ class RoleModel {
     }
   }
 
-  async getUnrestrictedRoles() {
+  async getUnrestrictedOnes() {
     return await this.execute(() =>
       knex.select('id', 'title').from('roles').where({ is_restrict: false })
     )
   }
 
-  async getRoleTitleById(id) {
+  async getTitleById(id) {
     return await this.execute(() =>
-      knex.select('title').from('roles').where({ id })
+      knex.select('title').from('roles').where({ id }).first()
     )
   }
 }
