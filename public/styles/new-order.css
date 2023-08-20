@@ -4,6 +4,7 @@
 @import './modules/select.css';
 @import './modules/button.css';
 @import './modules/form.css';
+@import './modules/toast.css';
 
 main.container {
   width: 90%;
