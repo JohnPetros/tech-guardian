@@ -11,9 +11,7 @@
 
   <%- include("../partials/header.ejs", { user: user }) %>
 
-  <% getFlashMessages('error').forEach(message => { %>
-    <%- include("../partials/toast.ejs", { type: 'error', body: message }) %>
-  <% }) %>
+  <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
 
   <main class="container">
 

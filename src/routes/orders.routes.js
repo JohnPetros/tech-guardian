@@ -17,7 +17,7 @@ ordersRouter.get('/order/:orderId', ordersController.renderOrderPage)
 
 ordersRouter.post(
   '/order/create',
-  checkRole('tech', 'Você precisa ser um tech para criar uma solicitação'),
+  checkRole('tech', 'Você precisa ser um tech para abrir uma solicitação'),
   ordersController.createOrder
 )
 
