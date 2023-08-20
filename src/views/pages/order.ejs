@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/order.css" />
     <script type="module" src="/scripts/order.mjs" defer></script>
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
     <title>TechGuardian | Order</title>
   </head>
   <body>
@@ -13,7 +14,7 @@
     <%- include("../partials/order-status.ejs", { isOpen: order.is_open }) %>
 
     <main class="container">
-      <form action="/order/resolve" method="post" data-form>
+      <form action="/order/<%= action %>" method="post" data-form>
         <%- 
           include("../partials/order-field.ejs", 
             { 
@@ -62,7 +63,19 @@
          %>
         <% } %>
 
-        <button class="button" type="submit">Finalizar</button>
+        <% if (order.creator_id === user.id) { %>
+          <div class="buttons">
+            <button class="button purple" type="submit">
+              <i class="ph-bold ph-note-pencil"></i>
+              Editar solicitação
+            </button>
+            <button class="button red" type="submit">
+              <i class="ph-bold ph-trash"></i>
+              Apagar solicitação
+            </button>
+          </div>
+        <% } %>
+        
       </form>
     </main>
   </body>
