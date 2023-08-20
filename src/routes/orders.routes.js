@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const OrdersController = require('../controllers/OrdersController')
 const checkSession = require('../middlewares/checkSession')
+const checkRole = require('../middlewares/checkRole')
 
 const ordersRouter = new Router()
 
@@ -14,6 +15,10 @@ ordersRouter.get('/new-order', ordersController.renderNewOrderPage)
 
 ordersRouter.get('/order/:orderId', ordersController.renderOrderPage)
 
-ordersRouter.get('/order/resolve', ordersController.renderOrderPage)
+ordersRouter.post(
+  '/order/create',
+  checkRole('tech'),
+  ordersController.createOrder
+)
 
 module.exports = ordersRouter
