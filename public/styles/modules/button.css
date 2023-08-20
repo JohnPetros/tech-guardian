@@ -1,6 +1,12 @@
 .button {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 
+  font-size: 1.4rem;
+  font-weight: 700;
+  
   background-color: var(--green-700);
   color: var(--gray-100);
 
@@ -10,8 +16,15 @@
   outline: none;
 
   border-radius: 8px;
+}
 
-  font-weight: 700;
+.button.purple {
+  background-color: var(--purple-700);
+  color: var(--gray-700);
+}
+
+.button.red {
+  background-color: var(--red-700);
 }
 
 .button:focus {
