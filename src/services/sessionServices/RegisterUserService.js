@@ -1,5 +1,4 @@
 const Validator = require('../../utils/Validator')
-const uuid = require('uuid')
 const bcrypt = require('bcryptjs')
 
 class RegisterUserService {
