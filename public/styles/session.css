@@ -16,9 +16,8 @@ main.container {
 
   width: 100%;
   height: calc(100% - 7.2rem);
+  padding: 0 2.4rem;
 }
-
-
 
 .roles-question {
   margin-top: 1.2rem;
