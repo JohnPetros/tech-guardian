@@ -28,6 +28,9 @@
   background-color: transparent;
   border: none;
   resize: none;
+  outline: none;
+
+  border-radius: 8px;
 
   overflow-y: auto;
 
@@ -36,6 +39,10 @@
   font-size: 1.6rem;
 
   color: var(--gray-100);
+}
+
+.order-field textarea:focus {
+  box-shadow: var(--outline);
 }
 
 .order-field textarea.big {
