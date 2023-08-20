@@ -36,7 +36,7 @@ ordersRouter.post(
   '/order/:order_id/delete',
   checkRole('tech', 'Você precisa ser um tech para deletar uma solicitação'),
   checkUserId('Somente o criador da solicitação pode deletá-lo'),
-  ordersController.editOrder
+  ordersController.deleteOrder
 )
 
 module.exports = ordersRouter

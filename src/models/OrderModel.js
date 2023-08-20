@@ -77,6 +77,11 @@ class OrderModel {
       })
     )
   }
+
+  async delete(id) {
+    console.log({ id })
+    return await this.execute(() => knex.from('orders').del().where({ id }))
+  }
 }
 
 module.exports = OrderModel

@@ -9,6 +9,7 @@ const GetOrderFormActionService = require('../services/orderServices/GetOrderFor
 const EditOrderService = require('../services/orderServices/EditOrderService')
 
 const FlashMessage = require('../utils/FlashMessage')
+const DeleteOrderService = require('../services/orderServices/DeleteOrderService')
 
 class OrdersController {
   async renderOpenOrdersPage(request, response) {
@@ -92,17 +93,6 @@ class OrdersController {
     const { order_id } = request.params
     const { title, patrimony_id, description, user_id } = request.body
 
-    const flashMessage = new FlashMessage(response.flash)
-
-    if (user_id !== request.session.user.id) {
-      flashMessage.add(
-        'error',
-        'Somente o usuário que criou a solicitação pode editá-lo'
-      )
-
-      return response.redirect('order/' + order_id)
-    }
-
     const orderModel = new OrderModel()
 
     const editOderService = new EditOrderService(orderModel)
@@ -113,6 +103,8 @@ class OrdersController {
       patrimony_id,
       description,
     })
+
+    const flashMessage = new FlashMessage(response.flash)
 
     if (errors) {
       for (const error of errors) {
@@ -131,6 +123,28 @@ class OrdersController {
     flashMessage.add('success', 'Solicitação editada com sucesso')
 
     return response.redirect('/order/' + order_id)
+  }
+
+  async deleteOrder(request, response) {
+    const { order_id } = request.params
+
+    const orderModel = new OrderModel()
+
+    const deleteOrderService = new DeleteOrderService(orderModel)
+
+    const error = await deleteOrderService.execute(order_id)
+
+    const flashMessage = new FlashMessage(response.flash)
+
+    if (error) {
+      flashMessage.add('error', error)
+
+      response.redirect('/order/' + order_id)
+    }
+
+    flashMessage.add('success', 'Solicitação deletada com sucesso')
+
+    return response.redirect('/open-orders')
   }
 }
 
