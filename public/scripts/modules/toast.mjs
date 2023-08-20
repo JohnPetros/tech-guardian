@@ -21,6 +21,6 @@ export class Toast {
 
   open() {
     this.toasts.forEach((toast) => toast.classList.add('open'))
-    setTimeout(() => this.closeAll(), 3000)
+    setTimeout(() => this.closeAll(), 5000)
   }
 }
