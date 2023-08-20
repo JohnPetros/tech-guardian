@@ -191,6 +191,7 @@ export class Form {
     }
 
     if (this.selects.length) {
+      this.selects.forEach(this.sanitizeInputs, this)
       this.selects.forEach(this.validateSelect, this)
     }
 
