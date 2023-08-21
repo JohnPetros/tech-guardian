@@ -2,7 +2,7 @@ const formatTime = require('../../helpers/formatTime')
 const uuid = require('uuid')
 
 class GetOrderByIdService {
-  constructor(orderModel) {
+constructor(orderModel) {
     this.orderModel = orderModel
   }
 

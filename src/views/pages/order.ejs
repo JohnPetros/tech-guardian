@@ -65,9 +65,11 @@
           <%- include(
             "../partials/order-field-user.ejs",
             { 
-              id: '123',
-              name: 'John Petros',
-              title: 'Resgistrado por'
+              title: 'Resgistrado por',
+              id: order.creator_id,
+              name: order.creator_name,
+              avatar: order.creator_avatar,
+              caption: 'em ' + order.created_at,
            }) 
           %>
         <% } %>
