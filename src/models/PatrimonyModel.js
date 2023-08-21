@@ -13,6 +13,12 @@ class PatrimonyModel {
   async getAll() {
     return await this.execute(() => knex.from('patrimonies'))
   }
+
+  async getById(id) {
+    return await this.execute(() =>
+      knex.from('patrimonies').where({ id })
+    ).first()
+  }
 }
 
 module.exports = PatrimonyModel
