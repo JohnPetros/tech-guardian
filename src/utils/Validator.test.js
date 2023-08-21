@@ -49,8 +49,8 @@ describe('Validator', () => {
       name: 'John Petros',
       email: 'johnpetros@gmial.com',
       password: 'johnPETROS777$',
-      passwordConfirmation: 'johnPETROS777$',
-      roleId: 'bc1cebbc-f20e-409d-ad7f-f567490c0953',
+      password_confirmation: 'johnPETROS777$',
+      role_id: 'bc1cebbc-f20e-409d-ad7f-f567490c0953',
     }
 
     const errors = await validator.validateRegister(correctInput)
@@ -76,7 +76,7 @@ describe('Validator', () => {
       'Por favor, confirme sua senha',
       'Por favor, insira uma senha',
       'Sua senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial',
-      'Por favor, escolha uma função'
+      'Por favor, escolha uma função',
     ])
   })
 
@@ -94,8 +94,9 @@ describe('Validator', () => {
     expect(errors).toEqual([
       'Nome de usuário deve ter pelo menos 3 caracteres',
       'Por favor, insira um e-mail válido',
-      'Senhas não conferem',
+      'Por favor, confirme sua senha',
       'Sua senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial',
+      'Por favor, escolha uma função',
     ])
   })
 })
