@@ -11,6 +11,8 @@ const ordersController = new OrdersController()
 
 ordersRouter.get('/open-orders', ordersController.renderOpenOrdersPage)
 
+ordersRouter.get('/closed-orders', ordersController.renderClosedOrdersPage)
+
 ordersRouter.get(
   '/new-order',
   checkRole('tech', 'Você precisa ser um tech para abrir uma solicitação'),
@@ -44,6 +46,5 @@ ordersRouter.post(
   checkRole('guardian', 'Você precisa ser um Guardian para enviar uma solução'),
   ordersController.resolveOrder
 )
-
 
 module.exports = ordersRouter

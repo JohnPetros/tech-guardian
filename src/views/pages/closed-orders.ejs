@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/open-orders.css" />
+  <script type="module" src="/scripts/open-orders.mjs" defer></script>
+  <title>TechGuardian | Solicitações finalizadas</title>
+  </head>
+  <body>
+    <%- include("../partials/header.ejs", { user: user }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'success', messages: getFlashMessages('success') }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
+
+    <main class="container">
+      <div class="navigation">
+        <div>
+          <h2>Solicitações</h2>
+          <span class="amount"><%= closedOrders.length %></span>
+        </div>
+
+        <nav>
+          <ul>
+            <li>
+              <a href="/open-orders" class="nav-link">Em andamento</a>
+            </li>
+            <li>
+              <a href="/closed-orders" class="nav-link green">Finalizados</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <% if (user.role === 'tech') { %>
+         <a class="new-order-button" href="/new-order">
+          <img src="assets/icons/plus.svg" width="16" height="16" alt="">
+          Abrir nova solicitação
+        </a>
+      <% } %>
+
+      <div class="order-cards">
+        <% closedOrders.forEach(order => { %> 
+          <%-
+            include("../partials/order-card.ejs", 
+              { 
+                isOpen: false,
+                id: order.id,
+                title: order.title,
+                createdBy: order.created_by,
+                patrimonyNumber: order.patrimony_number,
+                createdAt: order.created_at,
+              }) %> 
+          <% }) %>
+      </div>
+    </main>
+  </body>
+</html>

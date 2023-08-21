@@ -24,6 +24,18 @@ class OrdersController {
     response.render('pages/open-orders.ejs', { user, openOrders })
   }
 
+  async renderClosedOrdersPage(request, response) {
+    const { user } = request.session
+
+    const orderModel = new OrderModel()
+
+    const getOrdersService = new GetOrdersService(orderModel)
+
+    const closedOrders = await getOrdersService.execute(false)
+
+    response.render('pages/closed-orders.ejs', { user, closedOrders })
+  }
+
   async renderNewOrderPage(request, response) {
     const { user } = request.session
 
