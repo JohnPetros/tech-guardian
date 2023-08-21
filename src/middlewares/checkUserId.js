@@ -1,4 +1,3 @@
-const getPreviousRoute = require('../helpers/getPreviousRoute')
 const FlashMessage = require('../utils/FlashMessage')
 
 function checkId(errorMessage) {
