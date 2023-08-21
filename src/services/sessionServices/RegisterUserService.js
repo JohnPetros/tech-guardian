@@ -35,11 +35,11 @@ class RegisterUserService {
       email,
       password: hashedPassword,
       role_id,
-    })[0]
+    })
 
-    const role = await this.roleModel.getTitleById(createdUser.role_id)
+    const role = await this.roleModel.getTitleById(createdUser[0].role_id)
 
-    return { errors: null, user: { ...createdUser, role: role.title } }
+    return { errors: null, user: { ...createdUser[0], role: role.title } }
   }
 }
 
