@@ -1,4 +1,5 @@
-<div class="order-status <%= isOpen %>">
-  <img src="/assets/icons/<%= isOpen %>" alt="">
-  <p>Solicitação <%= isOpen ? 'em andamento' : 'finalizada' %></p>
+<div class="order-status <%= isOpen ? 'open' : 'closed' %>">
+  <i class="ph-bold ph-<%= isOpen ? 'hourglass' : 'seal-check' %> icon"></i>
+  <img src="/assets/icons/" alt="">
+  <p>Solicitação <%= isOpen ? 'em andamento' : 'finalizado' %></p>
 </div>

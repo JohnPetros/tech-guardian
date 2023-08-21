@@ -74,22 +74,35 @@
           %>
         <% } %>
 
-         <% if (user.role === 'guardian') { %>
+         <% if (user.role === 'guardian' || order.is_open) { %>
           <%- 
             include("../partials/order-field.ejs", 
               { 
                 id: 'solution',
                 title: 'Solução',
                 icon: 'seal-check',
-                isDisabled: false,
-                text: '',
+                isDisabled: !order.is_open,
+                text: order.solution,
                 hasAutoFocus: true,
                 placeholder: 'Escreva uma solução para o problema',
-                isBig: true,
+                isBig: order.is_open,
                 validations: [
                   { type: 'required' },
                 ]
               })
+          %>
+        <% } %>
+
+        <% if (!order.is_open && order.resolved_at && order.resolved_by) { %>
+          <%- include(
+            "../partials/order-field-user.ejs",
+            { 
+              title: 'Solucionado por',
+              id: order.creator_id,
+              name: order.creator_name,
+              avatar: order.creator_avatar,
+              caption: 'em ' + order.created_at,
+           }) 
           %>
         <% } %>
 
@@ -120,7 +133,7 @@
           </div>
         <% } %>
 
-        <% if (user.role === 'guardian') { %>
+        <% if (user.role === 'guardian' && order.is_open) { %>
             <button 
               class="button" 
               name="action" 
@@ -132,6 +145,19 @@
               Enviar solução
             </button>
         <% } %>
+
+        <% if (user.role === 'tech' && order.creator_id === user.id) { %>
+          <button 
+            class="button" 
+            name="action" 
+            value="<%= order.id %>/resolve" 
+            type="button" 
+            data-button
+          >
+            <i class="ph-bold ph-paper-plane"></i>
+            Enviar solução
+          </button>
+      <% } %>
         
       </form>
     </main>

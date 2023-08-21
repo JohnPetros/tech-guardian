@@ -40,6 +40,8 @@ class OrderModel {
           'orders.solution',
           'orders.description',
           'orders.is_open',
+          'orders.resolved_at',
+          'orders.resolved_by',
           'patrimonies.number as patrimony_number',
           'users.id as creator_id',
           'users.name as creator_name',
