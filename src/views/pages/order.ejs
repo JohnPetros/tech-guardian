@@ -61,6 +61,17 @@
             })
          %>
 
+         <% if (order.creator_id !== user.id) { %>
+          <%- include(
+            "../partials/order-field-user.ejs",
+            { 
+              id: '123',
+              name: 'John Petros',
+              title: 'Resgistrado por'
+           }) 
+          %>
+        <% } %>
+
          <% if (user.role === 'guardian') { %>
           <%- 
             include("../partials/order-field.ejs", 
