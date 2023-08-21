@@ -55,7 +55,9 @@ class SessionController {
   }
 
   async registerUser(request, response) {
-    const { name, email, password, password_confirmation, role_id } = request.body
+    const { name, email, password, password_confirmation, role_id } =
+      request.body
+      
 
     const userModel = new UserModel()
     const roleModel = new RoleModel()
@@ -69,8 +71,9 @@ class SessionController {
       role_id,
     })
 
+    const flashMessage = new FlashMessage(response.flash)
+
     if (errors) {
-      const flashMessage = new FlashMessage(response.flash)
 
       for (const error of errors) {
         flashMessage.add('error', error)
@@ -81,11 +84,11 @@ class SessionController {
       return response.redirect('/register')
     }
 
+    flashMessage.add('success', 'Bem vindo ' + user.name)
+
     request.session.user = {}
 
     Object.assign(request.session.user, user)
-
-    response.flash('success', 'Bem vindo ' + user.name)
 
     response.redirect('/open-orders')
   }
