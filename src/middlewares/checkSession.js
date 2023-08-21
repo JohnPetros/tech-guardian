@@ -1,5 +1,3 @@
-const getPreviousRoute = require('../helpers/getPreviousRoute')
-
 const publicRoutes = ['/', '/register', '/login-user', '/register-user']
 
 function checkSession(request, response, next) {
