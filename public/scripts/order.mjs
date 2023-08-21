@@ -11,6 +11,7 @@ const toast = new Toast('[data-toast]')
 function handleButtonClick({ currentTarget }) {
   orderForm.setAction(`/order/${currentTarget.value}`)
 
+  orderForm.removeErrors()
   orderForm.validateFields()
   orderForm.submit()
 }

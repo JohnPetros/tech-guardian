@@ -89,7 +89,6 @@ export class Form {
   }
 
   showError(errorMessage, input) {
-    console.log(input)
     const inputContainer = input.parentElement
 
     const error = this.createError(errorMessage)
