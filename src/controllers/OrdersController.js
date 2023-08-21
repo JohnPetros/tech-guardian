@@ -5,7 +5,6 @@ const PatrimonyModel = require('../models/PatrimonyModel')
 const GetOrderByIdService = require('../services/orderServices/GetOrderByIdService')
 const GetOrdersService = require('../services/orderServices/GetOrdersService')
 const CreateOrderService = require('../services/orderServices/CreateOrderService')
-const GetOrderFormActionService = require('../services/orderServices/GetOrderFormActionService')
 const EditOrderService = require('../services/orderServices/EditOrderService')
 
 const FlashMessage = require('../utils/FlashMessage')
@@ -38,11 +37,8 @@ class OrdersController {
     const { user } = request.session
 
     const orderModel = new OrderModel()
+
     const getOrderById = new GetOrderByIdService(orderModel)
-
-    const getOrderFormActionService = new GetOrderFormActionService(user)
-
-    const action = getOrderFormActionService.execute()
 
     const patrimonyModel = new PatrimonyModel()
 
@@ -50,16 +46,29 @@ class OrdersController {
 
     const order = await getOrderById.execute(request.params.orderId)
 
-    response.render('pages/order.ejs', { user, order, action, patrimonies })
+    if (order === 'Solicitação não encontrada') {
+      const flashMessage = new FlashMessage(response.flash)
+
+      flashMessage.add('error', order)
+
+      return response.redirect('/open-orders')
+    }
+
+    response.render('pages/order.ejs', { user, order, patrimonies })
   }
 
   async createOrder(request, response) {
     const { title, description, patrimony_id, user_id } = request.body
 
     const orderModel = new OrderModel()
+    const patrimonyModel = new PatrimonyModel()
     const userModel = new UserModel()
 
-    const createOrderService = new CreateOrderService(orderModel, userModel)
+    const createOrderService = new CreateOrderService(
+      orderModel,
+      patrimonyModel,
+      userModel
+    )
 
     const errors = await createOrderService.execute({
       title,
