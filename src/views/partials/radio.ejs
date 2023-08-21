@@ -1,12 +1,13 @@
 <div class="radio-container <%= color %>" >
   <input 
     type="radio" 
-    name="roleId" 
+    name="<%= name %>" 
     value="<%= id %>" 
     id="<%= id %>" 
     <%= checkedRadioId === id ? 'checked' : isChecked ? 'checked' : '' %> 
+    data-radio
   >
-  <label for="<%= id %>" data-radio tabindex="0">
+  <label for="<%= id %>" tabindex="0" data-radio-label>
     <span class="radio"></span>
     <%= title %>
   </label>
