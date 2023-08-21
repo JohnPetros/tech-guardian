@@ -6,7 +6,8 @@ function checkId(errorMessage) {
     const { user } = request.session
     const { user_id } = request.body
 
-    const previousRoute = getPreviousRoute(request)
+    const previousRoute =
+    request.session.previousRoute ?? user ? '/open-orders' : '/'
 
     if (!user_id || user.id !== user_id) {
       const flashMessage = new FlashMessage(response.flash)

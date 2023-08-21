@@ -1,11 +1,14 @@
-const getPreviousRoute = require('../helpers/getPreviousRoute')
 const FlashMessage = require('../utils/FlashMessage')
 
 function checkRole(role, errorMessage) {
   return (request, response, next) => {
     const { user } = request.session
 
-    const previousRoute = getPreviousRoute(request)
+    const currentRoute = request.originalUrl
+    const previousRoute =
+      request.session.previousRoute === currentRoute
+        ? '/open-orders'
+        : request.session.previousRoute
 
     if (user.role !== role) {
       const flashMessage = new FlashMessage(response.flash)
@@ -14,7 +17,7 @@ function checkRole(role, errorMessage) {
 
       flashMessage.addMultipleByRoute(previousRoute, request.body)
 
-      return response.redirect(previousRoute)
+      return response.redirect('back')
     }
 
     next()
