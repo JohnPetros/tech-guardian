@@ -21,22 +21,29 @@ ordersRouter.get('/order/:orderId', ordersController.renderOrderPage)
 
 ordersRouter.post(
   '/order/create',
-  checkRole('tech', 'Você precisa ser um tech para abrir uma solicitação'),
+  checkRole('tech', 'Você precisa ser um Tech para abrir uma solicitação'),
   ordersController.createOrder
 )
 
 ordersRouter.post(
   '/order/:order_id/edit',
-  checkRole('tech', 'Você precisa ser um tech para editar uma solicitação'),
+  checkRole('tech', 'Você precisa ser um Tech para editar uma solicitação'),
   checkUserId('Somente o criador da solicitação pode editá-lo'),
   ordersController.editOrder
 )
 
 ordersRouter.post(
   '/order/:order_id/delete',
-  checkRole('tech', 'Você precisa ser um tech para deletar uma solicitação'),
+  checkRole('tech', 'Você precisa ser um Tech para deletar uma solicitação'),
   checkUserId('Somente o criador da solicitação pode deletá-lo'),
   ordersController.deleteOrder
 )
+
+ordersRouter.post(
+  '/order/:order_id/resolve',
+  checkRole('guardian', 'Você precisa ser um Guardian para enviar uma solução'),
+  ordersController.resolveOrder
+)
+
 
 module.exports = ordersRouter
