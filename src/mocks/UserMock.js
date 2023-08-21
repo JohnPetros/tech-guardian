@@ -1,4 +1,4 @@
-  class UserMock {
+class UserMock {
   users = [
     {
       id: '31be399e-431e-4237-b7b3-db6b6387c4c5',
@@ -25,9 +25,11 @@
   }
 
   async getByEmail(email) {
-    const user = this.users.find((user) => user.email === email)
+    return this.users.find((user) => user.email === email)
+  }
 
-    return user
+  async getById(id) {
+    return this.users.find((user) => user.id === id)
   }
 }
 
