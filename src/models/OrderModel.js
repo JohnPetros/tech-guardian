@@ -82,7 +82,7 @@ class OrderModel {
     await this.execute(() => knex.from('orders').del().where({ id }))
   }
 
-  async resolve(id, solution, userId) {
+  async resolve(id, userId, solution) {
     await this.execute(() =>
       knex
         .from('orders')

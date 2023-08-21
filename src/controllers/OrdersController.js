@@ -172,13 +172,14 @@ class OrdersController {
 
   async resolveOrder(request, response) {
     const { order_id } = request.params
-    const { solution } = request.body
+    const { user_id, solution } = request.body
 
     const orderModel = new OrderModel()
+    const userModel = new UserModel()
 
-    const deleteOrderService = new ResolveOrderService(orderModel)
+    const deleteOrderService = new ResolveOrderService(orderModel, userModel)
 
-    const error = await deleteOrderService.execute(order_id, solution)
+    const error = await deleteOrderService.execute(order_id, user_id, solution)
 
     const flashMessage = new FlashMessage(response.flash)
 

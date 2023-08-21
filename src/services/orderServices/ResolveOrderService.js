@@ -1,13 +1,18 @@
 const uuid = require('uuid')
 
 class ResolveOrderService {
-  constructor(orderModel) {
+  constructor(orderModel, userModel) {
     this.orderModel = orderModel
+    this.userModel = userModel
   }
 
-  async execute(orderId, solution) {
+  async execute(orderId, userId, solution) {
     if (!uuid.validate(orderId)) {
       return 'Solicitação não encontrada'
+    }
+
+    if (!uuid.validate(userId)) {
+      return 'Usuário não encontrado'
     }
 
     if (!solution) {
@@ -24,7 +29,13 @@ class ResolveOrderService {
       return 'Solicitação já está fechada'
     }
 
-    await this.orderModel.resolve(orderId, solution)
+    const user = await this.userModel.getById(userId)
+
+    if (!user) {
+      return 'Usuário não encontrado'
+    }
+
+    await this.orderModel.resolve(orderId, userId, solution)
   }
 }
 

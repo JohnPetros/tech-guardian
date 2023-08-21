@@ -69,6 +69,20 @@ class OrderMock {
   async delete(id) {
     this.orders = this.orders.filter((order) => order.id !== id)
   }
+
+  async resolve(id, userId, solution) {
+    this.orders = this.orders.map((order) =>
+      order.id === id
+        ? {
+            ...order,
+            is_open: false,
+            solution: solution,
+            resolved_by: userId,
+            resolved_at: new Date(),
+          }
+        : order
+    )
+  }
 }
 
 module.exports = OrderMock
