@@ -99,7 +99,6 @@
 .order-field.user .content {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 1.2rem;
 }
 
@@ -112,6 +111,7 @@
 
 .order-field.user .name {
   color: var(--gray-100);
+  font-weight: 400;
 }
 
 .order-field.user .caption {
