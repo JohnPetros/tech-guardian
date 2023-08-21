@@ -21,8 +21,15 @@ class RoleMock {
     return this.roles.filter((role) => role.is_restrict === false)
   }
 
-  async getRoleName(id) {
-    return this.roles.filter((role) => role.id === id).name
+
+  async getUnrestrictedOnes() {
+    return await this.execute(() =>
+      knex.select('id', 'title').from('roles').where({ is_restrict: false })
+    )
+  }
+
+  async getTitleById(id) {
+    return this.roles.filter((role) => role.id === id)
   }
 }
 
