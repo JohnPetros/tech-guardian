@@ -9,7 +9,7 @@ exports.up = (knex) => {
       table.text('name').notNullable().checkLength('>=', 3)
       table.text('email').index().unique().notNullable()
       table.text('password').notNullable().checkLength('>', 6)
-      table.text('avatar').notNullable().defaultTo('default.jpg')
+      table.text('avatar').notNullable().defaultTo('default.png')
 
       table
         .uuid('role_id')
