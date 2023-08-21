@@ -51,7 +51,8 @@
 
 
 .navigation .nav-link.green {
-  border-color: var(--yellow-300);
+  border-color: var(--green-300);
+  color: var(--green-300);
 }
 
 @media (max-width: 420px) {
