@@ -11,11 +11,11 @@ class UserModel {
     }
   }
 
-  async create({ id, name, email, password, roleId }) {
+  async create({ name, email, password, role_id }) {
     const createdUser = await this.execute(() =>
       knex('users')
         .returning(['id', 'name', 'email', 'avatar', 'role_id'])
-        .insert({ id: uuid.v4(), name, email, password, role_id: roleId })
+        .insert({ id: uuid.v4(), name, email, password, role_id })
     )
 
     return createdUser
