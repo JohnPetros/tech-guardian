@@ -1,4 +1,5 @@
 const Validator = require('../../utils/Validator')
+const uuid = require('uuid')
 
 class EditOrderService {
   constructor(orderModel) {
@@ -6,6 +7,10 @@ class EditOrderService {
   }
 
   async execute({ order_id, title, patrimony_id, description }) {
+    if ([order_id, patrimony_id].some((id) => !uuid.validate(id))) {
+      return ['Solicitação não encontrada']
+    }
+
     const validator = new Validator()
 
     const errors = await validator.validateOrder({
