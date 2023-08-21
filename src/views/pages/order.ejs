@@ -94,6 +94,13 @@
             </button>
           </div>
         <% } %>
+
+        <% if (user.role === 'guardian') { %>
+            <button class="button" name="action" value="<%= order.id %>/resolve" type="button" data-button>
+              <i class="ph-bold ph-paper-plane"></i>
+              Enviar solução
+            </button>
+        <% } %>
         
       </form>
     </main>
