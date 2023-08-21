@@ -4,13 +4,13 @@ const RegisterUserService = require('./RegisterUserService')
 
 describe('Register user service', () => {
   let roleMock = null
-  let mockUser = null
+  let userMock = null
   let registerUser = null
 
   beforeEach(() => {
-    mockUser = new UserMock()
+    userMock = new UserMock()
     roleMock = new RoleMock()
-    registerUser = new RegisterUserService(UserMock, RoleMock)
+    registerUser = new RegisterUserService(userMock, roleMock)
   })
 
   it('should not create user whose email already exists', async () => {
@@ -18,8 +18,8 @@ describe('Register user service', () => {
       name: 'john doe',
       email: 'johndoe@mock.com',
       password: 'jonhDOE77$',
-      passwordConfirmation: 'jonhDOE77$',
-      roleId: 'ixtxutxouxyil',
+      password_confirmation: 'jonhDOE77$',
+      role_id: 'ixtxutxouxyil',
     }
 
     const { errors, user } = await registerUser.execute(input)
@@ -33,8 +33,8 @@ describe('Register user service', () => {
       name: 'john doe',
       email: 'johndoe@mock3.com',
       password: 'jonhDOE77$',
-      passwordConfirmation: 'jonhDOE77$',
-      roleId: 'ixtxutxouxyil',
+      password_confirmation: 'jonhDOE77$',
+      role_id: 'ixtxutxouxyil',
     }
 
     const { errors, user } = await registerUser.execute(input)
