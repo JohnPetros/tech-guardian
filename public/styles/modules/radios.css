@@ -16,6 +16,10 @@
   gap: 8px;
   cursor: pointer;
   text-transform: capitalize;
+
+  border-radius: 8px;
+
+  outline: none;
 }
 
 .radio {
@@ -31,6 +35,10 @@
 
   border: 2px solid var(--gray-300);
   border-radius: 50%;
+}
+
+.radio-container label:focus {
+  box-shadow: var(--outline);
 }
 
 .radio::after {
