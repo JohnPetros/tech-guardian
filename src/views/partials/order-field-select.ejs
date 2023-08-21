@@ -4,7 +4,13 @@
     <%= title %>
   </strong>
   <div class="content">
-    <select data-select class="select" name="<%= id %>" id="<%= id %>">
+    <select 
+      data-select 
+      class="select" 
+      name="<%= id %>" 
+      id="<%= id %>"
+      <%= isDisabled ? 'disabled' : '' %>
+    >
       <% options.forEach(option => { %>
         <option 
         data-option 
