@@ -84,11 +84,23 @@
 
         <% if (order.creator_id === user.id) { %>
           <div class="buttons">
-            <button class="button purple" name="action" value="<%= order.id %>/edit" type="button" data-button>
+            <button 
+              class="button purple" 
+              name="action" 
+              value="<%= order.id %>/edit" 
+              type="button" 
+              data-button
+            >
               <i class="ph-bold ph-note-pencil"></i>
               Editar solicitação
             </button>
-            <button class="button red" name="action" value="<%= order.id %>/delete" type="button" data-button>
+            <button 
+              class="button red" 
+              name="action" 
+              value="<%= order.id %>/delete" 
+              type="button" 
+              data-button
+            >
               <i class="ph-bold ph-trash"></i>
               Apagar solicitação
             </button>
@@ -96,7 +108,13 @@
         <% } %>
 
         <% if (user.role === 'guardian') { %>
-            <button class="button" name="action" value="<%= order.id %>/resolve" type="button" data-button>
+            <button 
+              class="button" 
+              name="action" 
+              value="<%= order.id %>/resolve" 
+              type="button" 
+              data-button
+            >
               <i class="ph-bold ph-paper-plane"></i>
               Enviar solução
             </button>

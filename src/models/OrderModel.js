@@ -54,7 +54,7 @@ class OrderModel {
   }
 
   async edit({ id, title, description, patrimony_id }) {
-    return await this.execute(() =>
+    await this.execute(() =>
       knex
         .from('orders')
         .update({
@@ -67,7 +67,7 @@ class OrderModel {
   }
 
   async create({ title, description, patrimony_id, user_id }) {
-    return await this.execute(() =>
+    await this.execute(() =>
       knex.from('orders').insert({
         id: uuid.v4(),
         title,
@@ -79,7 +79,21 @@ class OrderModel {
   }
 
   async delete(id) {
-    return await this.execute(() => knex.from('orders').del().where({ id }))
+    await this.execute(() => knex.from('orders').del().where({ id }))
+  }
+
+  async resolve(id, solution, userId) {
+    await this.execute(() =>
+      knex
+        .from('orders')
+        .update({
+          is_open: false,
+          solution: solution,
+          resolved_by: userId,
+          resolved_at: new Date(),
+        })
+        .where({ id })
+    )
   }
 }
 

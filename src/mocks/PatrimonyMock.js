@@ -4,6 +4,10 @@ class PatrimonyModel {
       id: 'b2737076-dcfe-4d8f-b4b3-76dcafdd99ef',
       number: '147456',
     },
+    {
+      id: '4ba2af62-552b-4225-b5d8-157f3369e654',
+      number: '98746',
+    },
   ]
 
   async getAll() {

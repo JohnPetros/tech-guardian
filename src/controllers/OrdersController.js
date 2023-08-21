@@ -9,6 +9,7 @@ const EditOrderService = require('../services/orderServices/EditOrderService')
 
 const FlashMessage = require('../utils/FlashMessage')
 const DeleteOrderService = require('../services/orderServices/DeleteOrderService')
+const ResolveOrderService = require('../services/orderServices/ResolveOrderService')
 
 class OrdersController {
   async renderOpenOrdersPage(request, response) {
@@ -100,11 +101,12 @@ class OrdersController {
 
   async editOrder(request, response) {
     const { order_id } = request.params
-    const { title, patrimony_id, description, user_id } = request.body
+    const { title, patrimony_id, description } = request.body
 
     const orderModel = new OrderModel()
+    const patrimonyModel = new PatrimonyModel()
 
-    const editOderService = new EditOrderService(orderModel)
+    const editOderService = new EditOrderService(orderModel, patrimonyModel)
 
     const errors = await editOderService.execute({
       order_id,
@@ -152,6 +154,29 @@ class OrdersController {
     }
 
     flashMessage.add('success', 'Solicitação deletada com sucesso')
+
+    return response.redirect('/open-orders')
+  }
+
+  async resolveOrder(request, response) {
+    const { order_id } = request.params
+    const { solution } = request.body
+
+    const orderModel = new OrderModel()
+
+    const deleteOrderService = new ResolveOrderService(orderModel)
+
+    const error = await deleteOrderService.execute(order_id, solution)
+
+    const flashMessage = new FlashMessage(response.flash)
+
+    if (error) {
+      flashMessage.add('error', error)
+
+      response.redirect('/order/' + order_id)
+    }
+
+    flashMessage.add('success', 'Solução enviada com sucesso')
 
     return response.redirect('/open-orders')
   }
