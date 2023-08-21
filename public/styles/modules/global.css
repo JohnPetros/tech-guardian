@@ -29,7 +29,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
+
   font-family: 'Roboto', sans-serif;
 }
 
@@ -72,12 +72,19 @@ a {
 
 button,
 a {
+  outline: none;
   transition: filter 0.3s;
 }
 
 button:hover,
 a:hover {
   filter: brightness(1.2);
+}
+
+a:focus,
+button:focus {
+  box-shadow: var(--outline);
+  border-radius: 8px;
 }
 
 ul {
