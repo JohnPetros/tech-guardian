@@ -24,10 +24,11 @@ export class Form {
     this.inputs = this.form.querySelectorAll('[data-input]')
     this.textareas = this.form.querySelectorAll('[data-textarea]')
     this.radios = this.form.querySelectorAll('[data-radio]')
+    this.radiosLabels = this.form.querySelectorAll('[data-radio-label]')
     this.selects = this.form.querySelectorAll('[data-select]')
 
     this.onTextareaKeyup = this.onTextareaKeyup.bind(this)
-    this.onRadioKeyDown = this.onRadioKeyDown.bind(this)
+    this.onRadioLabelKeyDown = this.onRadioLabelKeyDown.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.form.addEventListener('submit', this.onSubmit)
 
@@ -38,9 +39,9 @@ export class Form {
       })
     }
 
-    if (this.radios.length) {
-      this.radios.forEach((radio) =>
-        radio.addEventListener('keydown', this.onRadioKeyDown)
+    if (this.radiosLabels.length) {
+      this.radiosLabels.forEach((label) =>
+        label.addEventListener('keydown', this.onRadioLabelKeyDown)
       )
     }
   }
@@ -88,9 +89,8 @@ export class Form {
   }
 
   showError(errorMessage, input) {
+    console.log(input)
     const inputContainer = input.parentElement
-
-    console.log(inputContainer)
 
     const error = this.createError(errorMessage)
 
@@ -141,14 +141,29 @@ export class Form {
   }
 
   validatePassword(input) {
-    if (this.passwordRegex.test(input.value)) {
+    const isPassword = this.passwordRegex.test(input.value)
+
+    if (isPassword) {
+      console.log(this.passwordRegex.test(input.value))
       return true
     }
 
+    console.log('por que')
     this.showError(
       'Senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial.',
       input
     )
+    return false
+  }
+
+  validateRadio(radio) {
+    const hasCheckedOption = !!radio.value
+
+    if (hasCheckedOption) {
+      return true
+    }
+
+    this.showError('Marque uma opção', radio)
     return false
   }
 
@@ -185,6 +200,11 @@ export class Form {
       this.inputs.forEach(this.validateInput, this)
     }
 
+    if (this.radios.length) {
+      this.radios.forEach(this.sanitizeInputs, this)
+      this.radios.forEach(this.validateRadio, this)
+    }
+
     if (this.textareas.length) {
       this.textareas.forEach(this.sanitizeInputs, this)
       this.textareas.forEach(this.validateInput, this)
@@ -197,12 +217,13 @@ export class Form {
   }
 
   sanitizeInputs(input) {
-    input.value = input.value
-      .trim()
-      .replace(/[&<>"']/g, (match) => this.specialChars[match])
+    if (input.value)
+      input.value = input.value
+        .trim()
+        .replace(/[&<>"']/g, (match) => this.specialChars[match])
   }
 
-  onRadioKeyDown(event) {
+  onRadioLabelKeyDown(event) {
     if (event.key === 'Enter') {
       event.currentTarget.click()
     }
