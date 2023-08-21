@@ -2,5 +2,6 @@
   border-radius: 50%;
   border: 2px solid var(--purple-700);
 
+  padding: 2px;
   overflow: hidden;
 }
