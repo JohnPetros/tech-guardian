@@ -20,7 +20,6 @@ function checkSession(request, response, next) {
 
   request.session.previousRoute = currentRoute
 
-  console.log(request.session)
 
   next()
 }
