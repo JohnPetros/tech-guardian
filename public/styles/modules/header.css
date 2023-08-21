@@ -27,3 +27,24 @@
 #header .logo h1 span {
   color: var(--green-500);
 }
+
+#header .user, .info {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+#header .user {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+#header .user .avatar {
+  width: 4rem;
+  height: 4rem;
+}
+
+#header .user .name {
+  color: var(--gray-100);
+}

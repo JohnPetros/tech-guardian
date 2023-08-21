@@ -4,6 +4,7 @@
 @import './modules/order-status.css';
 @import './modules/order-field.css';
 @import './modules/button.css';
+@import './modules/avatar.css';
 @import './modules/modal.css';
 
 main.container {
