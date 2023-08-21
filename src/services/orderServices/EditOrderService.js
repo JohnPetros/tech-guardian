@@ -2,8 +2,9 @@ const Validator = require('../../utils/Validator')
 const uuid = require('uuid')
 
 class EditOrderService {
-  constructor(orderModel) {
+  constructor(orderModel, patrimonyModel) {
     this.orderModel = orderModel
+    this.patrimonyModel = patrimonyModel
   }
 
   async execute({ order_id, title, patrimony_id, description }) {
@@ -27,7 +28,13 @@ class EditOrderService {
       return ['Solicitação não encontrada']
     }
 
-    await this.orderModel.edit({
+    const patrimony = await this.patrimonyModel.getById(patrimony_id)
+
+    if (!patrimony) {
+      return ['Patrimônio não encontrado']
+    }
+
+   await this.orderModel.edit({
       id: order.id,
       title,
       patrimony_id,

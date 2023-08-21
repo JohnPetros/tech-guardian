@@ -47,6 +47,13 @@ class OrderMock {
     return this.orders.find((order) => order.title === title)
   }
 
+  async edit(newData) {
+    const editedOrders = this.orders.map((order) =>
+      order.id === newData.id ? { ...order, ...newData } : order
+    )
+    this.orders = editedOrders
+  }
+
   async create({ id, title, description, patrimony_id, user_id }) {
     return this.orders.push({
       id,
@@ -57,6 +64,10 @@ class OrderMock {
       is_open: true,
       created_at: new Date(),
     })
+  }
+
+  async delete(id) {
+    this.orders = this.orders.filter((order) => order.id !== id)
   }
 }
 
