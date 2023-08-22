@@ -40,7 +40,7 @@
               id: 'patrimony_id',
               title: 'Patrimônio',
               icon: 'desktop-tower',
-              isDisabled: order.creator_id !== user.id,
+              isDisabled: order.creator_id !== user.id || user.role !== 'tech',
               options: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number })),
               selectedOptionId: order.patrimony_id
             })
@@ -52,7 +52,7 @@
               id: 'description',
               title: 'Descrição do problema',
               icon: 'clipboard-text',
-              isDisabled: order.creator_id !== user.id,
+              isDisabled: order.creator_id !== user.id || user.role !== 'tech',
               text: order.description ?? 'Problema sem descrição',
               isBig: order.creator_id === user.id && order.is_open,
               validations: [
@@ -61,7 +61,6 @@
             })
          %>
 
-         <% if (order.creator_id !== user.id) { %>
           <%- include(
             "../partials/order-field-user.ejs",
             { 
@@ -72,7 +71,6 @@
               caption: 'em ' + order.created_at,
            }) 
           %>
-        <% } %>
 
          <% if ((user.role === 'guardian' && order.is_open) || !order.is_open) { %>
           <%- 

@@ -28,6 +28,7 @@ class UsersController {
 
     response.render('pages/user.ejs', {
       user,
+      sessionUser: request.session.user,
       roles,
     })
   }
@@ -76,7 +77,7 @@ class UsersController {
       request.session.user = await userModel.getById(updatedUserId)
     }
 
-    console.log(request.session.user);
+    console.log(request.session.user)
 
     flashMessage.add('success', 'Conta editada com sucesso')
 
