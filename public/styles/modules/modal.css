@@ -8,10 +8,7 @@
   position: fixed;
   inset: 0;
 
-
   border: none;
-
-  z-index: 50;
 }
 
 .modal .content {
@@ -38,18 +35,15 @@
   align-items: center;
   justify-content: end;
   gap: 8px;
-  
+
   border-top: 1px solid var(--gray-300);
-  padding: 3.6rem 0 1.2rem; 
+  padding: 3.6rem 0 1.2rem;
 
   height: 2.4rem;
+
+  text-transform: capitalize;
 }
 
 .modal .content .buttons .button {
   padding: 8px;
 }
-
-/* .modal.visible {
-  opacity: 1;
-  pointer-events: all;
-} */
