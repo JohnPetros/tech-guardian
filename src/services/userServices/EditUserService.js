@@ -62,7 +62,7 @@ class EditUserService {
       name,
       email,
       password: password ? await bcrypt.hash(password, 8) : user.password,
-      avatar: avatarFile.filename ?? user.avatar,
+      avatar: avatarFile?.filename ?? user.avatar,
       role_id,
     })
   }
