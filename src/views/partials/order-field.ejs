@@ -9,7 +9,6 @@
     name="<%= id %>"
     id="<%= id %>"
     <%= isDisabled ? 'disabled' : '' %>
-    <%= typeof hasAutoFocus !== 'undefined' && hasAutoFocus ? 'autofocus' : '' %>
     placeholder="<%= typeof placeholder !== 'undefined' && placeholder ? placeholder: '' %>"
     class="<%= isBig ? 'big' : '' %>"
     <% validations.forEach(validation => { %>
