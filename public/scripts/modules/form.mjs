@@ -21,16 +21,21 @@ export class Form {
 
   constructor(form) {
     this.form = document.querySelector(form)
-    this.inputs = this.form.querySelectorAll('[data-input]')
-    this.textareas = this.form.querySelectorAll('[data-textarea]')
-    this.radios = this.form.querySelectorAll('[data-radio]')
-    this.radiosLabels = this.form.querySelectorAll('[data-radio-label]')
-    this.selects = this.form.querySelectorAll('[data-select]')
 
-    this.onTextareaKeyup = this.onTextareaKeyup.bind(this)
-    this.onRadioLabelKeyDown = this.onRadioLabelKeyDown.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
-    this.form.addEventListener('submit', this.onSubmit)
+    if (this.form) {
+      this.inputs = this.form.querySelectorAll('[data-input]')
+      this.textareas = this.form.querySelectorAll('[data-textarea]')
+      this.radios = this.form.querySelectorAll('[data-radio]')
+      this.radiosLabels = this.form.querySelectorAll('[data-radio-label]')
+      this.selects = this.form.querySelectorAll('[data-select]')
+      this.inputFiles = this.form.querySelectorAll('[data-input-file]')
+
+      this.onTextareaKeyup = this.onTextareaKeyup.bind(this)
+      this.onRadioLabelKeyDown = this.onRadioLabelKeyDown.bind(this)
+      this.onInputFileChange = this.onInputFileChange.bind(this)
+      this.onSubmit = this.onSubmit.bind(this)
+      this.form.addEventListener('submit', this.onSubmit)
+    }
 
     if (this.textareas.length) {
       this.textareas.forEach((textarea) => {
@@ -44,10 +49,26 @@ export class Form {
         label.addEventListener('keydown', this.onRadioLabelKeyDown)
       )
     }
+
+    if (this.inputFiles.length) {
+      this.inputFiles.forEach((input) =>
+        input.addEventListener('change', this.onInputFileChange)
+      )
+    }
   }
 
   setAction(action) {
     this.form.action = action
+  }
+
+  setInputAvatar(inputAvatar, file) {
+    const avatar = inputAvatar.querySelector('.avatar')
+
+    console.log(avatar);
+
+    const reader = new FileReader()
+    reader.onload = ({ target }) => (avatar.src = target.result)
+    reader.readAsDataURL(file)
   }
 
   submit() {
@@ -226,6 +247,11 @@ export class Form {
     if (event.key === 'Enter') {
       event.currentTarget.click()
     }
+  }
+
+  onInputFileChange({ currentTarget }) {
+    const file = currentTarget.files[0]
+    this.setInputAvatar(currentTarget.parentElement, file)
   }
 
   onSubmit(event) {
