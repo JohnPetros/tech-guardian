@@ -31,14 +31,36 @@
             </li>
           </ul>
         </nav>
+
+        <form>
+          <%-
+            include(
+              "../partials/input.ejs",
+              {
+                id: 'search',
+                type: 'search',
+                placeholder: 'Pesquisar solicitação por nome',
+                icon: 'magnifying-glass',
+                value: search,
+                validations: []
+              }
+            )
+            %>
+        </form>
       </div>
 
+     
+          
       <% if (user.role === 'tech') { %>
          <a class="new-order-button" href="/new-order">
           <img src="assets/icons/plus.svg" width="16" height="16" alt="">
           Abrir nova solicitação
         </a>
       <% } %>
+
+      <% if (!openOrders.length) { %>
+          <p class="no-orders-message">Nenhuma solicitação encontrada.</p>
+     <% } %>
 
       <div class="order-cards">
         <% openOrders.forEach(order => { %> 
