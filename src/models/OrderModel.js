@@ -11,7 +11,7 @@ class OrderModel {
     }
   }
 
-  async getAll(isOpen = true) {
+  async getAll({ isOpen = true, search }) {
     const roles = await this.execute(() =>
       knex
         .select(
@@ -25,6 +25,7 @@ class OrderModel {
         .join('patrimonies', 'patrimonies.id', '=', 'orders.patrimony_id')
         .join('users', 'users.id', '=', 'orders.created_by')
         .where({ is_open: isOpen })
+        .where('title', 'like', `%${search}%`)
     )
 
     return roles

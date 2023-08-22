@@ -15,14 +15,18 @@ const ReopenOrderService = require('../services/orderServices/ReopenOrderService
 class OrdersController {
   async renderOpenOrdersPage(request, response) {
     const { user } = request.session
+    const { search } = request.query
 
     const orderModel = new OrderModel()
 
     const getOrdersService = new GetOrdersService(orderModel)
 
-    const openOrders = await getOrdersService.execute()
+    const openOrders = await getOrdersService.execute({
+      isOpen: true,
+      search
+    })
 
-    response.render('pages/open-orders.ejs', { user, openOrders })
+    response.render('pages/open-orders.ejs', { user, openOrders, search })
   }
 
   async renderClosedOrdersPage(request, response) {

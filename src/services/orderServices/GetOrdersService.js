@@ -1,12 +1,12 @@
-const formatTime = require("../../helpers/formatTime")
+const formatTime = require('../../helpers/formatTime')
 
 class GetOrdersService {
   constructor(orderModel) {
     this.orderModel = orderModel
   }
 
-  async execute(isOpen = true) {
-    const openOrders = await this.orderModel.getAll(isOpen)
+  async execute({ isOpen = true, search }) {
+    const openOrders = await this.orderModel.getAll({ isOpen, search })
 
     return openOrders.map((order) => ({
       ...order,
