@@ -1,0 +1,39 @@
+.input-avatar-container {
+  background-color: var(--gray-700);
+
+  display: grid;
+  place-content: center;
+
+  padding: 1.2rem 0;
+}
+
+.input-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+
+  cursor: pointer;
+  transition: filter 0.3s;
+}
+
+.input-avatar:hover {
+  filter: brightness(1.1);
+}
+
+.input-avatar .label {
+  color: var(--purple-700);
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+.input-avatar .avatar-container {
+  width: 12rem;
+  height: 12rem;
+}
+
+.input-avatar input[type='file'] {
+  display: none;
+}
+
