@@ -1,15 +1,70 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<body lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/user.css" />
+    <script type="module" src="/scripts/user.mjs" defer></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <title>Tech Guardian | Usuário <%= name %></title>
+    <title>Tech Guardian | Usuário <%= user.name %></title>
 </head>
-<body>
-    <form action="/user/<%= id %>/">
-      
-    </form>
-</body>
+    <%- include("../partials/header.ejs", { user: user }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'success', messages: getFlashMessages('success') }) %>
+
+    <main class="container">
+
+      <form class="form" action="/user/<%= user.id %>/" data-form>
+        <fieldset class="inputs">
+          <%-
+            include(
+              "../partials/input-avatar.ejs",
+              {
+                value: user.avatar,
+                validations: [
+                  { type: 'required' },
+                ]
+              }
+            )
+          %>
+
+          <%-
+            include(
+              "../partials/input.ejs",
+              {
+                id: 'name',
+                type: 'text',
+                placeholder: 'Nome de usuário',
+                icon: 'user',
+                value: user.name,
+                validations: [
+                  { type: 'required' },
+                  { type: 'min-length', value: 4 },
+                ]
+              }
+            )
+          %>
+
+          <%-  
+            include(
+              "../partials/input.ejs",
+              {
+                id: 'email',
+                type: 'text',
+                icon: 'envelope-simple',
+                placeholder: 'E-mail',
+                value: user.email,
+                validations: [
+                  { type: 'required' },
+                  { type: 'email' },
+                ]
+              }
+            )
+          %>    
+        </fieldset>
+      </form>
+    </main>
+  </body>
 </html>
