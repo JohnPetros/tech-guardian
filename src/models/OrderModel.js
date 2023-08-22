@@ -11,7 +11,7 @@ class OrderModel {
     }
   }
 
-  async getAll({ isOpen = true, search }) {
+  async getAll({ isOpen = true, search = '' }) {
     const roles = await this.execute(() =>
       knex
         .select(
