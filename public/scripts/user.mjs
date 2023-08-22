@@ -14,7 +14,6 @@ const buttons = document.querySelectorAll('[data-button]')
 const actionTitles = {
   delete: 'deletar',
   edit: 'editar',
-  reopen: 'reabrir',
 }
 
 function submitForm() {
@@ -25,19 +24,37 @@ function submitForm() {
   userForm.submit()
 }
 
-function handleButtonClick({ currentTarget }) {
-  const isResolveButton = currentTarget.id === 'resolve'
+function hideInputPasswords() {
+  const inputPasswords = userForm.getInputsByType('password')
+  inputPasswords.forEach((input) => {
+    input.type = 'hidden'
+    input.value = ''
+  })
+}
 
-  if (isResolveButton) {
-    userForm.setAction(currentTarget.value)
-    submitForm()
+function showInputPasswords() {
+  const hiddenInputs = userForm.getInputsByType('hidden')
+
+  if (!hiddenInputs.length) {
+    hideInputPasswords()
+    return
+  }
+
+  hiddenInputs.forEach((input) => (input.type = 'password'))
+}
+
+function handleButtonClick({ currentTarget }) {
+  const isEditPasswordButton = currentTarget.id === 'edit-password'
+
+  if (isEditPasswordButton) {
+    showInputPasswords()
     return
   }
 
   const actionTitle = actionTitles[currentTarget.id]
 
   userForm.setAction(currentTarget.value)
-  
+
   modal.setTitle(`Deseja ${actionTitle} essa conta?`)
   modal.setAction(actionTitle, submitForm)
   modal.open()
