@@ -3,7 +3,7 @@ import { Toast } from './modules/toast.mjs'
 import { Modal } from './modules/modal.mjs'
 import './modules/header.mjs'
 
-const modal = new Modal('[data-modal]#logout-modal')
+const modal = new Modal('[data-modal]')
 
 const orderForm = new Form('[data-form]')
 
