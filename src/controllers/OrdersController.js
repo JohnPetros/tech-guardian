@@ -69,7 +69,7 @@ class OrdersController {
     if (order === 'Solicitação não encontrada') {
       const flashMessage = new FlashMessage(response.flash)
 
-      flashMessage.add('error', order)
+      flashMessage.add('error', 'Solicitação não encontrada')
 
       return response.redirect('/open-orders')
     }

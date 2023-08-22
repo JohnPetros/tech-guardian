@@ -55,7 +55,7 @@ class OrderModel {
         .from('orders')
         .join('patrimonies', 'patrimonies.id', '=', 'orders.patrimony_id')
         .join('users as creator', 'creator.id', '=', 'orders.created_by')
-        .join('users as resolver', 'resolver.id', '=', 'orders.resolved_by')
+        .leftJoin('users as resolver', 'resolver.id', '=', 'orders.resolved_by')
         .where('orders.id', id)
         .first()
     )
