@@ -1,7 +1,7 @@
 @import './input.css';
 @import './select.css';
 @import './input-avatar.css';
-@import './radios.css';
+@import './radio.css';
 
 .form {
   background-color: var(--gray-500);

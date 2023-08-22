@@ -41,6 +41,7 @@ label.src-only {
 
 .input-container .icon {
   color: var(--gray-300);
+  font-size: 2rem;
   margin-left: 8px;
 }
 
