@@ -47,4 +47,11 @@ ordersRouter.post(
   ordersController.resolveOrder
 )
 
+ordersRouter.post(
+  '/order/:order_id/reopen',
+  checkRole('tech', 'Você precisa ser um Tech para reabrir uma solicitação'),
+  checkUserId('Somente o criador da solicitação pode reabrí-lo'),
+  ordersController.reopenOrder
+)
+
 module.exports = ordersRouter

@@ -10,6 +10,7 @@ const EditOrderService = require('../services/orderServices/EditOrderService')
 const FlashMessage = require('../utils/FlashMessage')
 const DeleteOrderService = require('../services/orderServices/DeleteOrderService')
 const ResolveOrderService = require('../services/orderServices/ResolveOrderService')
+const ReopenOrderService = require('../services/orderServices/ReopenOrderService')
 
 class OrdersController {
   async renderOpenOrdersPage(request, response) {
@@ -192,6 +193,28 @@ class OrdersController {
     }
 
     flashMessage.add('success', 'Solução enviada com sucesso')
+
+    return response.redirect('/open-orders')
+  }
+
+  async reopenOrder(request, response) {
+    const { order_id } = request.params
+
+    const orderModel = new OrderModel()
+
+    const reopenOrderService = new ReopenOrderService(orderModel)
+
+    const error = await reopenOrderService.execute(order_id)
+
+    const flashMessage = new FlashMessage(response.flash)
+
+    if (error) {
+      flashMessage.add('error', error)
+
+      response.redirect('/order/' + order_id)
+    }
+
+    flashMessage.add('success', 'Solução reaberta com sucesso')
 
     return response.redirect('/open-orders')
   }

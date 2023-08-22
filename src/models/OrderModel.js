@@ -56,7 +56,7 @@ class OrderModel {
         .join('users as creator', 'creator.id', '=', 'orders.created_by')
         .join('users as resolver', 'resolver.id', '=', 'orders.resolved_by')
         .where('orders.id', id)
-        .first().debug()
+        .first()
     )
   }
 
@@ -98,6 +98,17 @@ class OrderModel {
           solution: solution,
           resolved_by: userId,
           resolved_at: new Date(),
+        })
+        .where({ id })
+    )
+  }
+
+  async reopen(id) {
+    await this.execute(() =>
+      knex
+        .from('orders')
+        .update({
+          is_open: true,
         })
         .where({ id })
     )
