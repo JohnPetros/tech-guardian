@@ -7,18 +7,11 @@ class GetOrderByIdService {
   }
 
   async execute(orderId) {
-    console.log(orderId)
-
-    const _order = await this.orderModel.getById(orderId)
-
-    console.log({ _order })
-
     if (!uuid.validate(orderId)) {
       return 'Solicitação não encontrada'
     }
-    const order = await this.orderModel.getById(orderId)
 
-    console.log(order)
+    const order = await this.orderModel.getById(orderId)
 
     if (!order) {
       return 'Solicitação não encontrada'

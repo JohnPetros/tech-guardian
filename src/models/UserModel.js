@@ -22,7 +22,13 @@ class UserModel {
   }
 
   async getById(id) {
-    return await this.execute(() => knex('users').where({ id }).first())
+    return await this.execute(() =>
+      knex
+        .select('id', 'name', 'email', 'avatar', 'role_id')
+        .from('users')
+        .where({ id })
+        .first()
+    )
   }
 
   async getByEmail(email) {
