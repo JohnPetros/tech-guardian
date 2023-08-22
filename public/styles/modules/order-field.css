@@ -12,6 +12,16 @@
   gap: 1.2rem;
 }
 
+.order-field .content:focus-within {
+  border-radius: 8px;
+  box-shadow: var(--outline);
+}
+
+.order-field .content:has(.select) {
+  width: max-content;
+  padding-right: 4px;
+}
+
 .order-field .title {
   display: flex;
   align-items: center;
