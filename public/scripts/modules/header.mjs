@@ -1,6 +1,6 @@
 import { Modal } from './modal.mjs'
 
-const modal = new Modal('[data-modal]#logout-modal')
+const modal = new Modal('[data-modal]')
 const logoutButton = document.querySelector('[data-logout-button]')
 
 function logoutUser() {
