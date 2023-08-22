@@ -13,10 +13,10 @@
     >
       <% options.forEach(option => { %>
         <option 
-        data-option 
-        class="option" 
-        value="<%= option.id %>"
-        <%= option.id === selectedOptionId ? 'selected' : '' %>
+          data-option 
+          class="option" 
+          value="<%= option.id %>"
+          <%= option.id === selectedOptionId ? 'selected' : '' %>
         >
         <%= option.value %>
       </option>

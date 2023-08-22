@@ -39,6 +39,7 @@ class OrderModel {
           'orders.created_at',
           'orders.solution',
           'orders.description',
+          'orders.patrimony_id',
           'orders.is_open',
           'orders.resolved_at',
           'orders.resolved_by',
