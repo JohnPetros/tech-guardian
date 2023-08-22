@@ -54,7 +54,6 @@ class SessionController {
     const { name, email, password, password_confirmation, role_id } =
       request.body
       
-
     const userModel = new UserModel()
     const roleModel = new RoleModel()
     const registerUserService = new RegisterUserService(userModel, roleModel)

@@ -64,8 +64,6 @@ class OrdersController {
 
     const order = await getOrderById.execute(request.params.orderId)
 
-    console.log(order);
-    
     if (order === 'Solicitação não encontrada') {
       const flashMessage = new FlashMessage(response.flash)
 
