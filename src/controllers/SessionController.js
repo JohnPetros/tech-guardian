@@ -9,11 +9,7 @@ class SessionController {
     response.render('pages/login.ejs')
   }
 
-  async renderRegisterPage(request, response) {
-    const { user } = request.session
-
-    if (user) return response.redirect('/open-orders')
-
+  async renderRegisterPage(_, response) {
     const roleModel = new RoleModel()
 
     const roles = await roleModel.getUnrestrictedOnes()
