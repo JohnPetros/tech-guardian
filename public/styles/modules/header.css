@@ -43,7 +43,7 @@
 }
 
 #header .user,
-.info {
+#header .user .info {
   display: flex;
   align-items: center;
   gap: 1.2rem;
@@ -62,4 +62,9 @@
 
 #header .user .name {
   color: var(--gray-100);
+}
+
+#header .user .logout-button {
+  display: grid;
+  place-content: center;
 }
