@@ -61,10 +61,14 @@
 }
 
 #header .user .name {
+  font-size: 1.8rem;
   color: var(--gray-100);
 }
 
 #header .user .logout-button {
   display: grid;
   place-content: center;
+
+  font-size: 2rem;
+  color: var(--gray-300);
 }
