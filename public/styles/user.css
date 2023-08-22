@@ -1,0 +1,16 @@
+@import './modules/global.css';
+@import './modules/header.css';
+@import './modules/toast.css';
+@import './modules/form.css';
+@import './modules/input.css';
+
+main.container {
+  width: 90%;
+  max-width: 1200px;
+
+  margin: 4rem auto;
+}
+
+.form {
+  
+}
