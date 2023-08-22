@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/styles/order.css" />
     <script type="module" src="/scripts/order.mjs" defer></script>
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
-    <title>TechGuardian | Order</title>
+    <title>TechGuardian | Solicitação: <%= order.title %></title>
   </head>
   <body>
     <%- include("../partials/header.ejs", { user: user }) %>
@@ -108,7 +108,7 @@
 
         <input type="hidden" name="user_id" value="<%= user.id %>">
 
-        <% if (order.creator_id === user.id) { %>
+        <% if (order.creator_id === user.id && order.is_open) { %>
           <div class="buttons">
             <button 
               id="edit"
@@ -120,6 +120,33 @@
             >
               <i class="ph-bold ph-note-pencil"></i>
               Editar solicitação
+            </button>
+            <button 
+              id="delete"
+              class="button red" 
+              name="action" 
+              value="/order/<%= order.id %>/delete" 
+              type="button" 
+              data-button
+            >
+              <i class="ph-bold ph-trash"></i>
+              Apagar solicitação
+            </button>
+          </div>
+        <% } %>
+
+        <% if (order.creator_id === user.id && !order.is_open) { %>
+          <div class="buttons">
+            <button 
+              id="reopen"
+              class="button purple" 
+              name="action" 
+              value="/order/<%= order.id %>/reopen" 
+              type="button" 
+              data-button
+            >
+              <i class="ph-bold ph-paper-plane"></i>
+              Reabrir solicitação
             </button>
             <button 
               id="delete"
