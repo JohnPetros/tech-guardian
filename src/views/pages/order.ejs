@@ -54,7 +54,7 @@
               icon: 'clipboard-text',
               isDisabled: order.creator_id !== user.id || user.role !== 'tech',
               text: order.description ?? 'Problema sem descrição',
-              isBig: order.creator_id === user.id && order.is_open,
+              isBig: user.role === 'tech' && !order.resolved_at,
               validations: [
                 { type: 'required' },
               ]
@@ -99,14 +99,14 @@
               id: order.resolver_id,
               name: order.resolver_name,
               avatar: order.resolver_avatar,
-              caption: 'em ' + order.created_at,
+              caption: 'em ' + order.resolved_at,
            }) 
           %>
         <% } %>
 
         <input type="hidden" name="user_id" value="<%= user.id %>">
 
-        <% if (order.creator_id === user.id && order.is_open) { %>
+        <% if (order.creator_id === user.id && order.is_open && user.role === 'tech') { %>
           <div class="buttons">
             <button 
               id="edit"
@@ -133,7 +133,7 @@
           </div>
         <% } %>
 
-        <% if (order.creator_id === user.id && !order.is_open) { %>
+        <% if (order.creator_id === user.id && !order.is_open && user.role === 'tech') { %>
           <div class="buttons">
             <button 
               id="reopen"
