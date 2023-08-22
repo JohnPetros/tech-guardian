@@ -4,16 +4,16 @@ const SessionController = require('../controllers/SessionController')
 
 const sessionController = new SessionController()
 
-const loginRouter = Router()
+const sessionRouter = Router()
 
-loginRouter.get('/', sessionController.renderLoginPage)
+sessionRouter.get('/', sessionController.renderLoginPage)
 
-loginRouter.post('/login-user', sessionController.loginUser)
+sessionRouter.post('/login-user', sessionController.loginUser)
 
-loginRouter.get('/register', sessionController.renderRegisterPage)
+sessionRouter.get('/register', sessionController.renderRegisterPage)
 
-loginRouter.post('/register-user', sessionController.registerUser)
+sessionRouter.post('/register-user', sessionController.registerUser)
 
-loginRouter.get('/logout-user', sessionController.logoutUser)
+sessionRouter.get('/logout-user', sessionController.logoutUser)
 
-module.exports = loginRouter
+module.exports = sessionRouter
