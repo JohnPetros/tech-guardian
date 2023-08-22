@@ -54,7 +54,7 @@
               icon: 'clipboard-text',
               isDisabled: order.creator_id !== user.id,
               text: order.description ?? 'Problema sem descrição',
-              isBig: false,
+              isBig: order.creator_id === user.id && order.is_open,
               validations: [
                 { type: 'required' },
               ]
@@ -111,9 +111,10 @@
         <% if (order.creator_id === user.id) { %>
           <div class="buttons">
             <button 
+              id="edit"
               class="button purple" 
               name="action" 
-              value="<%= order.id %>/edit" 
+              value="/order/<%= order.id %>/edit" 
               type="button" 
               data-button
             >
@@ -121,9 +122,10 @@
               Editar solicitação
             </button>
             <button 
+              id="delete"
               class="button red" 
               name="action" 
-              value="<%= order.id %>/delete" 
+              value="/order/<%= order.id %>/delete" 
               type="button" 
               data-button
             >
@@ -135,9 +137,10 @@
 
         <% if (user.role === 'guardian' && order.is_open) { %>
             <button 
+              id="resolve"
               class="button" 
               name="action" 
-              value="<%= order.id %>/resolve" 
+              value="/order/<%= order.id %>/resolve" 
               type="button" 
               data-button
             >
