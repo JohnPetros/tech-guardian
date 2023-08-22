@@ -1,10 +1,9 @@
 <div class="order-field user">
-  <strong class="title">
+  <label class="label">
     <i class="ph ph-user icon"></i>
     <%= title %>
-  </strong>
+  </label>
   <a href="/user/<%= id %>" class="content">
-    
     <%- include("../partials/avatar.ejs", { image: avatar, size: 40 }) %>
 
     <strong class="name"><%= name %></strong>
