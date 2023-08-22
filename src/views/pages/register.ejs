@@ -94,8 +94,7 @@
                     title: roles[0].title,
                     name: 'role_id',
                     color: 'purple',
-                    isChecked: true,
-                    checkedRadioId: getFlashMessages('role_id')[0] ?? ''
+                    isChecked: getFlashMessages('role_id')[0] ? roles[0].id === getFlashMessages('role_id')[0] : true,
                   }) 
               %>
               <%- 
@@ -105,8 +104,7 @@
                     title: roles[1].title,
                     name: 'role_id',
                     color: 'green',
-                    isChecked: false,
-                    checkedRadioId: getFlashMessages('role_id')[0] ?? ''
+                    isChecked: roles[1].id === getFlashMessages('role_id')[0]
                   }) 
               %>
             </div>
