@@ -1,4 +1,9 @@
-form {
+@import './input.css';
+@import './select.css';
+@import './input-avatar.css';
+@import './radios.css';
+
+.form {
   background-color: var(--gray-500);
 
   padding: 3.2rem 2.4rem;
@@ -14,11 +19,12 @@ form {
   justify-content: center;
 }
 
-form fieldset {
+.form fieldset {
+  width: 100%;
   border: none;
 }
 
-form legend {
+.form legend {
   color: var(--gray-100);
   margin-bottom: 2.4rem;
 
@@ -28,7 +34,7 @@ form legend {
   font-size: 2rem;
 }
 
-form .inputs {
+.form .inputs {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -36,6 +42,6 @@ form .inputs {
   width: 100%;
 }
 
-form button {
+.form button[type="submit"] {
   margin-top: 2.4rem;
 }

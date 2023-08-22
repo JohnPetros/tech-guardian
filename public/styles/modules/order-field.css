@@ -22,7 +22,7 @@
   padding-right: 4px;
 }
 
-.order-field .title {
+.order-field .label {
   display: flex;
   align-items: center;
   gap: 8px;
