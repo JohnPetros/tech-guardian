@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/session.css" />    
     <script src="/scripts/session.mjs" defer type="module"></script>
-    <script src="https://unpkg.com/@getByIdphor-icons/web"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <title>Tech Guardian | Cadastro</title>
   </head>
   <body>
     <%- include("../partials/header.ejs", { user: null }) %>
 
     <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
-
 
     <main class="container">
 
@@ -44,7 +43,7 @@
                     id: 'email',
                     type: 'email',
                     placeholder: 'E-mail',
-                    icon: 'mail',
+                    icon: 'envelope-simple',
                     value: getFlashMessages('email')[0] ?? '',
                     validations: [
                       { type: 'required' },
