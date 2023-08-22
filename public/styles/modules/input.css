@@ -43,6 +43,11 @@ textarea {
   font-size: 1.6rem;
 }
 
+.input-container .icon {
+  color: var(--gray-300);
+  margin-left: 8px;
+}
+
 .input-container textarea {
   min-height: 16rem;
 }
