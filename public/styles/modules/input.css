@@ -39,6 +39,12 @@ label.src-only {
   font-size: 1.6rem;
 }
 
+.input-container:has(input[type="hidden"]) {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
+
 .input-container .icon {
   color: var(--gray-300);
   font-size: 2rem;
