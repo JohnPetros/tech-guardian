@@ -34,6 +34,22 @@ class UserModel {
   async getByEmail(email) {
     return await this.execute(() => knex('users').where({ email }).first())
   }
+
+  async edit({ id, name, email, password, avatar, role_id }) {
+    await this.execute(() =>
+      knex
+        .from('users')
+        .update({
+          id,
+          name,
+          email,
+          password,
+          avatar,
+          role_id,
+        })
+        .where({ id })
+    )
+  }
 }
 
 module.exports = UserModel
