@@ -76,6 +76,8 @@ class UsersController {
       request.session.user = await userModel.getById(updatedUserId)
     }
 
+    console.log(request.session.user);
+
     flashMessage.add('success', 'Conta editada com sucesso')
 
     return response.redirect('/user/' + user_id)

@@ -24,9 +24,17 @@ class UserModel {
   async getById(id) {
     return await this.execute(() =>
       knex
-        .select('id', 'name', 'email', 'avatar', 'role_id')
+        .select(
+          'users.id',
+          'users.name',
+          'users.email',
+          'users.avatar',
+          'users.role_id',
+          'roles.title as role'
+        )
         .from('users')
-        .where({ id })
+        .join('roles', 'roles.id', '=', 'users.role_id')
+        .where('users.id', '=', id)
         .first()
     )
   }
