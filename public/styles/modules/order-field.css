@@ -27,6 +27,7 @@
   align-items: center;
   gap: 8px;
 
+  font-weight: 700;
   font-size: 1.4rem;
 
   text-transform: uppercase;
@@ -115,6 +116,11 @@
 .order-field.user .name {
   color: var(--gray-100);
   font-weight: 400;
+}
+
+.order-field.user .avatar {
+  width: 4rem;
+  height: 4rem;
 }
 
 .order-field.user .caption {
