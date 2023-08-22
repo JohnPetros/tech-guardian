@@ -8,7 +8,7 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <title>Tech Guardian | Usuário <%= user.name %></title>
 </head>
-    <%- include("../partials/header.ejs", { user: user }) %>
+    <%- include("../partials/header.ejs", { user: sessionUser }) %>
 
     <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
 
@@ -23,6 +23,7 @@
               "../partials/input-avatar.ejs",
               {
                 value: user.avatar,
+                isEditable: user.id === sessionUser.id,
                 validations: [
                   { type: 'required' },
                 ]
@@ -99,16 +100,21 @@
           %>
 
           <div class="radios">
-            <%- 
-              include("../partials/radio.ejs", 
-                { 
-                  id: roles[0].id,
-                  title: roles[0].title,
-                  name: 'role_id',
-                  color: 'purple',
-                  isChecked: roles[0].id === user.role_id
-                }) 
-            %>
+            <% if (roles[0].id === user.role_id || user.id === sessionUser.id) { %>
+              <%- 
+                include("../partials/radio.ejs", 
+                  { 
+                    id: roles[0].id,
+                    title: roles[0].title,
+                    name: 'role_id',
+                    color: 'purple',
+                    isChecked: roles[0].id === user.role_id,
+                  }) 
+              %>
+            <% } %>
+        
+           
+            <% if (roles[1].id === user.role_id || user.id === sessionUser.id) { %>
             <%- 
               include("../partials/radio.ejs",
                 { 
@@ -116,46 +122,50 @@
                   title: roles[1].title,
                   name: 'role_id',
                   color: 'green',
-                  isChecked: roles[1].id === user.role_id
+                  isChecked: roles[1].id === user.role_id,
                 }) 
-            %>
+              %>
+            <% } %>
+
           </div>
 
         </fieldset>
 
-        <div class="buttons">
-          <button 
-            id="edit-password"
-            class="button purple" 
-            type="button" 
-            data-button
-          >
-            <i class="icon ph-bold ph-key"></i>
-            Editar senha
-          </button>
-          <button 
-            id="edit"
-            class="button green" 
-            name="action" 
-            value="/user/<%= user.id %>/edit" 
-            type="button" 
-            data-button
-          >
-            <i class="icon ph-bold ph-note-pencil"></i>
-            Editar conta
-          </button>
-          <button 
-            id="delete"
-            class="button red" 
-            name="action" 
-            value="/user/<%= user.id %>/edit" 
-            type="button" 
-            data-button
-          >
-            <i class="icon ph-bold ph-trash"></i>
-            Apagar conta
-          </button>
-        </div>
+        <% if (typeof user.id === sessionUser.id) { %>
+          <div class="buttons">
+            <button 
+              id="edit-password"
+              class="button purple" 
+              type="button" 
+              data-button
+            >
+              <i class="icon ph-bold ph-key"></i>
+              Editar senha
+            </button>
+            <button 
+              id="edit"
+              class="button green" 
+              name="action" 
+              value="/user/<%= user.id %>/edit" 
+              type="button" 
+              data-button
+            >
+              <i class="icon ph-bold ph-note-pencil"></i>
+              Editar conta
+            </button>
+            <button 
+              id="delete"
+              class="button red" 
+              name="action" 
+              value="/user/<%= user.id %>/edit" 
+              type="button" 
+              data-button
+            >
+              <i class="icon ph-bold ph-trash"></i>
+              Apagar conta
+            </button>
+          </div>
+        <% } %>
       </form>
     </main>
 
