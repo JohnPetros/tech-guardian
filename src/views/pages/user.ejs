@@ -64,6 +64,40 @@
             )
           %>    
 
+          <%- 
+            include(
+              "../partials/input.ejs",
+              { 
+                id: 'password',
+                type: 'hidden',
+                placeholder: 'Senha',
+                icon: 'key',
+                value: '',
+                validations: [
+                  { type: 'required' },
+                  { type: 'password' },
+                ]
+              }
+            ) 
+          %>
+
+          <%- 
+            include(
+              "../partials/input.ejs",
+              { 
+                id: 'password_confirmation',
+                type: 'hidden',
+                placeholder: 'Confirme sua senha',
+                icon: 'key',
+                value: '',
+                validations: [
+                  { type: 'required' },
+                  { type: 'equal', value: 'password' },
+                ]
+              }
+            ) 
+          %>
+
           <div class="radios">
             <%- 
               include("../partials/radio.ejs", 
@@ -91,9 +125,8 @@
 
         <div class="buttons">
           <button 
-            id="edit"
+            id="edit-password"
             class="button purple" 
-            name="action" 
             type="button" 
             data-button
           >
