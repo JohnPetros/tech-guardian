@@ -3,6 +3,7 @@
 @import './modules/navigation.css';
 @import './modules/order-card.css';
 @import './modules/button.css';
+@import './modules/input.css';
 @import './modules/toast.css';
 @import './modules/modal.css';
 
@@ -11,6 +12,26 @@ main.container {
   max-width: 1200px;
 
   margin: 4rem auto;
+}
+
+form {
+  padding: 8px;
+  background-color: var(--gray-500);
+  border-radius: 8px;
+
+  margin-top: 2.4rem;
+  max-width: 48rem;
+
+}
+
+#search {
+  padding: 8px;
+  font-size: 1.4rem;
+}
+
+.input-container {
+  padding: 4px;
+
 }
 
 .order-cards {
@@ -31,4 +52,13 @@ main.container {
   .order-cards {
     grid-template-columns: 1fr;
   }
+}
+
+.no-orders-found-message {
+  margin-top: 4rem;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  color: var(--gray-200);
 }
