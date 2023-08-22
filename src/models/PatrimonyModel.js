@@ -16,8 +16,8 @@ class PatrimonyModel {
 
   async getById(id) {
     return await this.execute(() =>
-      knex.from('patrimonies').where({ id })
-    ).first()
+      knex.from('patrimonies').where({ id }).first()
+    )
   }
 }
 
