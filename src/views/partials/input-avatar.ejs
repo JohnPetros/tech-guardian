@@ -1,6 +1,6 @@
 <div class="input-avatar-container">
   <label class="input-avatar" for="avatar">
-    <%- include("../partials/avatar.ejs", { image: 'default.png', size: 80 }) %>
+    <%- include("../partials/avatar.ejs", { image: value, size: 80 }) %>
 
     <small class="label">alterar avatar</small>
     <input type="file" id="avatar" name="avatar" accept="image/*" data-input-file />

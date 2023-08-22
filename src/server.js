@@ -2,9 +2,7 @@ require('express-async-errors')
 require('dotenv').config()
 
 const express = require('express')
-
 const session = require('express-session')
-
 const flash = require('express-flash-message').default
 
 const handleServerError = require('./middlewares/handleServerError')

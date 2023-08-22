@@ -34,8 +34,10 @@ class UsersController {
 
   async editUser(request, response) {
     const { user_id } = request.params
-    const { name, email, password, password_confirmation, avatar, role_id } =
+    const { name, email, password, password_confirmation, role_id } =
       request.body
+
+      const avatarFile = request.file
 
     const userModel = new UserModel()
 
@@ -47,7 +49,7 @@ class UsersController {
       email,
       password,
       password_confirmation,
-      avatar,
+      avatarFile,
       role_id,
     })
 
