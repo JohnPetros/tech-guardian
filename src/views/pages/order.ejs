@@ -145,20 +145,7 @@
               Enviar solução
             </button>
         <% } %>
-
-        <% if (user.role === 'tech' && order.creator_id === user.id) { %>
-          <button 
-            class="button" 
-            name="action" 
-            value="<%= order.id %>/resolve" 
-            type="button" 
-            data-button
-          >
-            <i class="ph-bold ph-paper-plane"></i>
-            Enviar solução
-          </button>
-      <% } %>
-        
+  
       </form>
     </main>
   </body>
