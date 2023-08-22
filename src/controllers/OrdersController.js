@@ -23,7 +23,7 @@ class OrdersController {
 
     const openOrders = await getOrdersService.execute({
       isOpen: true,
-      search
+      search,
     })
 
     response.render('pages/open-orders.ejs', { user, openOrders, search })
@@ -31,14 +31,18 @@ class OrdersController {
 
   async renderClosedOrdersPage(request, response) {
     const { user } = request.session
+    const { search } = request.query
 
     const orderModel = new OrderModel()
 
     const getOrdersService = new GetOrdersService(orderModel)
 
-    const closedOrders = await getOrdersService.execute(false)
+    const closedOrders = await getOrdersService.execute({
+      isOpen: false,
+      search,
+    })
 
-    response.render('pages/closed-orders.ejs', { user, closedOrders })
+    response.render('pages/closed-orders.ejs', { user, closedOrders, search })
   }
 
   async renderNewOrderPage(request, response) {

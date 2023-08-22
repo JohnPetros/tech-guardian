@@ -32,6 +32,22 @@
             </li>
           </ul>
         </nav>
+
+        <form>
+          <%-
+            include(
+              "../partials/input.ejs",
+              {
+                id: 'search',
+                type: 'search',
+                placeholder: 'Pesquisar solicitação por nome',
+                icon: 'magnifying-glass',
+                value: search,
+                validations: []
+              }
+            )
+            %>
+        </form>
       </div>
 
       <% if (user.role === 'tech') { %>
