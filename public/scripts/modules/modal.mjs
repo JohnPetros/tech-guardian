@@ -7,6 +7,7 @@ export class Modal {
 
     this.onClick = this.onClick.bind(this)
     this.onCancelClick = this.onCancelClick.bind(this)
+    this.onActionClick = this.onActionClick.bind(this)
 
     if (this.modal) {
       this.modal.addEventListener('click', this.onClick)
@@ -14,6 +15,10 @@ export class Modal {
 
     if (this.cancel) {
       this.cancel.addEventListener('click', this.onCancelClick)
+    }
+
+    if (this.cancel) {
+      this.action.addEventListener('click', this.onActionClick)
     }
   }
 
@@ -29,10 +34,10 @@ export class Modal {
     if (this.title) this.title.innerText = title
   }
 
-  setAction(actionTitle, actionPath) {
+  setAction(actionTitle, actionHandler) {
     if (this.action) {
       this.action.innerText = actionTitle
-      this.action.href = actionPath
+      this.actionHandler = actionHandler
     }
   }
 
@@ -44,5 +49,9 @@ export class Modal {
 
   onCancelClick() {
     this.close()
+  }
+
+  onActionClick() {
+    this.actionHandler()
   }
 }
