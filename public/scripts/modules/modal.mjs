@@ -5,29 +5,28 @@ export class Modal {
     this.action = this.modal.querySelector('.action')
     this.cancel = this.modal.querySelector('.cancel')
 
-    this.onClick = this.onClick.bind(this)
-    this.onCancelClick = this.onCancelClick.bind(this)
     this.onActionClick = this.onActionClick.bind(this)
+    this.onClick = this.onClick.bind(this)
 
     if (this.modal) {
-      this.modal.addEventListener('click', this.onClick)
+      document.addEventListener('click', this.onClick)
     }
 
     if (this.cancel) {
       this.cancel.addEventListener('click', this.onCancelClick)
     }
 
-    if (this.cancel) {
+    if (this.action) {
       this.action.addEventListener('click', this.onActionClick)
     }
   }
 
   close() {
-    this.modal.removeAttribute('open')
+    this.modal.close()
   }
 
   open() {
-    this.modal.setAttribute('open', '')
+    this.modal.showModal()
   }
 
   setTitle(title) {
@@ -42,7 +41,7 @@ export class Modal {
   }
 
   onClick({ target }) {
-    if (target.className === 'overlay') {
+    if (target.hasAttribute('data-modal')) {
       this.close()
     }
   }

@@ -1,34 +1,42 @@
-.modal .overlay {
-  background-color: rgba(0, 0, 0, 0.7);
-
+.modal {
   display: flex;
   align-items: center;
   justify-content: center;
 
   position: fixed;
-  inset: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   border: none;
+  border-radius: 8px;
+
+ overflow: hidden;
+}
+
+.modal:not([open]) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .modal .content {
-  background-color: var(--gray-600);
-
+  flex: 1;
   padding: 2.4rem;
-
-  border-radius: 8px;
-
-  width: 90%;
-  max-width: 40rem;
+  background-color: var(--gray-600);
 }
 
-.modal .content .title {
+.modal .title {
   color: var(--gray-100);
   text-align: center;
   font-size: 2rem;
 }
 
-.modal .content .buttons {
+.modal .buttons {
   margin-top: 2.4rem;
 
   display: flex;
@@ -44,7 +52,7 @@
   text-transform: capitalize;
 }
 
-.modal .content .buttons .button {
+.modal .buttons .button {
   padding: 1.2rem;
   text-transform: capitalize;
 }
