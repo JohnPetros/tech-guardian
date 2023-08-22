@@ -45,5 +45,6 @@
 }
 
 .modal .content .buttons .button {
-  padding: 8px;
+  padding: 1.2rem;
+  text-transform: capitalize;
 }

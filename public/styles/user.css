@@ -1,6 +1,8 @@
 @import './modules/global.css';
 @import './modules/header.css';
 @import './modules/toast.css';
+@import './modules/modal.css';
+@import './modules/button.css';
 @import './modules/form.css';
 @import './modules/input.css';
 
@@ -12,5 +14,21 @@ main.container {
 }
 
 .form {
-  
+  max-width: 480px;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+
+  margin-top: 2.4rem;
+
+  width: 100%;
+  height: 4rem;
+}
+
+.radios {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
 }
