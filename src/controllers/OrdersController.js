@@ -58,8 +58,9 @@ class OrdersController {
     const patrimonies = await patrimonyModel.getAll()
 
     const order = await getOrderById.execute(request.params.orderId)
-    
 
+    console.log(order);
+    
     if (order === 'Solicitação não encontrada') {
       const flashMessage = new FlashMessage(response.flash)
 

@@ -44,15 +44,19 @@ class OrderModel {
           'orders.resolved_at',
           'orders.resolved_by',
           'patrimonies.number as patrimony_number',
-          'users.id as creator_id',
-          'users.name as creator_name',
-          'users.avatar as creator_avatar'
+          'creator.id as creator_id',
+          'creator.name as creator_name',
+          'creator.avatar as creator_avatar',
+          'resolver.id as resolver_id',
+          'resolver.name as resolver_name',
+          'resolver.avatar as resolver_avatar'
         )
         .from('orders')
         .join('patrimonies', 'patrimonies.id', '=', 'orders.patrimony_id')
-        .join('users', 'users.id', '=', 'orders.created_by')
+        .join('users as creator', 'creator.id', '=', 'orders.created_by')
+        .join('users as resolver', 'resolver.id', '=', 'orders.resolved_by')
         .where('orders.id', id)
-        .first()
+        .first().debug()
     )
   }
 
