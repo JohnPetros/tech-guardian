@@ -83,6 +83,17 @@ class OrderMock {
         : order
     )
   }
+
+  async reopen(id) {
+    this.orders = this.orders.map((order) =>
+      order.id === id
+        ? {
+            ...order,
+            is_open: true,
+          }
+        : order
+    )
+  }
 }
 
 module.exports = OrderMock
