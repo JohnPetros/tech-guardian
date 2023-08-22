@@ -74,14 +74,14 @@
           %>
         <% } %>
 
-         <% if (user.role === 'guardian' || order.is_open) { %>
+         <% if ((user.role === 'guardian' && order.is_open) || !order.is_open) { %>
           <%- 
             include("../partials/order-field.ejs", 
               { 
                 id: 'solution',
                 title: 'Solução',
                 icon: 'seal-check',
-                isDisabled: !order.is_open,
+                isDisabled: user.role === 'tech' || !order.is_open,
                 text: order.solution,
                 hasAutoFocus: true,
                 placeholder: 'Escreva uma solução para o problema',
