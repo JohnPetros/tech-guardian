@@ -36,7 +36,7 @@ class UserModel {
   }
 
   async edit({ id, name, email, password, avatar, role_id }) {
-    await this.execute(() =>
+    return await this.execute(() =>
       knex
         .from('users')
         .update({
@@ -48,6 +48,7 @@ class UserModel {
           role_id,
         })
         .where({ id })
+        .returning('id')
     )
   }
 }

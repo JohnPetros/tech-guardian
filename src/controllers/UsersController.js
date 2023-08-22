@@ -37,13 +37,13 @@ class UsersController {
     const { name, email, password, password_confirmation, role_id } =
       request.body
 
-      const avatarFile = request.file
+    const avatarFile = request.file
 
     const userModel = new UserModel()
 
     const editOderService = new EditUserService(userModel)
 
-    const errors = await editOderService.execute({
+    const { errors, updatedUserId } = await editOderService.execute({
       user_id,
       name,
       email,
@@ -70,6 +70,10 @@ class UsersController {
       })
 
       return response.redirect('/user/' + user_id)
+    }
+
+    if (updatedUserId === request.session.user.id) {
+      request.session.user = await userModel.getById(updatedUserId)
     }
 
     flashMessage.add('success', 'Conta editada com sucesso')

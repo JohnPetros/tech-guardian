@@ -18,7 +18,7 @@ class EditUserService {
     role_id,
   }) {
     if (!uuid.validate(user_id)) {
-      return ['Usuário não encontrado']
+      return { errors: ['Usuário não encontrado'], updatedUserId: null }
     }
 
     const validator = new Validator()
@@ -36,14 +36,17 @@ class EditUserService {
     const user = await this.userModel.getById(user_id)
 
     if (!user) {
-      return ['Usuário não encontrado']
+      return { errors: ['Usuário não encontrado'], updatedUserId: null }
     }
 
     if (avatarFile) {
       const isImage = avatarFile.mimetype.includes('image')
 
       if (!isImage) {
-        return ['Avatar de usuário deve ser do tipo imagem']
+        return {
+          errors: ['Avatar de usuário deve ser do tipo imagem'],
+          updatedUserId: null,
+        }
       }
 
       const file = new File()
@@ -57,7 +60,7 @@ class EditUserService {
       }
     }
 
-    await this.userModel.edit({
+    const updatedUser = await this.userModel.edit({
       id: user_id,
       name,
       email,
@@ -65,6 +68,11 @@ class EditUserService {
       avatar: avatarFile?.filename ?? user.avatar,
       role_id,
     })
+
+    return {
+      errors: null,
+      updatedUserId: updatedUser[0].id,
+    }
   }
 }
 
