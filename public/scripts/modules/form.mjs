@@ -89,6 +89,10 @@ export class Form {
     this.adjustTextareaSize(event.currentTarget)
   }
 
+  getInputsByType(type) {
+    return Array.from(this.inputs).filter((input) => input.type === type);
+  }
+
   getInput(inputId) {
     return Array.from(this.inputs).find((input) => input.id === inputId)
   }
@@ -199,6 +203,10 @@ export class Form {
   }
 
   validateInput(input) {
+    if (input.type === 'hidden') {
+      return
+    } 
+
     const validations = input.dataset
 
     for (const [validationType, validationValue] of Object.entries(
