@@ -11,7 +11,7 @@ class OrderModel {
     }
   }
 
-  async getAll({ isOpen = true, search = '' }) {
+  async getAll({ isOpen = true, search = '', patrimonies_ids = [] }) {
     const roles = await this.execute(() =>
       knex
         .select(
@@ -26,6 +26,11 @@ class OrderModel {
         .join('users', 'users.id', '=', 'orders.created_by')
         .where({ is_open: isOpen })
         .where('title', 'like', `%${search}%`)
+        .modify((queryBuilder) => {
+          if (patrimonies_ids.length) {
+            queryBuilder.whereIn('orders.patrimony_id', patrimonies_ids)
+          }
+        })
     )
 
     return roles

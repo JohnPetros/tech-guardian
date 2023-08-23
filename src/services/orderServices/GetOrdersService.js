@@ -5,8 +5,8 @@ class GetOrdersService {
     this.orderModel = orderModel
   }
 
-  async execute({ isOpen = true, search }) {
-    const openOrders = await this.orderModel.getAll({ isOpen, search })
+  async execute({ isOpen = true, search, patrimonies_ids }) {
+    const openOrders = await this.orderModel.getAll({ isOpen, search, patrimonies_ids })
 
     return openOrders.map((order) => ({
       ...order,

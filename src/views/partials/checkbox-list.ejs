@@ -7,7 +7,15 @@
     <% items.forEach(item => { %>
       <li>
         <label for="<%= item.id %>" class="checkbox">
-          <input type="checkbox" name="patrimony_ids[]" id="<%= item.id %>" value="<%= item.id %>" />
+          <input 
+            type="checkbox" 
+            name="patrimonies_ids[]" 
+            id="<%= item.id %>" 
+            value="<%= item.id %>" 
+            <% if (checkedItemsIds && checkedItemsIds.includes(item.id)) { %>
+              checked
+            <% } %>
+          />
           <span><%= item.value %></span>
         </label>
       </li>

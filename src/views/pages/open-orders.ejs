@@ -58,7 +58,8 @@
               include(
                 "../partials/checkbox-list.ejs",
                   {
-                    items: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number }))
+                    items: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number })),
+                    checkedItemsIds: patrimonies_ids
                   }
                 )
               %>
