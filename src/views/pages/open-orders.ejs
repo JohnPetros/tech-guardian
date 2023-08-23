@@ -32,25 +32,40 @@
             </li>
           </ul>
         </nav>
-
-        <form>
-          <%-
-            include(
-              "../partials/input.ejs",
-              {
-                id: 'search',
-                type: 'search',
-                placeholder: 'Pesquisar solicitação por nome',
-                icon: 'magnifying-glass',
-                value: search,
-                validations: []
-              }
-            )
-            %>
-
-        
-        </form>
       </div>
+
+      <form>
+        <ul class="order-filters">
+
+          <li class="order-filter">
+            <%-
+              include(
+                "../partials/input.ejs",
+                  {
+                    id: 'search',
+                    type: 'search',
+                    placeholder: 'Pesquisar solicitação por nome',
+                    icon: 'magnifying-glass',
+                    value: search,
+                    validations: []
+                  }
+                )
+              %>
+          </li>
+
+          <li class="order-filter">
+            <%-
+              include(
+                "../partials/checkbox-list.ejs",
+                  {
+                    items: []
+                  }
+                )
+              %>
+          </li>
+
+        </ul>
+      </form>
 
       <% if (user.role === 'tech') { %>
          <a class="new-order-button" href="/new-order">
