@@ -93,3 +93,18 @@
 .checkbox-list .checkbox input[type='checkbox']:checked:after {
   display: block;
 }
+
+.checkbox-list .checkboxes .filter-button {
+  border-radius: 8px;
+
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1.2rem;
+
+  color: var(--gray-700);
+  background-color: var(--purple-700);
+  padding: 4px;
+
+  font-weight: 700;
+  font-size: 1.2rem;
+}
