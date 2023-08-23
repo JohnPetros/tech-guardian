@@ -3,24 +3,16 @@
     <strong class="title">Patrimônios</strong>
     <i class="icon ph-bold ph-caret-down"></i>
   </button>
-  <ul class="checkboxes" data-checkboxes>
-    <li>
-      <label for="123456" class="checkbox">
-        <input type="checkbox" name="123456" id="123456" />
-        <span>123456</span>
-      </label>
-    </li>
-    <li>
-      <label for="741258" class="checkbox">
-        <input type="checkbox" name="741258" id="741258" />
-        <span>741258</span>
-      </label>
-    </li>
-    <li>
-      <label for="963258" class="checkbox">
-        <input type="checkbox" name="963258" id="963258" />
-        <span>963258</span>
-      </label>
-    </li>
+  <ul class="checkboxes">
+    <% items.forEach(item => { %>
+      <li>
+        <label for="<%= item.id %>" class="checkbox">
+          <input type="checkbox" name="patrimony_ids[]" id="<%= item.id %>" value="<%= item.id %>" />
+          <span><%= item.value %></span>
+        </label>
+      </li>
+    <% }) %>
+   
+    <button class="filter-button" type="submit">Filtrar</button>
   </ul>
 </div>

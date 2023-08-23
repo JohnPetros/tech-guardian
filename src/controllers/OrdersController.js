@@ -17,32 +17,43 @@ class OrdersController {
     const { user } = request.session
     const { search } = request.query
 
+    console.log(request.query)
+
     const orderModel = new OrderModel()
 
     const getOrdersService = new GetOrdersService(orderModel)
+
+    const patrimonyModel = new PatrimonyModel()
+
+    const patrimonies = await patrimonyModel.getAll()
 
     const openOrders = await getOrdersService.execute({
       isOpen: true,
       search,
     })
 
-    response.render('pages/open-orders.ejs', { user, openOrders, search })
+    response.render('pages/open-orders.ejs', { user, openOrders, search, patrimonies })
   }
 
   async renderClosedOrdersPage(request, response) {
     const { user } = request.session
     const { search } = request.query
 
+
     const orderModel = new OrderModel()
 
     const getOrdersService = new GetOrdersService(orderModel)
+
+    const patrimonyModel = new PatrimonyModel()
+
+    const patrimonies = await patrimonyModel.getAll()
 
     const closedOrders = await getOrdersService.execute({
       isOpen: false,
       search,
     })
 
-    response.render('pages/closed-orders.ejs', { user, closedOrders, search })
+    response.render('pages/closed-orders.ejs', { user, closedOrders, search, patrimonies })
   }
 
   async renderNewOrderPage(request, response) {

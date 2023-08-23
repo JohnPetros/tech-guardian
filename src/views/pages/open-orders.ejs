@@ -58,7 +58,7 @@
               include(
                 "../partials/checkbox-list.ejs",
                   {
-                    items: []
+                    items: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number }))
                   }
                 )
               %>
