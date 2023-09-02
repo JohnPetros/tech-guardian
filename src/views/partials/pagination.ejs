@@ -1,0 +1,13 @@
+<ul class="pagination" data-pagination>
+  <% for (let number = 1; number <= pages; number++) { %> 
+    <li>
+      <a 
+        href="?page=<%= number %>" 
+        class="page-number <%= Number(currentPage) === Number(number) ? 'active' : '' %>" 
+        data-page-number="<%= number %>"
+      >
+        <%= number %>
+      </a>
+    </li>
+  <% } %>
+</ul>
