@@ -28,7 +28,7 @@
 
   flex-wrap: wrap;
 
-  margin-top: 4rem;
+  margin-top: 2.4rem;
 }
 
 .navigation .nav-link {
@@ -83,7 +83,6 @@
 
   font-size: 1.2rem;
   font-weight: 700;
-  text-transform: uppercase;
 
   background-color: var(--green-700);
   color: var(--gray-100);
