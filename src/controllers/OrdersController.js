@@ -15,7 +15,7 @@ const ReopenOrderService = require('../services/orderServices/ReopenOrderService
 class OrdersController {
   async renderOpenOrdersPage(request, response) {
     const { user } = request.session
-    const { search, patrimonies_ids } = request.query
+    const { search, patrimonies_ids, page } = request.query
 
     const orderModel = new OrderModel()
 
@@ -25,18 +25,23 @@ class OrdersController {
 
     const patrimonies = await patrimonyModel.getAll()
 
-    const openOrders = await getOrdersService.execute({
+    const { orders, count } = await getOrdersService.execute({
       isOpen: true,
       search,
       patrimonies_ids,
+      page,
     })
+
+    console.log({ page })
 
     response.render('pages/open-orders.ejs', {
       user,
-      openOrders,
+      openOrders: orders,
       search,
       patrimonies,
       patrimonies_ids,
+      page: page ?? 1,
+      openOrdersCount: count,
     })
   }
 

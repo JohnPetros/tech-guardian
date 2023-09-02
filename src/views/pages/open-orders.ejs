@@ -19,7 +19,7 @@
       <div class="navigation">
         <div>
           <h2>Solicitações</h2>
-          <span class="amount"><%= openOrders.length %></span>
+          <span class="amount"><%= openOrdersCount %></span>
         </div>
 
         <nav>
@@ -58,6 +58,7 @@
               include(
                 "../partials/checkbox-list.ejs",
                   {
+                    name: 'patrimonies_ids',
                     items: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number })),
                     checkedItemsIds: patrimonies_ids
                   }
@@ -66,6 +67,7 @@
           </li>
 
         </ul>
+
       </form>
 
       <% if (user.role === 'tech') { %>
@@ -93,6 +95,11 @@
               }) %> 
           <% }) %>
       </div>
+
+      <% if (openOrdersCount > 9) { %>
+        <%- include("../partials/pagination.ejs", { pages: Math.ceil(openOrdersCount / 9), currentPage: page }) %>
+     <% } %>
+
     </main>
 
     <%- include("../partials/modal.ejs") %>

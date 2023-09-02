@@ -5,13 +5,21 @@ class GetOrdersService {
     this.orderModel = orderModel
   }
 
-  async execute({ isOpen = true, search, patrimonies_ids }) {
-    const openOrders = await this.orderModel.getAll({ isOpen, search, patrimonies_ids })
+  async execute({ isOpen = true, search, patrimonies_ids, page }) {
+    const { orders, count } = await this.orderModel.getAll({
+      isOpen,
+      search,
+      patrimonies_ids,
+      page: page && page < 1 ? 1 : page,
+    })
 
-    return openOrders.map((order) => ({
-      ...order,
-      created_at: formatTime(order.created_at),
-    }))
+    return {
+      orders: orders.map((order) => ({
+        ...order,
+        created_at: formatTime(order.created_at),
+      })),
+      count: Number(count),
+    }
   }
 }
 

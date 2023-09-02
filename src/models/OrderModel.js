@@ -3,6 +3,8 @@ const uuid = require('uuid')
 const ServerError = require('../errors/ServerError')
 
 class OrderModel {
+  limit = 9
+
   async execute(method) {
     try {
       return await method()
@@ -11,8 +13,20 @@ class OrderModel {
     }
   }
 
-  async getAll({ isOpen = true, search = '', patrimonies_ids = [] }) {
-    const roles = await this.execute(() =>
+  async getAll({ isOpen = true, search = '', patrimonies_ids = [], page = 1 }) {
+    const [ordersAmount] = await this.execute(() =>
+      knex('orders')
+        .where({ is_open: isOpen })
+        .where(knex.raw('lower(title)'), 'like', `%${search.toLowerCase()}%`)
+        .modify((queryBuilder) => {
+          if (patrimonies_ids.length) {
+            queryBuilder.whereIn('orders.patrimony_id', patrimonies_ids)
+          }
+        })
+        .count()
+    )
+
+    const orders = await this.execute(() =>
       knex
         .select(
           'orders.id',
@@ -25,15 +39,17 @@ class OrderModel {
         .join('patrimonies', 'patrimonies.id', '=', 'orders.patrimony_id')
         .join('users', 'users.id', '=', 'orders.created_by')
         .where({ is_open: isOpen })
-        .where('title', 'like', `%${search}%`)
+        .where(knex.raw('lower(title)'), 'like', `%${search.toLowerCase()}%`)
         .modify((queryBuilder) => {
           if (patrimonies_ids.length) {
             queryBuilder.whereIn('orders.patrimony_id', patrimonies_ids)
           }
         })
+        .limit(this.limit)
+        .offset((page - 1) * this.limit)
     )
 
-    return roles
+    return { orders, count: ordersAmount.count }
   }
 
   async getById(id) {
