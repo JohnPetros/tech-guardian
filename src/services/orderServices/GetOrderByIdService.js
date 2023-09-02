@@ -20,7 +20,7 @@ class GetOrderByIdService {
     return {
       ...order,
       created_at: formatTime(order.created_at),
-      resolved_at: formatTime(order.resolved_at),
+      resolved_at: order.resolved_at ? formatTime(order.resolved_at) : null,
     }
   }
 }
