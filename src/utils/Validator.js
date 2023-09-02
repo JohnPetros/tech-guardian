@@ -41,46 +41,46 @@ const loginValidation = emailValidation.concat(
   })
 )
 
-const registerValidation = nameValidation.concat(
-  emailValidation,
-  passwordValidation,
-  roleValidation
-)
+const registerValidation = nameValidation
+  .concat(emailValidation)
+  .concat(passwordValidation)
+  .concat(roleValidation)
 
-const userEditionValidation = nameValidation.concat(
-  emailValidation,
-  roleValidation,
-  yup.object().shape(
-    {
-      password: yup
-        .string()
-        .nullable()
-        .notRequired()
-        .when('password', {
-          is: (value) => value?.length,
-          then: passwordValidation.fields.password,
-        }),
-      password_confirmation: yup
-        .string()
-        .nullable()
-        .notRequired()
-        .when('password_confirmation', {
-          is: (value) => value?.length,
-          then: passwordValidation.fields.password_confirmation,
-        }),
-    },
-    [
-      ['password', 'password'],
-      ['password_confirmation', 'password_confirmation'],
-    ]
+const userEditionValidation = nameValidation
+  .concat(emailValidation)
+  .concat(roleValidation)
+  .concat(
+    yup.object().shape(
+      {
+        password: yup
+          .string()
+          .nullable()
+          .notRequired()
+          .when('password', {
+            is: (value) => value?.length,
+            then: passwordValidation.fields.password,
+          }),
+        password_confirmation: yup
+          .string()
+          .nullable()
+          .notRequired()
+          .when('password_confirmation', {
+            is: (value) => value?.length,
+            then: passwordValidation.fields.password_confirmation,
+          }),
+      },
+      [
+        ['password', 'password'],
+        ['password_confirmation', 'password_confirmation'],
+      ]
+    )
   )
-)
 
 const orderValidation = yup.object().shape({
-  title: yup.string().required('Uma solicitação deve ter um título'),
+  title: yup.string().required('Uma solicitação deve conter um título'),
   description: yup
     .string()
-    .required('Uma solicitação deve ter uma breve descrição do problema'),
+    .required('Uma solicitação deve conter uma breve descrição do problema'),
   patrimony_id: yup
     .string()
     .required('Uma solicitção deve estar associado a um patrimônio'),
@@ -116,13 +116,16 @@ class Validator {
     )
   }
 
-  async validateOrder({ title, description, patrimony_id, user_id }) {
+  async validateOrder({ title, description, patrimony_id }) {
     return this.validate(() =>
-      orderValidation.validate({
-        title,
-        description,
-        patrimony_id,
-      })
+      orderValidation.validate(
+        {
+          title,
+          description,
+          patrimony_id,
+        },
+        { abortEarly: false }
+      )
     )
   }
 
