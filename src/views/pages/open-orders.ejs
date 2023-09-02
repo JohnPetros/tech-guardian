@@ -66,16 +66,35 @@
               %>
           </li>
 
+          <li class="order-filter">
+            <%-
+              include(
+                "../partials/date-picker.ejs",
+                  {
+                    name: 'date',
+                    value: date
+                  }
+                )
+              %>
+          </li>
         </ul>
 
+        <div class="buttons">
+          <button type="submit" class="filter button">
+            <i class="ph-bold ph-funnel"></i>
+            filtrar
+          </button>
+
+          <% if (user.role === 'tech') { %>
+            <a class="new-order-button" href="/new-order">
+             <i class="ph-bold ph-plus"></i>
+             abrir nova solicitação
+           </a>
+         <% } %>
+        </div>
       </form>
 
-      <% if (user.role === 'tech') { %>
-         <a class="new-order-button" href="/new-order">
-          <img src="assets/icons/plus.svg" width="16" height="16" alt="">
-          Abrir nova solicitação
-        </a>
-      <% } %>
+     
 
       <% if (!openOrders.length) { %>
           <p class="no-orders-found-message">Nenhuma solicitação encontrada.</p>

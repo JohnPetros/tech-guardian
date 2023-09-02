@@ -26,7 +26,7 @@ main.container {
 
   margin-top: 3.2rem;
 
-  width: 70%;
+  width: 80%;
 }
 
 .order-filter {
@@ -45,6 +45,24 @@ main.container {
 
 .input-container {
   padding: 4px;
+}
+
+.buttons {
+  display: flex;
+  align-items: end;
+  gap: 8px;
+
+  margin-top: 2.8rem;
+}
+
+.button.filter {
+  width: max-content;
+  padding: 8px;
+  padding: 8px 1.4rem;
+  font-size: 1.4rem;
+
+  background-color: var(--purple-700);
+  color: var(--gray-700);
 }
 
 .order-cards {
