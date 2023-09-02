@@ -15,7 +15,7 @@ const ReopenOrderService = require('../services/orderServices/ReopenOrderService
 class OrdersController {
   async renderOpenOrdersPage(request, response) {
     const { user } = request.session
-    const { search, patrimonies_ids, page } = request.query
+    const { search, patrimonies_ids, date, page } = request.query
 
     const orderModel = new OrderModel()
 
@@ -29,9 +29,9 @@ class OrdersController {
       isOpen: true,
       search,
       patrimonies_ids,
+      date,
       page,
     })
-
 
     response.render('pages/open-orders.ejs', {
       user,
@@ -39,6 +39,7 @@ class OrdersController {
       search,
       patrimonies,
       patrimonies_ids,
+      date,
       page: page ? Number(page) : 1,
       openOrdersCount: count,
     })

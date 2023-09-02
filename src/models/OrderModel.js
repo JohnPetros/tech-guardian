@@ -13,7 +13,13 @@ class OrderModel {
     }
   }
 
-  async getAll({ isOpen = true, search = '', patrimonies_ids = [], page = 1 }) {
+  async getAll({
+    isOpen = true,
+    search = '',
+    patrimonies_ids = [],
+    date,
+    page = 1,
+  }) {
     const [ordersAmount] = await this.execute(() =>
       knex('orders')
         .where({ is_open: isOpen })
@@ -43,6 +49,12 @@ class OrderModel {
         .modify((queryBuilder) => {
           if (patrimonies_ids.length) {
             queryBuilder.whereIn('orders.patrimony_id', patrimonies_ids)
+          }
+
+          const isValidDate = /^\d{4}-\d{2}-\d{2}$/.test(date)
+
+          if (isValidDate) {
+            queryBuilder.whereRaw('date(orders.created_at) = ?', [date])
           }
         })
         .limit(this.limit)

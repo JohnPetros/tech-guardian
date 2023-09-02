@@ -5,11 +5,12 @@ class GetOrdersService {
     this.orderModel = orderModel
   }
 
-  async execute({ isOpen = true, search, patrimonies_ids, page }) {
+  async execute({ isOpen = true, search, patrimonies_ids, date, page }) {
     const { orders, count } = await this.orderModel.getAll({
       isOpen,
       search,
       patrimonies_ids,
+      date,
       page: page && page < 1 ? 1 : page,
     })
 
