@@ -32,7 +32,6 @@ class OrdersController {
       page,
     })
 
-    console.log({ page })
 
     response.render('pages/open-orders.ejs', {
       user,
@@ -40,7 +39,7 @@ class OrdersController {
       search,
       patrimonies,
       patrimonies_ids,
-      page: page ?? 1,
+      page: page ? Number(page) : 1,
       openOrdersCount: count,
     })
   }
