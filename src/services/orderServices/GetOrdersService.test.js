@@ -2,16 +2,42 @@ const OrderMock = require('../../mocks/OrderMock')
 const GetOrdersService = require('./GetOrdersService')
 
 describe('Get orders service', () => {
-  it('should get all open orders correctly', async () => {
-    const orderMock = new OrderMock()
-    const getOrdersService = new GetOrdersService(orderMock)
+  let orderMock = null
+  let getOrdersService = null
 
-    const orders = await getOrdersService.execute()
+  beforeEach(() => {
+    orderMock = new OrderMock()
+    getOrdersService = new GetOrdersService(orderMock)
+  })
+
+  it('should be able to get all open orders', async () => {
+    const orders = await getOrdersService.execute({ isOpen: true })
 
     orders.forEach((order) => {
-      expect(order).toHaveProperty('is_open')
+      expect(order.is_open).toBe(true)
+    })
+  })
 
-      expect(order.is_open).toEqual(true)
+  it('should be able to get order by search', async () => {
+    const orders = await getOrdersService.execute({
+      isOpen: true,
+      search: 'Máquina de lavar',
+    })
+
+    expect(
+      orders.some((order) => order.title === 'Máquina de lavar pifou')
+    ).toBe(true)
+  })
+
+  it('should be able to get order by patrimonies_ids', async () => {
+    const orders = await getOrdersService.execute({
+      isOpen: false,
+      patrimonies_ids: ['b2737076-dcfe-4d8f-b4b3-76dcafdd99ef'],
+    })
+
+    orders.forEach((order) => {
+      expect(order.is_open).toBe(false)
+      expect(order.patrimony_id).toBe('b2737076-dcfe-4d8f-b4b3-76dcafdd99ef')
     })
   })
 })
