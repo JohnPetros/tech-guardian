@@ -1,0 +1,18 @@
+.date-picker {
+  background-color: transparent;
+  color: var(--gray-200);
+
+  border-radius: 8px;
+
+  padding: 1.2rem;
+
+  outline: none;
+  border: none;
+
+  width: 100%;
+}
+
+.date-picker::-webkit-calendar-picker-indicator {
+  background-color: var(--purple-700);
+  border-radius: 4px;
+}
