@@ -6,6 +6,7 @@ class UserMock {
       email: 'johndoe@mock.com',
       password: '$2a$08$xMm1PEz8aR0ddE0UCKavk.Ye7eS2gN/VVmQdsC8KXhHuxLwXwyr5C',
       avatar: 'default.jpg',
+      role: 'tech',
     },
   ]
 
