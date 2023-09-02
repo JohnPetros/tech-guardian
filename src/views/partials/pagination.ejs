@@ -1,5 +1,21 @@
 <ul class="pagination" data-pagination>
+  <% let hasPrevDots = false %> 
   <% for (let number = 1; number <= pages; number++) { %> 
+    <% if (number <= currentPage - 2) { %>
+      <% if (!hasPrevDots) { %>
+        <li>
+          <span class="dots">...</span>
+        </li>
+        <% hasPrevDots = true %>
+      <% } %>
+      <% continue %>
+    <% } %>
+    <% if (number > currentPage + 2) { %>
+      <li>
+        <span class="dots">...</span>
+      </li>
+      <% break %>
+    <% } %>
     <li>
       <a 
         href="?page=<%= number %>" 
