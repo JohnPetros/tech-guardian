@@ -1,0 +1,59 @@
+<form>
+  <ul class="order-filters">
+
+    <li class="order-filter">
+      <%-
+        include(
+          "../partials/input.ejs",
+            {
+              id: 'search',
+              type: 'search',
+              placeholder: 'Pesquisar solicitação por nome',
+              icon: 'magnifying-glass',
+              value: search,
+              validations: []
+            }
+          )
+        %>
+    </li>
+
+    <li class="order-filter">
+      <%-
+        include(
+          "../partials/checkbox-list.ejs",
+            {
+              name: 'patrimonies_ids',
+              items: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number })),
+              checkedItemsIds: patrimonies_ids
+            }
+          )
+        %>
+    </li>
+
+    <li class="order-filter">
+      <%-
+        include(
+          "../partials/date-picker.ejs",
+            {
+              name: 'date',
+              value: date
+            }
+          )
+        %>
+    </li>
+  </ul>
+
+  <div class="buttons">
+    <button type="submit" class="filter button">
+      <i class="ph-bold ph-funnel"></i>
+      filtrar
+    </button>
+
+    <% if (user.role === 'tech') { %>
+      <a class="new-order-button" href="/new-order">
+       <i class="ph-bold ph-plus"></i>
+       abrir nova solicitação
+     </a>
+   <% } %>
+  </div>
+</form>
