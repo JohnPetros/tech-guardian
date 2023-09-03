@@ -19,7 +19,7 @@
       <div class="navigation">
         <div>
           <h2>Solicitações</h2>
-          <span class="amount"><%= closedOrders.length %></span>
+          <span class="amount"><%= closedOrdersCount %></span>
         </div>
 
         <nav>
@@ -33,28 +33,12 @@
           </ul>
         </nav>
 
-        <form>
-          <%-
-            include(
-              "../partials/input.ejs",
-              {
-                id: 'search',
-                type: 'search',
-                placeholder: 'Pesquisar solicitação por nome',
-                icon: 'magnifying-glass',
-                value: search,
-                validations: []
-              }
-            )
-            %>
-        </form>
       </div>
 
-      <% if (user.role === 'tech') { %>
-         <a class="new-order-button" href="/new-order">
-          <img src="assets/icons/plus.svg" width="16" height="16" alt="">
-          Abrir nova solicitação
-        </a>
+      <%- include("../partials/orders-filters.ejs") %>
+
+      <% if (!closedOrders.length) { %>
+        <p class="no-orders-found-message">Nenhuma solicitação encontrada.</p>
       <% } %>
 
       <div class="order-cards">
@@ -71,6 +55,10 @@
               }) %> 
           <% }) %>
       </div>
+
+      <% if (closedOrdersCount > 9) { %>
+        <%- include("../partials/pagination.ejs", { pages: Math.ceil(closedOrdersCount / 9), currentPage: page }) %>
+     <% } %>
     </main>
 
     <%- include("../partials/modal.ejs") %>

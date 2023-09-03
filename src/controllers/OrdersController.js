@@ -47,7 +47,7 @@ class OrdersController {
 
   async renderClosedOrdersPage(request, response) {
     const { user } = request.session
-    const { search } = request.query
+    const { search, patrimonies_ids, date, page } = request.query
 
     const orderModel = new OrderModel()
 
@@ -57,16 +57,20 @@ class OrdersController {
 
     const patrimonies = await patrimonyModel.getAll()
 
-    const closedOrders = await getOrdersService.execute({
+    const { orders, count } = await getOrdersService.execute({
       isOpen: false,
       search,
     })
 
     response.render('pages/closed-orders.ejs', {
       user,
-      closedOrders,
+      closedOrders: orders,
       search,
       patrimonies,
+      patrimonies_ids,
+      date,
+      page: page ? Number(page) : 1,
+      closedOrdersCount: count,
     })
   }
 
