@@ -12,6 +12,13 @@ export class CheckboxList {
     }
   }
 
+  closeAll() {
+    this.checkboxLists.forEach((checkboxList) => {
+      const checkboxes = checkboxList.querySelector('.checkboxes')
+      checkboxes.classList.remove('open')
+    })
+  }
+
   onCheckboxlistButtonClick({ currentTarget }) {
     const checkboxList = currentTarget.parentElement
     const checkboxes = checkboxList.querySelector('.checkboxes')
