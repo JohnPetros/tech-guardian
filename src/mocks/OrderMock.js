@@ -51,7 +51,7 @@ class OrderMock {
     },
   ]
 
-  async getAll({ isOpen = true, search = '', patrimonies_ids = [] }) {
+  async getAll({ isOpen = true, search = '', patrimonies_ids = [], date }) {
     let orders = this.orders
 
     orders = orders.filter((order) => order.is_open === isOpen)
@@ -66,14 +66,26 @@ class OrderMock {
       )
     }
 
-    return orders.map((order) => ({
-      id: order.id,
-      title: order.title,
-      patrimony_number: order.patrimony_number,
-      created_at: order.created_at,
-      created_by: order.created_by,
-      is_open: order.is_open,
-    }))
+    if (date) {
+      orders = orders.filter((order) => {
+        return (
+          order.created_at.toISOString().split('T')[0].toString() ===
+          date.toString()
+        )
+      })
+    }
+
+    return {
+      orders: orders.map((order) => ({
+        id: order.id,
+        title: order.title,
+        patrimony_number: order.patrimony_number,
+        created_at: order.created_at,
+        created_by: order.created_by,
+        is_open: order.is_open,
+      })),
+      count: orders.length,
+    }
   }
 
   async getById(id) {
