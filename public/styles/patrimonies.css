@@ -8,6 +8,7 @@
 @import './modules/filters.css';
 @import './modules/input.css';
 @import './modules/search.css';
+@import './modules/pagination.css';
 
 main.container {
   width: 90%;
@@ -57,7 +58,7 @@ main.container {
   align-items: start;
   gap: 2.4rem;
 
-  min-height: 16rem;
+  min-height: 28rem;
 }
 
 @media (max-width: 1024px) {
