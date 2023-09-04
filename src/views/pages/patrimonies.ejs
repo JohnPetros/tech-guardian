@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/patrimonies.css" />
+    <script type="module" src="/scripts/patrimonies.mjs" defer></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <title>TechGuardian | Patrimônios</title>
+  </head>
+  <body>
+    <%- include("../partials/header.ejs", { user: user }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'success', messages: getFlashMessages('success') }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
+
+    <main class="container">
+      <div class="navigation">
+        <div>
+          <h2>Patrimônios</h2>
+          <span class="amount"><%= patrimonies.length %></span>
+        </div>
+
+        <nav>
+          <ul>
+            <li>
+              <a href="/open-orders" class="nav-link">Solicitações</a>
+            </li>
+            <li>
+              <a href="/patrimonies" class="nav-link purple">Patrimônios</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      
+      <% if (!patrimonies.length) { %>
+          <p class="no-orders-found-message">Nenhuma solicitação encontrada.</p>
+     <% } %>
+
+      <div class="patrimonies-cards">
+        <% patrimonies.forEach(patrimony => { %> 
+          <%-
+            include("../partials/patrimony-card.ejs", 
+              { 
+                id: patrimony.id,
+                number: patrimony.number,
+              }) %> 
+          <% }) %>
+      </div>
+
+   
+
+    </main>
+
+    <%- include("../partials/modal.ejs") %>
+  </body>
+</html>
