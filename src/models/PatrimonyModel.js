@@ -47,6 +47,17 @@ class PatrimonyModel {
       })
     )
   }
+
+  async edit(id, number) {
+    await this.execute(() =>
+      knex
+        .from('patrimonies')
+        .update({
+          number,
+        })
+        .where({ id })
+    )
+  }
 }
 
 module.exports = PatrimonyModel

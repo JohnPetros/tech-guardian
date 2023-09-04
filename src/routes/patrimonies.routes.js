@@ -32,4 +32,10 @@ patrimoniesRouter.post(
   patrimoniesController.createPatrimony
 )
 
+patrimoniesRouter.post(
+  '/patrimony/:patrimony_id/edit',
+  checkRole('admin'),
+  patrimoniesController.editPatrimony
+)
+
 module.exports = patrimoniesRouter

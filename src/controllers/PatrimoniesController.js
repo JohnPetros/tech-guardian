@@ -2,6 +2,7 @@ const PatrimonyModel = require('../models/PatrimonyModel')
 const FlashMessage = require('../utils/FlashMessage')
 const CreatePatrimonyService = require('../services/patrimonyServices/CreatePatrimonyService')
 const GetPatrimonyById = require('../services/patrimonyServices/GetPatrimonyById')
+const EditPatrimonyService = require('../services/patrimonyServices/EditPatrimonyService')
 
 class PatrimoniesController {
   async renderPatrimoniesPage(request, response) {
@@ -72,6 +73,33 @@ class PatrimoniesController {
     flashMessage.add('success', 'Patrimônio cadastrado com sucesso')
 
     return response.redirect('/patrimonies')
+  }
+
+  async editPatrimony(request, response) {
+    const { patrimony_id } = request.params
+    const { number } = request.body
+
+    const patrimonyModel = new PatrimonyModel()
+
+    const editPatrimonyService = new EditPatrimonyService(patrimonyModel)
+
+    const errors = await editPatrimonyService.execute(patrimony_id, number)
+
+    const flashMessage = new FlashMessage(response.flash)
+
+    if (errors) {
+      for (const error of errors) flashMessage.add('error', error)
+
+      flashMessage.addMultipleByRoute('/new-patrimony', {
+        number,
+      })
+
+      return response.redirect('/patrimony/' + patrimony_id)
+    }
+
+    flashMessage.add('success', 'Patrimônio editado com sucesso')
+
+    return response.redirect('/patrimony/' + patrimony_id)
   }
 }
 
