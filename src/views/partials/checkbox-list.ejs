@@ -1,4 +1,5 @@
 <div class="checkbox-list" data-checkbox-list>
+  <span class="overlay"></span>
   <button class="checkbox-list-button" type="button">
     <strong class="title">Patrimônios</strong>
     <i class="icon ph-bold ph-caret-down"></i>
@@ -6,12 +7,13 @@
   <ul class="checkboxes">
     <% items.forEach(item => { %>
       <li>
-        <label for="<%= item.id %>" class="checkbox">
+        <label for="<%= item.id %>" class="checkbox" tabindex="0">
           <input 
             type="checkbox" 
             name="<%= name %>[]" 
             id="<%= item.id %>" 
             value="<%= item.id %>" 
+            tabindex="-1"
             <% if (checkedItemsIds && checkedItemsIds.includes(item.id)) { %>
               checked
             <% } %>
