@@ -1,0 +1,39 @@
+@import './modules/global.css';
+@import './modules/header.css';
+@import './modules/toast.css';
+@import './modules/button.css';
+@import './modules/input.css';
+@import './modules/form.css';
+@import './modules/modal.css';
+
+main.container {
+  width: 90%;
+  max-width: 540px;
+
+  margin: 3.2rem auto;
+}
+
+h2 {
+  text-align: center;
+  color: var(--gray-100);
+}
+
+.form {
+  margin-top: 2.4rem;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2.4rem;
+
+  padding-bottom: 4rem;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
