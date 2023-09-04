@@ -1,12 +1,13 @@
 export class Modal {
   constructor(modal) {
     this.modal = document.querySelector(modal)
-    this.title = this.modal.querySelector('.title')
-    this.action = this.modal.querySelector('.action')
-    this.cancel = this.modal.querySelector('.cancel')
+    this.title = this.modal.querySelector('[data-title]')
+    this.action = this.modal.querySelector('[data-action]')
+    this.cancel = this.modal.querySelector('[data-cancel]')
 
     this.onActionClick = this.onActionClick.bind(this)
     this.onClick = this.onClick.bind(this)
+    this.onCancelClick = this.onCancelClick.bind(this)
 
     if (this.modal) {
       document.addEventListener('click', this.onClick)
@@ -51,6 +52,6 @@ export class Modal {
   }
 
   onActionClick() {
-    this.actionHandler()
+    if (this.actionHandler) this.actionHandler()
   }
 }
