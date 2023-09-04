@@ -1,0 +1,41 @@
+.patrimony-card {
+  border-radius: 8px;
+
+  border-left: 8px solid var(--purple-700);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: var(--gray-600);
+
+  padding: 2rem;
+
+  transition: transform 0.3s;
+}
+
+.patrimony-card:hover {
+  transform: scale(1.02);
+}
+
+.patrimony-card .title {
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  color: var(--gray-100);
+}
+
+.patrimony-card .icon {
+  border-radius: 50%;
+
+  width: 3.6rem;
+  height: 3.6rem;
+
+  display: grid;
+  place-content: center;
+
+  background-color: var(--gray-500);
+
+  font-size: 2.4rem;
+  color: var(--purple-700);
+}
