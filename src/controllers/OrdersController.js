@@ -79,7 +79,7 @@ class OrdersController {
 
     const patrimonyModel = new PatrimonyModel()
 
-    const patrimonies = await patrimonyModel.getAll()
+    const { patrimonies } = await patrimonyModel.getAll({})
 
     response.render('pages/new-order.ejs', { user, patrimonies })
   }
@@ -93,7 +93,7 @@ class OrdersController {
 
     const patrimonyModel = new PatrimonyModel()
 
-    const patrimonies = await patrimonyModel.getAll()
+    const { patrimonies } = await patrimonyModel.getAll({})
 
     const order = await getOrderById.execute(request.params.orderId)
 
