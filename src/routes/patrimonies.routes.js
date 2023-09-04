@@ -10,18 +10,19 @@ const patrimoniesRouter = Router()
 
 patrimoniesRouter.get(
   '/patrimonies',
+  checkRole('admin'),
   patrimoniesController.renderPatrimoniesPage
 )
 
 patrimoniesRouter.get(
   '/new-patrimony',
-  // checkRole('admin'),
+  checkRole('admin'),
   patrimoniesController.renderNewPatrimonyPage
 )
 
 patrimoniesRouter.post(
   '/patrimony/create',
-  // checkRole('admin'),
+  checkRole('admin'),
   patrimoniesController.createPatrimony
 )
 
