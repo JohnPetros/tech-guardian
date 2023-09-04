@@ -7,6 +7,12 @@
 @import './modules/toast.css';
 @import './modules/modal.css';
 @import './modules/form.css';
+@import './modules/input.css';
+@import './modules/select.css';
+@import './modules/input-avatar.css';
+@import './modules/radio.css';
+@import './modules/checkbox-list.css';
+@import './modules/date-picker.css';
 @import './modules/pagination.css';
 
 main.container {

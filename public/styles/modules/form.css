@@ -1,10 +1,3 @@
-@import './input.css';
-@import './select.css';
-@import './input-avatar.css';
-@import './radio.css';
-@import './checkbox-list.css';
-@import './date-picker.css';
-
 .form {
   background-color: var(--gray-500);
 
