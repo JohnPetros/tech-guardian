@@ -10,10 +10,14 @@ function checkRole(role, errorMessage) {
         ? '/open-orders'
         : request.session.previousRoute
 
+    if (user.role === 'admin') {
+      return next()
+    }
+
     if (user.role !== role) {
       const flashMessage = new FlashMessage(response.flash)
 
-      flashMessage.add('error', errorMessage)
+      if (errorMessage) flashMessage.add('error', errorMessage)
 
       flashMessage.addMultipleByRoute(previousRoute, request.body)
 
