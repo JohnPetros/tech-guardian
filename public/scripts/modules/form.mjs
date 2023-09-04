@@ -4,6 +4,7 @@ export class Form {
     'validatePassword',
     'validateRequired',
     'validateMinLength',
+    'validateMaxLength',
     'validateEqual',
   ]
 
@@ -64,7 +65,7 @@ export class Form {
   setInputAvatar(inputAvatar, file) {
     const avatar = inputAvatar.querySelector('.avatar')
 
-    console.log(avatar);
+    console.log(avatar)
 
     const reader = new FileReader()
     reader.onload = ({ target }) => (avatar.src = target.result)
@@ -90,7 +91,7 @@ export class Form {
   }
 
   getInputsByType(type) {
-    return Array.from(this.inputs).filter((input) => input.type === type);
+    return Array.from(this.inputs).filter((input) => input.type === type)
   }
 
   getInput(inputId) {
@@ -144,6 +145,21 @@ export class Form {
     return false
   }
 
+  validateMaxLength(input, max) {
+    this.removeErrors(input)
+
+    if (input.value.length <= max) {
+      return true
+    }
+
+    this.showError(
+      `${input.placeholder} deve ter no máximo ${max} caracteres`,
+      input
+    )
+
+    return false
+  }
+
   validateEqual(input, targetInputId) {
     const targetInput = this.getInput(targetInputId)
 
@@ -168,11 +184,9 @@ export class Form {
     const isPassword = this.passwordRegex.test(input.value)
 
     if (isPassword) {
-      console.log(this.passwordRegex.test(input.value))
       return true
     }
 
-    console.log('por que')
     this.showError(
       'Senha deve conter pelo menos uma letra minúscula, uma maiúscula, um dígito e um caractere especial.',
       input
@@ -205,9 +219,11 @@ export class Form {
   validateInput(input) {
     if (input.type === 'hidden') {
       return
-    } 
+    }
 
     const validations = input.dataset
+
+    console.log(validations)
 
     for (const [validationType, validationValue] of Object.entries(
       validations
