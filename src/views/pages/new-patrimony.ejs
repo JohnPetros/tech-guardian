@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/new-patrimony.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script type="module" src="/scripts/new-patrimony.mjs" defer></script>
+  <title>TechGuardian | Novo Patrimônio</title>
+</head>
+<body>
+
+  <%- include("../partials/header.ejs", { user: user }) %>
+
+  <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
+
+  <main class="container">
+
+    <h2>Nova solicitação</h2>
+
+   <form action="/patrimony/create" method="post" class="form" data-form>
+    <fieldset class="inputs">
+      <%-
+        include(
+          "../partials/input.ejs",
+          {
+            id: 'number',
+            type: 'number',
+            placeholder: 'Número do patrimônio',
+            value: getFlashMessages('number')[0] ?? '',
+            validations: [
+              { type: 'required' },
+              { type: 'min-length', value: 6 },
+            ]
+          }
+        )
+      %>
+    </fieldset>
+
+      <input type="hidden" name="user_id" value="<%= user.id %>">
+    
+      <button class="button" type="submit">Cadastrar patrimônio</button>
+    </form>
+  </main>
+
+  <%- include("../partials/modal.ejs") %>
+</body>
+</html>
