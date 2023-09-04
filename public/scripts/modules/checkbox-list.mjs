@@ -12,28 +12,41 @@ export class CheckboxList {
     }
   }
 
-  close() {
-    this.checkboxLists.forEach((checkboxList) => {
-      const checkboxes = checkboxList.querySelector('.checkboxes')
-      checkboxes.classList.remove('open')
-
-      const checks = checkboxes.querySelectorAll('.checkbox')
-      checks.forEach((check) =>
-        check.removeEventListener('keydown', this.onCheckKeydown)
-      )
-    })
+  removeOverlay() {
+    const overlay = document.querySelector('.checkbox-list-overlay')
+    overlay.remove()
   }
 
-  open() {
-    this.checkboxLists.forEach((checkboxList) => {
-      const checkboxes = checkboxList.querySelector('.checkboxes')
-      checkboxes.classList.add('open')
+  addOverlay(checkboxList) {
+    const overlay = document.createElement('span')
+    overlay.classList.add('checkbox-list-overlay')
+    overlay.addEventListener('click', () => this.close(checkboxList))
 
-      const checks = checkboxes.querySelectorAll('.checkbox')
-      checks.forEach((check) =>
-        check.addEventListener('keydown', this.onCheckKeydown)
-      )
-    })
+    checkboxList.insertAdjacentElement('afterend', overlay)
+  }
+
+  close(checkboxList) {
+    const checkboxes = checkboxList.querySelector('.checkboxes')
+    checkboxes.classList.remove('open')
+
+    const checks = checkboxes.querySelectorAll('.checkbox')
+    checks.forEach((check) =>
+      check.removeEventListener('keydown', this.onCheckKeydown)
+    )
+
+    this.removeOverlay()
+  }
+
+  open(checkboxList) {
+    const checkboxes = checkboxList.querySelector('.checkboxes')
+    checkboxes.classList.add('open')
+
+    const checks = checkboxes.querySelectorAll('.checkbox')
+    checks.forEach((check) =>
+      check.addEventListener('keydown', this.onCheckKeydown)
+    )
+
+    this.addOverlay(checkboxList)
   }
 
   onCheckboxlistButtonClick({ currentTarget }) {
@@ -43,9 +56,9 @@ export class CheckboxList {
     const isOpen = checkboxes.classList.contains('open')
 
     if (isOpen) {
-      this.close()
+      this.close(checkboxList)
     } else {
-      this.open()
+      this.open(checkboxList)
     }
   }
 
