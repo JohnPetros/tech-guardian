@@ -19,7 +19,7 @@
       <div class="navigation">
         <div>
           <h2>Patrimônios</h2>
-          <span class="amount"><%= patrimonies.length %></span>
+          <span class="amount"><%= patrimoniesCount %></span>
         </div>
 
         <nav>
@@ -33,6 +33,40 @@
           </ul>
         </nav>
       </div>
+
+      <form action="">
+        <ul class="filters">
+          <li class="filter">
+            <%-
+              include(
+                "../partials/input.ejs",
+                  {
+                    id: 'search',
+                    type: 'search',
+                    placeholder: 'Pesquisar patrimônio por número',
+                    icon: 'magnifying-glass',
+                    value: search,
+                    validations: []
+                  }
+                )
+            %>
+          </li>
+        </ul>
+
+        <div class="buttons">
+          <button type="submit" class="filter button">
+            <i class="ph-bold ph-funnel"></i>
+            Filtrar patrimônios
+          </button>
+      
+          <% if (user.role === 'tech') { %>
+            <a class="new-patrimony button" href="/new-patrimony">
+             <i class="ph-bold ph-plus"></i>
+             Cadastrar novo patrimônio
+           </a>
+         <% } %>
+        </div>
+      </form>
 
       
       <% if (!patrimonies.length) { %>
@@ -50,7 +84,16 @@
           <% }) %>
       </div>
 
-   
+      <% if (patrimoniesCount > 9) { %>
+        <%- include("../partials/pagination.ejs", 
+            { 
+              pages: Math.ceil(patrimoniesCount / 9), 
+              currentPage: page,
+              limit: 4,
+            }
+          ) 
+        %>
+     <% } %>
 
     </main>
 
