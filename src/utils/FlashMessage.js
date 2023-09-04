@@ -1,9 +1,10 @@
 class FlashMessage {
   routes = {
-    '/new-order': ['title', 'patrimony_id', 'description'],
     '/': ['email'],
-    '/order': ['order_id', 'title', 'patrimony_id', 'description'],
     '/register': ['name', 'email', 'role_id'],
+    '/new-patrimony': ['number'],
+    '/new-order': ['title', 'patrimony_id', 'description'],
+    '/order': ['order_id', 'title', 'patrimony_id', 'description'],
   }
 
   constructor(flash) {
