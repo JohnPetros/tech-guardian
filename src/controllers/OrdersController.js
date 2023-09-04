@@ -131,11 +131,9 @@ class OrdersController {
     const flashMessage = new FlashMessage(response.flash)
 
     if (errors) {
-      for (const error of errors) {
-        flashMessage.add('error', error)
-      }
+      for (const error of errors) flashMessage.add('error', error)
 
-      flashMessage.addMultipleByRoute('/register', {
+      flashMessage.addMultipleByRoute('/new-order', {
         title,
         description,
         patrimony_id,

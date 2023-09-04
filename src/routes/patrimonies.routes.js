@@ -19,4 +19,10 @@ patrimoniesRouter.get(
   patrimoniesController.renderNewPatrimonyPage
 )
 
+patrimoniesRouter.post(
+  '/patrimony/create',
+  // checkRole('admin'),
+  patrimoniesController.createPatrimony
+)
+
 module.exports = patrimoniesRouter

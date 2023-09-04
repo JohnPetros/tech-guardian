@@ -1,4 +1,5 @@
 const knex = require('../database')
+const uuid = require('uuid')
 const ServerError = require('../errors/ServerError')
 
 class PatrimonyModel {
@@ -29,6 +30,21 @@ class PatrimonyModel {
   async getById(id) {
     return await this.execute(() =>
       knex.from('patrimonies').where({ id }).first()
+    )
+  }
+
+  async getByNumber(number) {
+    return await this.execute(() =>
+      knex.from('patrimonies').where({ number }).first()
+    )
+  }
+
+  async create(number) {
+    await this.execute(() =>
+      knex.from('patrimonies').insert({
+        id: uuid.v4(),
+        number,
+      })
     )
   }
 }
