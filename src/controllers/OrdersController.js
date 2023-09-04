@@ -23,7 +23,7 @@ class OrdersController {
 
     const patrimonyModel = new PatrimonyModel()
 
-    const patrimonies = await patrimonyModel.getAll()
+    const { patrimonies } = await patrimonyModel.getAll({})
 
     const { orders, count } = await getOrdersService.execute({
       isOpen: true,
