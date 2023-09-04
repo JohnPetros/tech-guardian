@@ -5,6 +5,7 @@ export class Form {
     'validateRequired',
     'validateMinLength',
     'validateMaxLength',
+    'validateLength',
     'validateEqual',
   ]
 
@@ -134,7 +135,7 @@ export class Form {
   validateMinLength(input, min) {
     this.removeErrors(input)
 
-    if (input.value.length >= min) {
+    if (input.value.length >= Number(min)) {
       return true
     }
 
@@ -148,12 +149,27 @@ export class Form {
   validateMaxLength(input, max) {
     this.removeErrors(input)
 
-    if (input.value.length <= max) {
+    if (input.value.length <= Number(max)) {
       return true
     }
 
     this.showError(
       `${input.placeholder} deve ter no máximo ${max} caracteres`,
+      input
+    )
+
+    return false
+  }
+
+  validateLength(input, length) {
+    this.removeErrors(input)
+
+    if (input.value.length === Number(length)) {
+      return true
+    }
+
+    this.showError(
+      `${input.placeholder} deve ter exatamente ${length} caracteres`,
       input
     )
 
@@ -222,8 +238,6 @@ export class Form {
     }
 
     const validations = input.dataset
-
-    console.log(validations)
 
     for (const [validationType, validationValue] of Object.entries(
       validations
