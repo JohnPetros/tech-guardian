@@ -17,6 +17,12 @@ class PatrimoniesController {
       patrimoniesCount: count,
     })
   }
+
+  async renderNewPatrimonyPage(request, response) {
+    const { user } = request.session
+
+    response.render('pages/new-patrimony.ejs', { user })
+  }
 }
 
 module.exports = PatrimoniesController
