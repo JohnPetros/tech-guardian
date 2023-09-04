@@ -34,7 +34,7 @@ main.container {
 
   width: 100%;
 
-  box-shadow: 0 0 0 1.2rem var(--gray-400);
+  box-shadow: 0 0 0 8px var(--gray-400);
 }
 
 #search {
