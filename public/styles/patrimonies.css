@@ -1,0 +1,47 @@
+@import './modules/global.css';
+@import './modules/header.css';
+@import './modules/toast.css';
+@import './modules/modal.css';
+@import './modules/navigation.css';
+@import './modules/patrimony-card.css';
+
+main.container {
+  width: 90%;
+  max-width: 1200px;
+
+  margin: 2.4rem auto;
+
+  padding-bottom: 4rem;
+}
+
+.patrimonies-cards {
+  margin-top: 3.2rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: start;
+  gap: 2.4rem;
+
+  min-height: 16rem;
+}
+
+@media (max-width: 1024px) {
+  .patrimonies-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .patrimonies-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.no-patrimoniess-found-message {
+  margin-top: 4rem;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  color: var(--gray-200);
+}
