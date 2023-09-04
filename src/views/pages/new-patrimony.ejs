@@ -30,8 +30,7 @@
             value: getFlashMessages('number')[0] ?? '',
             validations: [
               { type: 'required' },
-              { type: 'min-length', value: 6 },
-              { type: 'max-length', value: 6 }
+              { type: 'length', value: 6 },
             ]
           }
         )

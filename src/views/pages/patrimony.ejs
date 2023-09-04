@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/patrimony.css" />
+    <script type="module" src="/scripts/patrimony.mjs" defer></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <title>TechGuardian | Patrimônio: <%= patrimony.number %></title>
+  </head>
+  <body>
+    <%- include("../partials/header.ejs", { user: user }) %>
+    
+    <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'success', messages: getFlashMessages('success') }) %>
+
+    <main class="container">
+      <h2>Patrimônio</h2>
+
+      <form class="form" action="#" method="post" data-form>
+        <%-
+          include(
+            "../partials/input.ejs",
+            {
+              id: 'number',
+              type: 'number',
+              placeholder: 'Número do patrimônio',
+              value: patrimony.number,
+              validations: [
+                { type: 'required' },
+                { type: 'length', value: 6 },
+              ]
+            }
+          )
+        %>
+
+          <div class="buttons">
+            <button 
+              id="edit"
+              class="button purple" 
+              name="action" 
+              value="/patrimony/<%= patrimony.id %>/edit" 
+              type="button" 
+              data-button
+            >
+              <i class="icon ph-bold ph-pencil-simple"></i>
+              Editar patrimônio
+            </button>
+            <button 
+              id="delete"
+              class="button red" 
+              name="action" 
+              value="/patrimony/<%= patrimony.id %>/delete" 
+              type="button" 
+              data-button
+            >
+              <i class="icon ph-bold ph-trash"></i>
+              Apagar patrimônio
+            </button>
+          </div>
+
+      </form>
+    </main>
+
+    <%- include("../partials/modal.ejs") %>
+  </body>
+</html>
