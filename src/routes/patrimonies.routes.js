@@ -20,6 +20,12 @@ patrimoniesRouter.get(
   patrimoniesController.renderNewPatrimonyPage
 )
 
+patrimoniesRouter.get(
+  '/patrimony/:patrimony_id',
+  checkRole('admin'),
+  patrimoniesController.renderPatrimonyPage
+)
+
 patrimoniesRouter.post(
   '/patrimony/create',
   checkRole('admin'),

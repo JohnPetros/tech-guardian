@@ -1,6 +1,7 @@
 const PatrimonyModel = require('../models/PatrimonyModel')
 const FlashMessage = require('../utils/FlashMessage')
 const CreatePatrimonyService = require('../services/patrimonyServices/CreatePatrimonyService')
+const GetPatrimonyById = require('../services/patrimonyServices/GetPatrimonyById')
 
 class PatrimoniesController {
   async renderPatrimoniesPage(request, response) {
@@ -24,6 +25,27 @@ class PatrimoniesController {
     const { user } = request.session
 
     response.render('pages/new-patrimony.ejs', { user })
+  }
+
+  async renderPatrimonyPage(request, response) {
+    const { user } = request.session
+    const { patrimony_id } = request.params
+
+    const patrimonyModel = new PatrimonyModel()
+
+    const getPatrimonyById = new GetPatrimonyById(patrimonyModel)
+
+    const patrimony = await getPatrimonyById.execute(patrimony_id)
+
+    if (patrimony === 'Patrimônio não encontrado') {
+      const flashMessage = new FlashMessage(response.flash)
+
+      flashMessage.add('error', 'Patrimônio não encontrado')
+
+      return response.redirect('/patrimonies')
+    }
+
+    response.render('pages/patrimony.ejs', { user, patrimony })
   }
 
   async createPatrimony(request, response) {
