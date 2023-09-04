@@ -58,6 +58,10 @@ class PatrimonyModel {
         .where({ id })
     )
   }
+
+  async delete(id) {
+    await this.execute(() => knex.from('patrimonies').del().where({ id }))
+  }
 }
 
 module.exports = PatrimonyModel

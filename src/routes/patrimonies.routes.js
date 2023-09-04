@@ -38,4 +38,10 @@ patrimoniesRouter.post(
   patrimoniesController.editPatrimony
 )
 
+patrimoniesRouter.post(
+  '/patrimony/:patrimony_id/delete',
+  checkRole('admin'),
+  patrimoniesController.deletePatrimony
+)
+
 module.exports = patrimoniesRouter

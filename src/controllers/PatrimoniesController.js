@@ -3,6 +3,7 @@ const FlashMessage = require('../utils/FlashMessage')
 const CreatePatrimonyService = require('../services/patrimonyServices/CreatePatrimonyService')
 const GetPatrimonyById = require('../services/patrimonyServices/GetPatrimonyById')
 const EditPatrimonyService = require('../services/patrimonyServices/EditPatrimonyService')
+const DeletePatrimonyService = require('../services/patrimonyServices/DeletePatrimonyService')
 
 class PatrimoniesController {
   async renderPatrimoniesPage(request, response) {
@@ -100,6 +101,28 @@ class PatrimoniesController {
     flashMessage.add('success', 'Patrimônio editado com sucesso')
 
     return response.redirect('/patrimony/' + patrimony_id)
+  }
+
+  async deletePatrimony(request, response) {
+    const { patrimony_id } = request.params
+
+    const patrimonyModel = new PatrimonyModel()
+
+    const deletePatrimonyService = new DeletePatrimonyService(patrimonyModel)
+
+    const error = await deletePatrimonyService.execute(patrimony_id)
+
+    const flashMessage = new FlashMessage(response.flash)
+
+    if (error) {
+      flashMessage.add('error', error)
+
+      response.redirect('/patrimony/' + patrimony_id)
+    }
+
+    flashMessage.add('success', 'Patrimônio deletado com sucesso')
+
+    return response.redirect('/patrimonies')
   }
 }
 

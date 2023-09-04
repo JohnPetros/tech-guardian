@@ -1,6 +1,6 @@
 const uuid = require('uuid')
 
-class GetPatrimonyById {
+class DeletePatrimonyService {
   constructor(patrimonyModel) {
     this.patrimonyModel = patrimonyModel
   }
@@ -9,13 +9,13 @@ class GetPatrimonyById {
     if (!uuid.validate(id)) {
       return 'Patrimônio não encontrado'
     }
-    
+
     const patrimony = await this.patrimonyModel.getById(id)
 
     if (!patrimony) return 'Patrimônio não encontrado'
 
-    return patrimony
+    await this.patrimonyModel.delete(id)
   }
 }
 
-module.exports = GetPatrimonyById
+module.exports = DeletePatrimonyService
