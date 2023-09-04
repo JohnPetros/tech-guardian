@@ -30,6 +30,9 @@
             <li>
               <a href="/closed-orders" class="nav-link">Finalizados</a>
             </li>
+            <li>
+              <a href="/patrimonies" class="nav-link">Patrimônios</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -57,7 +60,14 @@
       </div>
 
       <% if (openOrdersCount > 9) { %>
-        <%- include("../partials/pagination.ejs", { pages: Math.ceil(openOrdersCount / 9), currentPage: page }) %>
+        <%- include("../partials/pagination.ejs", 
+            { 
+              pages: Math.ceil(openOrdersCount / 9), 
+              currentPage: page,
+              limit: 4,
+            }
+          ) 
+        %>
      <% } %>
 
     </main>

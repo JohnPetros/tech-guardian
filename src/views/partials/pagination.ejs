@@ -1,7 +1,7 @@
 <ul class="pagination" data-pagination>
   <% let hasPrevDots = false %> 
   <% for (let number = 1; number <= pages; number++) { %> 
-    <% if (number <= currentPage - 2) { %>
+    <% if (number <= currentPage - limit) { %>
       <% if (!hasPrevDots) { %>
         <li>
           <span class="dots">...</span>
@@ -10,7 +10,7 @@
       <% } %>
       <% continue %>
     <% } %>
-    <% if (number > currentPage + 2) { %>
+    <% if (number > currentPage + limit) { %>
       <li>
         <span class="dots">...</span>
       </li>

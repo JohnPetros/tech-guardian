@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/open-orders.css" />
+    <link rel="stylesheet" href="/styles/orders.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script type="module" src="/scripts/open-orders.mjs" defer></script>
+    <script type="module" src="/scripts/orders.mjs" defer></script>
     <title>TechGuardian | Solicitações finalizadas</title>
   </head>
   <body>
@@ -29,6 +29,9 @@
             </li>
             <li>
               <a href="/closed-orders" class="nav-link green">Finalizados</a>
+            </li>
+            <li>
+              <a href="/patrimonies" class="nav-link">Patrimônios</a>
             </li>
           </ul>
         </nav>
@@ -56,8 +59,15 @@
           <% }) %>
       </div>
 
-      <% if (closedOrdersCount > 9) { %>
-        <%- include("../partials/pagination.ejs", { pages: Math.ceil(closedOrdersCount / 9), currentPage: page }) %>
+      <% if (openOrdersCount > 9) { %>
+        <%- include("../partials/pagination.ejs", 
+            { 
+              pages: Math.ceil(openOrdersCount / 9), 
+              currentPage: page,
+              limit: 4,
+            }
+          ) 
+        %>
      <% } %>
     </main>
 
