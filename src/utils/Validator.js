@@ -88,7 +88,7 @@ const orderValidation = yup.object().shape({
 
 const patrimonyValidation = yup.object().shape({
   number: yup
-    .number()
+    .string()
     .required('Patrimônio deve ser associado a um número')
     .test(
       'len',
