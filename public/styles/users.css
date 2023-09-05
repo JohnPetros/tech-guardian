@@ -45,7 +45,7 @@ main.container {
   color: var(--gray-700);
 }
 
-.button.new-patrimony {
+.button.new-user {
   background-color: var(--green-500);
   color: var(--gray-700);
   padding: 8px;
