@@ -11,7 +11,11 @@ class UsersController {
 
     const userModel = new UserModel()
 
-    const { users, count } = await userModel.getAll({ search, page })
+    const { users, count } = await userModel.getAll({
+      search,
+      page,
+      sessionUserId: user.id,
+    })
 
     response.render('pages/users.ejs', {
       user,

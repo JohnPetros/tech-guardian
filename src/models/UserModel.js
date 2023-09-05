@@ -43,7 +43,7 @@ class UserModel {
     return await this.execute(() => knex('users').where({ email }).first())
   }
 
-  async getAll({ search = '', page = 1 }) {
+  async getAll({ search = '', page = 1, sessionUserId }) {
     const [{ count }] = await this.execute(() => knex('users').count())
 
     const users = await this.execute(() =>
@@ -58,6 +58,7 @@ class UserModel {
         .from('users')
         .join('roles', 'roles.id', '=', 'users.role_id')
         .where(knex.raw('lower(name)'), 'like', `%${search.toLowerCase()}%`)
+        .whereNot('users.id', sessionUserId)
         .limit(this.limit)
         .offset((page - 1) * this.limit)
     )
