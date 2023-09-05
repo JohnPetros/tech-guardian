@@ -8,7 +8,7 @@
   overflow: hidden;
 }
 
-.avatar {
+.avatar-container .avatar {
   min-width: 100%;
   min-height: 100%;
   border-radius: 50%;
