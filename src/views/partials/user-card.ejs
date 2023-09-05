@@ -1,7 +1,8 @@
-<a href="/user/<%= id %>" class="user-card">
+<a href="/user/<%= id %>" class="user-card <%= role %>">
   <div class="info">
     <strong class="name"><%= name %></strong>
     <small class="email"><%= email %></small>
+    <span class="role <%= role %>"><%= role %></span>
   </div>
   <div class="avatar">
     <%- include("../partials/avatar.ejs", { image: avatar, size: 40 }) %>

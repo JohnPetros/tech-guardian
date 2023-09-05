@@ -1,7 +1,7 @@
 .user-card {
   border-radius: 8px;
 
-  border-left: 8px solid var(--purple-700);
+  border-left: 8px solid;
 
   display: flex;
   align-items: center;
@@ -12,6 +12,18 @@
   padding: 2rem;
 
   transition: transform 0.3s;
+}
+
+.user-card.tech {
+  border-color: var(--purple-700);
+}
+
+.user-card.guardian {
+  border-color: var(--green-500);
+}
+
+.user-card.admin {
+  border-color: var(--yellow-700);
 }
 
 .user-card:hover {
@@ -33,6 +45,24 @@
 
 .user-card .info .email {
   color: var(--gray-200);
+}
+
+.user-card .info .role {
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+.user-card .info .role.tech {
+  color: var(--purple-700);
+}
+
+.user-card .info .role.guardian {
+  color: var(--green-500);
+}
+
+.user-card .info .role.admin {
+  color: var(--yellow-700);
 }
 
 .user-card .avatar {
