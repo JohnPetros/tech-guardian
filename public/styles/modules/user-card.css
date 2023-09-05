@@ -1,0 +1,46 @@
+.user-card {
+  border-radius: 8px;
+
+  border-left: 8px solid var(--purple-700);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: var(--gray-600);
+
+  padding: 2rem;
+
+  transition: transform 0.3s;
+}
+
+.user-card:hover {
+  transform: scale(1.02);
+}
+
+.user-card .info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-card .info .name {
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  color: var(--gray-100);
+}
+
+.user-card .info .email {
+  color: var(--gray-200);
+}
+
+.user-card .avatar {
+  border-radius: 50%;
+
+  width: 5.2rem;
+  height: 5.2rem;
+
+  display: grid;
+  place-content: center;
+}
