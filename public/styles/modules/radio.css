@@ -53,6 +53,10 @@
   color: var(--green-500);
 }
 
+.radio-container.yellow input[type='radio']:checked + label {
+  color: var(--yellow-700);
+}
+
 .radio-container.purple:has(input[type='radio']:checked) .radio {
   border-color: var(--purple-700);
 }
@@ -67,4 +71,12 @@
 
 .radio-container.green:has(input[type='radio']:checked) .radio::after {
   background-color: var(--green-500);
+}
+
+.radio-container.yellow:has(input[type='radio']:checked) .radio {
+  border-color: var(--yellow-700);
+}
+
+.radio-container.yellow:has(input[type='radio']:checked) .radio::after {
+  background-color: var(--yellow-700);
 }
