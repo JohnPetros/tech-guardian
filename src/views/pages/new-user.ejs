@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<body lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/new-user.css" />
+    <script type="module" src="/scripts/new-user.mjs" defer></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <title>Tech Guardian | Novo Usuário</title>
+  </head>
+  
+    <%- include("../partials/header.ejs", { user: user }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'success', messages: getFlashMessages('success') }) %>
+
+    <main class="container">
+
+      <form class="form" action="" method="post" enctype="multipart/form-data" data-form>
+        <fieldset class="inputs">
+          <%-
+            include(
+              "../partials/input-avatar.ejs",
+              {
+                value: user.avatar,
+                isEditable: true,
+                validations: [
+                  { type: 'required' },
+                ]
+              }
+            )
+          %>
+
+          <%-
+            include(
+              "../partials/input.ejs",
+              {
+                id: 'name',
+                type: 'text',
+                placeholder: 'Nome de usuário',
+                icon: 'user',
+                value: user.name,
+                validations: [
+                  { type: 'required' },
+                  { type: 'min-length', value: 4 },
+                ]
+              }
+            )
+          %>
+
+          <%-  
+            include(
+              "../partials/input.ejs",
+              {
+                id: 'email',
+                type: 'text',
+                icon: 'envelope-simple',
+                placeholder: 'E-mail',
+                value: user.email,
+                validations: [
+                  { type: 'required' },
+                  { type: 'email' },
+                ]
+              }
+            )
+          %>    
+
+          <%- 
+            include(
+              "../partials/input.ejs",
+              { 
+                id: 'password',
+                type: 'password',
+                placeholder: 'Senha',
+                icon: 'key',
+                value: '',
+                validations: [
+                  { type: 'required' },
+                  { type: 'password' },
+                ]
+              }
+            ) 
+          %>
+
+          <%- 
+            include(
+              "../partials/input.ejs",
+              { 
+                id: 'password_confirmation',
+                type: 'password',
+                placeholder: 'Confirme sua senha',
+                icon: 'key',
+                value: '',
+                validations: [
+                  { type: 'required' },
+                  { type: 'equal', value: 'password' },
+                ]
+              }
+            ) 
+          %>
+
+          <div class="radios">
+            <%- 
+              include("../partials/radio.ejs", 
+                { 
+                  id: roles[0].id,
+                  title: roles[0].title,
+                  name: 'role_id',
+                  color: 'purple',
+                  isChecked: getFlashMessages('role_id')[0] ? roles[0].id === getFlashMessages('role_id')[0] : true,
+                }) 
+            %>
+        
+            <%- 
+              include("../partials/radio.ejs",
+                { 
+                  id: roles[1].id,
+                  title: roles[1].title,
+                  name: 'role_id',
+                  color: 'green',
+                  isChecked: roles[1].id === getFlashMessages('role_id')[0],
+                }) 
+            %>
+
+            <%- 
+              include("../partials/radio.ejs",
+                { 
+                  id: roles[2].id,
+                  title: roles[2].title,
+                  name: 'role_id',
+                  color: 'yellow',
+                  isChecked: roles[2].id === getFlashMessages('role_id')[0],
+                }) 
+              %>
+
+          </div>
+
+        </fieldset>
+
+          <button 
+            id="delete"
+            class="button green" 
+            name="action" 
+            value="/user/<%= user.id %>/edit" 
+            type="button"
+            data-button
+          >
+            <i class="icon ph-bold ph-user"></i>
+            Cadastrar usuário
+          </button>
+      </form>
+    </main>
+
+    <%- include("../partials/modal.ejs") %>
+  </body>
+</html>
