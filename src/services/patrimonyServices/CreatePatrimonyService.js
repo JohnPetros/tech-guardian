@@ -14,8 +14,6 @@ class CreatePatrimonyService {
 
     const patrimony = await this.patrimonyModel.getByNumber(number)
 
-    console.log(patrimony)
-
     if (patrimony) return ['Patrimônio já existente']
 
     await this.patrimonyModel.create(number)

@@ -12,7 +12,6 @@ class PatrimoniesController {
 
     const patrimonyModel = new PatrimonyModel()
 
-    
     const { patrimonies, count } = await patrimonyModel.getAll({ search, page })
 
     response.render('pages/patrimonies.ejs', {
