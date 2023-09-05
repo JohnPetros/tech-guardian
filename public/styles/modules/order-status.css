@@ -14,10 +14,14 @@
   font-weight: 700;
 }
 
+.order-status p {
+  font-size: 1.4rem;
+}
+
 .order-status.closed {
   color: var(--green-500);
 }
 
 .order-status .icon {
-  font-size: 2.4rem;
+  font-size: 2rem;
 }
