@@ -7,7 +7,8 @@
     <script type="module" src="/scripts/user.mjs" defer></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <title>Tech Guardian | Usuário <%= user.name %></title>
-</head>
+  </head>
+  
     <%- include("../partials/header.ejs", { user: sessionUser }) %>
 
     <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
@@ -40,6 +41,7 @@
                 placeholder: 'Nome de usuário',
                 icon: 'user',
                 value: user.name,
+                isDisabled: sessionUser.role === 'admin' || user.id === sessionUser.id,
                 validations: [
                   { type: 'required' },
                   { type: 'min-length', value: 4 },
@@ -57,6 +59,7 @@
                 icon: 'envelope-simple',
                 placeholder: 'E-mail',
                 value: user.email,
+                isDisabled: sessionUser.role === 'admin' || user.id === sessionUser.id,
                 validations: [
                   { type: 'required' },
                   { type: 'email' },
@@ -74,6 +77,7 @@
                 placeholder: 'Senha',
                 icon: 'key',
                 value: '',
+                isDisabled: sessionUser.role === 'admin' || user.id === sessionUser.id,
                 validations: [
                   { type: 'required' },
                   { type: 'password' },
@@ -91,6 +95,7 @@
                 placeholder: 'Confirme sua senha',
                 icon: 'key',
                 value: '',
+                isDisabled: sessionUser.role === 'admin' || user.id === sessionUser.id,
                 validations: [
                   { type: 'required' },
                   { type: 'equal', value: 'password' },
@@ -100,7 +105,7 @@
           %>
 
           <div class="radios">
-            <% if (roles[0].id === user.role_id || user.id === sessionUser.id) { %>
+            <% if (roles[0].id === user.role_id || user.id === sessionUser.id || sessionUser.role === 'admin') { %>
               <%- 
                 include("../partials/radio.ejs", 
                   { 
@@ -114,7 +119,7 @@
             <% } %>
         
            
-            <% if (roles[1].id === user.role_id || user.id === sessionUser.id) { %>
+            <% if (roles[1].id === user.role_id || user.id === sessionUser.id || sessionUser.role === 'admin') { %>
             <%- 
               include("../partials/radio.ejs",
                 { 
@@ -131,7 +136,7 @@
 
         </fieldset>
 
-        <% if (user.id === sessionUser.id) { %>
+        <% if (sessionUser.role === 'admin' || user.id === sessionUser.id) { %>
           <div class="buttons">
             <button 
               id="edit-password"
