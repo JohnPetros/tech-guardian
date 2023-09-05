@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/users.css" />
+    <script type="module" src="/scripts/users.mjs" defer></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <title>TechGuardian | Usuários</title>
+  </head>
+  <body>
+    <%- include("../partials/header.ejs", { user: user }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'success', messages: getFlashMessages('success') }) %>
+
+    <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
+
+    <main class="container">
+      <div class="navigation">
+        <div>
+          <h2>Usuários</h2>
+          <span class="amount"><%= usersCount %></span>
+        </div>
+
+        <nav>
+          <ul>
+            <li>
+              <a href="/open-orders" class="nav-link">Solicitações</a>
+            </li>
+            <li>
+              <a href="/patrimonies" class="nav-link">Patrimônios</a>
+            </li>
+            <li>
+              <a href="/users" class="nav-link purple">Usuários</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <form action="">
+        <ul class="filters">
+          <li class="filter">
+            <%-
+              include(
+                "../partials/input.ejs",
+                  {
+                    id: 'search',
+                    type: 'search',
+                    placeholder: 'Pesquisar usuário por nome',
+                    icon: 'magnifying-glass',
+                    value: search,
+                    validations: []
+                  }
+                )
+            %>
+          </li>
+        </ul>
+
+        <div class="buttons">
+          <button type="submit" class="filter button">
+            <i class="ph-bold ph-funnel"></i>
+            filtrar usuários
+          </button>
+      
+            <a class="new-patrimony button" href="/new-patrimony">
+             <i class="ph-bold ph-plus"></i>
+             cadastrar novo usuário
+           </a>
+        </div>
+      </form>
+
+      
+      <% if (!users.length) { %>
+        <p class="no-orders-found-message">Nenhum usuário encontrado encontrado.</p>
+     <% } %>
+
+      <div class="users-cards">
+        <% users.forEach(user => { %> 
+          <%-
+            include("../partials/user-card.ejs", 
+              { 
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                avatar: user.avatar,
+                role: user.role,
+              }) 
+            %> 
+          <% }) %>
+      </div>
+
+      <% if (usersCount > 9) { %>
+        <%- include("../partials/pagination.ejs", 
+            { 
+              pages: Math.ceil(usersCount / 9), 
+              currentPage: page,
+              limit: 4,
+            }
+          ) 
+        %>
+     <% } %>
+
+    </main>
+
+    <%- include("../partials/modal.ejs") %>
+  </body>
+</html>
