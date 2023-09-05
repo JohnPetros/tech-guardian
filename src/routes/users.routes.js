@@ -16,12 +16,23 @@ usersRouter.get('/user/:user_id', usersController.renderUserPage)
 
 usersRouter.get('/users', checkRole('admin'), usersController.renderUsersPage)
 
-usersRouter.get('/new-user', checkRole('admin'), usersController.renderNewUserPage)
+usersRouter.get(
+  '/new-user',
+  checkRole('admin'),
+  usersController.renderNewUserPage
+)
 
 usersRouter.post(
   '/user/:user_id/edit',
   upload.single('avatar'),
   usersController.editUser
+)
+
+usersRouter.post(
+  '/user/create',
+  checkRole('admin'),
+  upload.single('avatar'),
+  usersController.createUser
 )
 
 module.exports = usersRouter
