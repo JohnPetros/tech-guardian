@@ -10,6 +10,12 @@ class RoleModel {
     }
   }
 
+  async getAll() {
+    return await this.execute(() =>
+      knex.select('id', 'title').from('roles')
+    )
+  }
+
   async getUnrestrictedOnes() {
     return await this.execute(() =>
       knex.select('id', 'title').from('roles').where({ is_restrict: false })

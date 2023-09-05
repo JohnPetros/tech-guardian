@@ -54,6 +54,16 @@ class UsersController {
     })
   }
 
+  async renderNewUserPage(request, response) {
+    const { user } = request.session
+
+    const roleModel = new RoleModel()
+
+    const roles = await roleModel.getAll()
+
+    response.render('pages/new-user.ejs', { user, roles })
+  }
+
   async editUser(request, response) {
     const { user_id } = request.params
     const { name, email, password, password_confirmation, role_id } =
