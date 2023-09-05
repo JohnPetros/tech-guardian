@@ -13,13 +13,14 @@ export class CheckboxList {
   }
 
   removeOverlay() {
-    const overlay = document.querySelector('.checkbox-list-overlay')
+    const overlay = document.querySelector('[data-checkbox-list-overlay]')
     overlay.remove()
   }
 
   addOverlay(checkboxList) {
     const overlay = document.createElement('span')
     overlay.classList.add('checkbox-list-overlay')
+    overlay.setAttribute('data-checkbox-list-overlay', '')
     overlay.addEventListener('click', () => this.close(checkboxList))
 
     checkboxList.insertAdjacentElement('afterend', overlay)
