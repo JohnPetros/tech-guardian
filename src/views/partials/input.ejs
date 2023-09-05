@@ -13,7 +13,12 @@
       value="<%= value %>"
       <% validations.forEach(validation => { %>
         data-validate-<%= validation.type %>="<%= validation.value ?? '' %>"
-        <% }) %>
+      <% }) %>
+
+      <% if (typeof isDisabled !== 'undefined' && isDisabled) { %>
+        disable
+      <% } %>
+      
       data-input
     />
   </div>
