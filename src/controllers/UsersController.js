@@ -5,6 +5,23 @@ const GetUserByIdService = require('../services/userServices/GetUserByIdService'
 const FlashMessage = require('../utils/FlashMessage')
 
 class UsersController {
+  async renderUsersPage(request, response) {
+    const { user } = request.session
+    const { search, page } = request.query
+
+    const userModel = new UserModel()
+
+    const { users, count } = await userModel.getAll({ search, page })
+
+    response.render('pages/users.ejs', {
+      user,
+      users,
+      search,
+      page,
+      usersCount: count,
+    })
+  }
+
   async renderUserPage(request, response) {
     const { user_id } = request.params
 
@@ -76,8 +93,6 @@ class UsersController {
     if (updatedUserId === request.session.user.id) {
       request.session.user = await userModel.getById(updatedUserId)
     }
-
-    console.log(request.session.user)
 
     flashMessage.add('success', 'Conta editada com sucesso')
 

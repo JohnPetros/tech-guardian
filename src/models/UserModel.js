@@ -43,6 +43,28 @@ class UserModel {
     return await this.execute(() => knex('users').where({ email }).first())
   }
 
+  async getAll({ search = '', page = 1 }) {
+    const [{ count }] = await this.execute(() => knex('users').count())
+
+    const users = await this.execute(() =>
+      knex
+        .select(
+          'users.id',
+          'users.name',
+          'users.email',
+          'users.avatar',
+          'roles.title as role'
+        )
+        .from('users')
+        .join('roles', 'roles.id', '=', 'users.role_id')
+        .where(knex.raw('lower(name)'), 'like', `%${search.toLowerCase()}%`)
+        .limit(this.limit)
+        .offset((page - 1) * this.limit)
+    )
+
+    return { users, count }
+  }
+
   async edit({ id, name, email, password, avatar, role_id }) {
     return await this.execute(() =>
       knex
