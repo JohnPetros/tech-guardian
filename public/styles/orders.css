@@ -7,10 +7,9 @@
 @import './modules/toast.css';
 @import './modules/modal.css';
 @import './modules/form.css';
+@import './modules/filters.css';
 @import './modules/input.css';
-@import './modules/select.css';
-@import './modules/input-avatar.css';
-@import './modules/radio.css';
+@import './modules/search.css';
 @import './modules/checkbox-list.css';
 @import './modules/date-picker.css';
 @import './modules/pagination.css';
@@ -24,41 +23,13 @@ main.container {
   padding-bottom: 4rem;
 }
 
-.order-filters {
-  display: flex;
-  align-items: start;
-  justify-content: start;
-  gap: 4.8rem;
-
-  margin-top: 3.2rem;
-
-  width: 80%;
-}
-
-.order-filter {
-  border-radius: 8px;
-
-  width: 100%;
-
-  box-shadow: 0 0 0 8px var(--gray-400);
-}
-
-#search {
-  padding: 8px;
-  font-size: 1.4rem;
-  background-color: var(--gray-700);
-}
-
-.input-container {
-  padding: 4px;
-}
-
 .buttons {
   display: flex;
   align-items: end;
   gap: 8px;
 
   margin-top: 2.8rem;
+  width: max-content;
 }
 
 .button.filter {
@@ -71,12 +42,18 @@ main.container {
   color: var(--gray-700);
 }
 
+.button.new-order {
+  background-color: var(--green-500);
+  color: var(--gray-700);
+  padding: 8px;
+}
+
 .order-cards {
   margin-top: 2rem;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  align-items: start;
+  align-content: start;
   gap: 2.4rem;
 
   min-height: 40rem;

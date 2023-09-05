@@ -55,7 +55,7 @@ main.container {
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  align-items: start;
+  align-content: start;
   gap: 2.4rem;
 
   min-height: 28rem;
