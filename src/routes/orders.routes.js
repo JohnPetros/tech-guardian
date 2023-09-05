@@ -19,7 +19,7 @@ ordersRouter.get(
   ordersController.renderNewOrderPage
 )
 
-ordersRouter.get('/order/:orderId', ordersController.renderOrderPage)
+ordersRouter.get('/order/:order_id', ordersController.renderOrderPage)
 
 ordersRouter.post(
   '/order/create',
