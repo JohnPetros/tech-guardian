@@ -1,0 +1,32 @@
+@import './modules/global.css';
+@import './modules/header.css';
+@import './modules/toast.css';
+@import './modules/modal.css';
+@import './modules/button.css';
+@import './modules/input-avatar.css';
+@import './modules/input.css';
+@import './modules/radio.css';
+@import './modules/form.css';
+@import './modules/input.css';
+
+main.container {
+  width: 90%;
+  max-width: 1200px;
+
+  margin: 4rem auto;
+  padding-bottom: 2.4rem;
+}
+
+.form {
+  max-width: 480px;
+}
+
+.button {
+  margin-top: 2rem;
+}
+
+.radios {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
