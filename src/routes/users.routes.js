@@ -35,4 +35,11 @@ usersRouter.post(
   usersController.createUser
 )
 
+// usersRouter.post(
+//   '/user/:user_id/delete',
+//   checkRole('admin'),
+//   upload.single('avatar'),
+//   usersController.deleteUser
+// )
+
 module.exports = usersRouter

@@ -14,16 +14,22 @@
     <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
 
     <%- include("../partials/toasts.ejs", { type: 'success', messages: getFlashMessages('success') }) %>
+    
+
+    <% const roleId = getFlashMessages('role_id')[0] %>
+
 
     <main class="container">
 
-      <form class="form" action="" method="post" enctype="multipart/form-data" data-form>
+      <%- include("../partials/back-button.ejs", { page: '/users' }) %>
+
+      <form class="form" action="/user/create" method="post" enctype="multipart/form-data" data-form>
         <fieldset class="inputs">
           <%-
             include(
               "../partials/input-avatar.ejs",
               {
-                value: user.avatar,
+                value: 'default.png',
                 isEditable: true,
                 validations: [
                   { type: 'required' },
@@ -40,7 +46,7 @@
                 type: 'text',
                 placeholder: 'Nome de usuário',
                 icon: 'user',
-                value: user.name,
+                value: getFlashMessages('name')[0] ?? '',
                 validations: [
                   { type: 'required' },
                   { type: 'min-length', value: 4 },
@@ -57,7 +63,7 @@
                 type: 'text',
                 icon: 'envelope-simple',
                 placeholder: 'E-mail',
-                value: user.email,
+                value: getFlashMessages('email')[0] ?? '',
                 validations: [
                   { type: 'required' },
                   { type: 'email' },
@@ -89,7 +95,7 @@
               { 
                 id: 'password_confirmation',
                 type: 'password',
-                placeholder: 'Confirme sua senha',
+                placeholder: 'Confirmar senha',
                 icon: 'key',
                 value: '',
                 validations: [
@@ -100,50 +106,52 @@
             ) 
           %>
 
-          <div class="radios">
-            <%- 
-              include("../partials/radio.ejs", 
-                { 
-                  id: roles[0].id,
-                  title: roles[0].title,
-                  name: 'role_id',
-                  color: 'purple',
-                  isChecked: getFlashMessages('role_id')[0] ? roles[0].id === getFlashMessages('role_id')[0] : true,
-                }) 
-            %>
-        
-            <%- 
-              include("../partials/radio.ejs",
-                { 
-                  id: roles[1].id,
-                  title: roles[1].title,
-                  name: 'role_id',
-                  color: 'green',
-                  isChecked: roles[1].id === getFlashMessages('role_id')[0],
-                }) 
-            %>
+          <div>
+            <p class="roles-question">Tipo de usuário</p>
 
-            <%- 
-              include("../partials/radio.ejs",
-                { 
-                  id: roles[2].id,
-                  title: roles[2].title,
-                  name: 'role_id',
-                  color: 'yellow',
-                  isChecked: roles[2].id === getFlashMessages('role_id')[0],
-                }) 
+            <div class="radios">
+
+              <%- 
+                include("../partials/radio.ejs", 
+                  { 
+                    id: roles[0].id,
+                    title: roles[0].title,
+                    name: 'role_id',
+                    color: 'purple',
+                    isChecked: !roleId ? true : roles[1].id === roleId ? true : false,
+                  }) 
               %>
 
+              <%- 
+                include("../partials/radio.ejs",
+                  { 
+                    id: roles[1].id,
+                    title: roles[1].title,
+                    name: 'role_id',
+                    color: 'green',
+                    isChecked: roles[1].id === roleId,
+                  }) 
+              %>
+
+              <%- 
+                include("../partials/radio.ejs",
+                  { 
+                    id: roles[2].id,
+                    title: roles[2].title,
+                    name: 'role_id',
+                    color: 'yellow',
+                    isChecked: roles[2].id === roleId,
+                  }) 
+              %>
+            </div>
+        
           </div>
 
         </fieldset>
 
           <button 
-            id="delete"
             class="button green" 
-            name="action" 
-            value="/user/<%= user.id %>/edit" 
-            type="button"
+            type="submit"
             data-button
           >
             <i class="icon ph-bold ph-user"></i>

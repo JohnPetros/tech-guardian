@@ -17,7 +17,7 @@ class CreateUserService {
   }) {
     const validator = new Validator()
 
-    const errors = await validator.validateRegister({
+    const errors = await validator.validateUser({
       name,
       email,
       password,
@@ -30,7 +30,7 @@ class CreateUserService {
     const user = await this.userModel.getByEmail(email)
 
     if (user) {
-      return { errors: ['E-mail já em uso'], user: null }
+      return ['E-mail já em uso']
     }
 
     if (avatarFile) {
@@ -54,7 +54,7 @@ class CreateUserService {
       name,
       email,
       password: await bcrypt.hash(password, 8),
-      avatar: avatarFile?.filename,
+      avatar: avatarFile.filename,
       role_id,
     })
   }

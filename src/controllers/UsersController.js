@@ -1,6 +1,6 @@
 const RoleModel = require('../models/RoleModel')
 const UserModel = require('../models/UserModel')
-const RegisterUserService = require('../services/sessionServices/RegisterUserService')
+const CreateUserService = require('../services/userServices/CreateUserService')
 const EditUserService = require('../services/userServices/EditUserService')
 const GetUserByIdService = require('../services/userServices/GetUserByIdService')
 const FlashMessage = require('../utils/FlashMessage')
@@ -8,7 +8,7 @@ const FlashMessage = require('../utils/FlashMessage')
 class UsersController {
   async renderUsersPage(request, response) {
     const { user } = request.session
-    const { search, page } = request.query
+    const { search, page, roles_ids } = request.query
 
     const userModel = new UserModel()
 
@@ -18,12 +18,18 @@ class UsersController {
       sessionUserId: user.id,
     })
 
+    const roleModel = new RoleModel()
+
+    const roles = await roleModel.getAll()
+
     response.render('pages/users.ejs', {
       user,
       users,
       search,
       page,
       usersCount: count,
+      roles,
+      roles_ids,
     })
   }
 
@@ -46,7 +52,7 @@ class UsersController {
 
     const roleModel = new RoleModel()
 
-    const roles = await roleModel.getUnrestrictedOnes()
+    const roles = await roleModel.getAll()
 
     response.render('pages/user.ejs', {
       user,
@@ -117,18 +123,22 @@ class UsersController {
   async createUser(request, response) {
     const { name, email, password, password_confirmation, role_id } =
       request.body
+    const avatarFile = request.file
 
     const userModel = new UserModel()
     const roleModel = new RoleModel()
-    const registerUserService = new RegisterUserService(userModel, roleModel)
+    const createUserService = new CreateUserService(userModel, roleModel)
 
-    const { errors } = await registerUserService.execute({
+    const errors = await createUserService.execute({
       name,
       email,
       password,
       password_confirmation,
       role_id,
+      avatarFile,
     })
+
+    console.log(errors)
 
     const flashMessage = new FlashMessage(response.flash)
 

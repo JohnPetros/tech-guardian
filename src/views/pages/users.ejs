@@ -51,7 +51,20 @@
                     value: search,
                     validations: []
                   }
-                )
+              )
+            %>
+          </li>
+          <li class="filter">
+            <%-
+              include(
+                "../partials/checkbox-list.ejs",
+                  {
+                    title: 'Tipos de usuário',
+                    name: 'roles_ids',
+                    items: roles.map(role => ({ id: role.id, value: role.title })),
+                    checkedItemsIds: roles_ids
+                  }
+              )
             %>
           </li>
         </ul>
