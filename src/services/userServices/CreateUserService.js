@@ -54,7 +54,7 @@ class CreateUserService {
       name,
       email,
       password: await bcrypt.hash(password, 8),
-      avatar: avatarFile.filename,
+      avatar: avatarFile?.filename ?? 'default.png',
       role_id,
     })
   }
