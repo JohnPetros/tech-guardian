@@ -3,6 +3,8 @@ const uuid = require('uuid')
 const ServerError = require('../errors/ServerError')
 
 class UserModel {
+  limit = 9
+  
   async execute(method) {
     try {
       return await method()
@@ -44,7 +46,12 @@ class UserModel {
   }
 
   async getAll({ search = '', page = 1, sessionUserId }) {
-    const [{ count }] = await this.execute(() => knex('users').count())
+    const [{ count }] = await this.execute(() =>
+      knex('users')
+        .where(knex.raw('lower(name)'), 'like', `%${search.toLowerCase()}%`)
+        .whereNot('users.id', sessionUserId)
+        .count()
+    )
 
     const users = await this.execute(() =>
       knex

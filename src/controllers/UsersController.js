@@ -1,5 +1,6 @@
 const RoleModel = require('../models/RoleModel')
 const UserModel = require('../models/UserModel')
+const RegisterUserService = require('../services/sessionServices/RegisterUserService')
 const EditUserService = require('../services/userServices/EditUserService')
 const GetUserByIdService = require('../services/userServices/GetUserByIdService')
 const FlashMessage = require('../utils/FlashMessage')
@@ -111,6 +112,37 @@ class UsersController {
     flashMessage.add('success', 'Conta editada com sucesso')
 
     return response.redirect('/user/' + user_id)
+  }
+
+  async createUser(request, response) {
+    const { name, email, password, password_confirmation, role_id } =
+      request.body
+
+    const userModel = new UserModel()
+    const roleModel = new RoleModel()
+    const registerUserService = new RegisterUserService(userModel, roleModel)
+
+    const { errors } = await registerUserService.execute({
+      name,
+      email,
+      password,
+      password_confirmation,
+      role_id,
+    })
+
+    const flashMessage = new FlashMessage(response.flash)
+
+    if (errors) {
+      for (const error of errors) flashMessage.add('error', error)
+
+      flashMessage.addMultipleByRoute('/new-user', { name, email, role_id })
+
+      return response.redirect('/new-user')
+    }
+
+    flashMessage.add('success', 'Usuário cadastrado com sucesso')
+
+    response.redirect('/users')
   }
 }
 
