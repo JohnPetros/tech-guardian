@@ -1,0 +1,45 @@
+@import './modules/global.css';
+
+main.container {
+  width: 90%;
+  max-width: 1200px;
+  height: 100vh;
+
+  display: grid;
+  place-content: center;
+  gap: 1.2rem;
+
+  margin: 8px auto;
+}
+
+h1 {
+  font-size: 4.8rem;
+  color: var(--purple-700);
+}
+
+h2 {
+  color: var(--gray-100);
+}
+
+span {
+  display: inline-block;
+  margin: 0 1px;
+
+}
+
+.purple {
+  color: var(--purple-700);
+}
+
+p {
+  color: var(--gray-200);
+  font-size: 2rem;
+}
+
+button {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--green-500);
+
+  text-decoration: underline;
+}
