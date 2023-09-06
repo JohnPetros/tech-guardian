@@ -29,6 +29,12 @@ class PatrimonyMock {
       number,
     })
   }
+
+  async delete(id) {
+    this.patrimonies = this.patrimonies.filter(
+      (patrimony) => patrimony.id !== id
+    )
+  }
 }
 
 module.exports = PatrimonyMock
