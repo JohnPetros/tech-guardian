@@ -30,6 +30,12 @@ class PatrimonyMock {
     })
   }
 
+  async edit(id, number) {
+    this.patrimonies = this.patrimonies.map((patrimony) =>
+      patrimony.id === id ? { ...patrimony, number } : patrimony
+    )
+  }
+
   async delete(id) {
     this.patrimonies = this.patrimonies.filter(
       (patrimony) => patrimony.id !== id
