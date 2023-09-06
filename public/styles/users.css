@@ -59,7 +59,7 @@ main.container {
   align-content: start;
   gap: 2.4rem;
 
-  min-height: 28rem;
+  min-height: 36rem;
 }
 
 @media (max-width: 1024px) {

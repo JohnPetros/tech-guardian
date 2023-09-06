@@ -8,12 +8,13 @@
 @import './modules/radio.css';
 @import './modules/form.css';
 @import './modules/input.css';
+@import './modules/back-button.css';
 
 main.container {
   width: 90%;
   max-width: 1200px;
 
-  margin: 4rem auto;
+  margin: 1.2rem auto;
   padding-bottom: 2.4rem;
 }
 
