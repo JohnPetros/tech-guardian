@@ -32,6 +32,10 @@ class UserMock {
   async getById(id) {
     return this.users.find((user) => user.id === id)
   }
+
+  async delete(id) {
+    this.users = this.users.filter((user) => user.id !== id)
+  }
 }
 
 module.exports = UserMock
