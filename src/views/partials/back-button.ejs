@@ -1,0 +1,9 @@
+<button class="back-button" data-page="<%= page %>" onclick="backToPage(this)">
+  <i class="icon ph-bold ph-caret-left"></i>
+</button>
+
+<script>
+  function backToPage({ dataset: { page } }) {
+    location.href = page
+  }
+</script>
