@@ -1,4 +1,4 @@
-<ul class="pagination" data-pagination>
+<ul class="pagination" data-pagination data-current-page="<%= currentPage ?? 1 %>">
   <% let hasPrevDots = false %> 
   <% for (let number = 1; number <= pages; number++) { %> 
     <% if (number <= currentPage - limit) { %>
