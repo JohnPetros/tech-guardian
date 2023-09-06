@@ -6,11 +6,11 @@ const GetOrderByIdService = require('../services/orderServices/GetOrderByIdServi
 const GetOrdersService = require('../services/orderServices/GetOrdersService')
 const CreateOrderService = require('../services/orderServices/CreateOrderService')
 const EditOrderService = require('../services/orderServices/EditOrderService')
-
-const FlashMessage = require('../utils/FlashMessage')
 const DeleteOrderService = require('../services/orderServices/DeleteOrderService')
 const ResolveOrderService = require('../services/orderServices/ResolveOrderService')
 const ReopenOrderService = require('../services/orderServices/ReopenOrderService')
+
+const FlashMessage = require('../utils/FlashMessage')
 
 class OrdersController {
   async renderOpenOrdersPage(request, response) {
@@ -55,7 +55,7 @@ class OrdersController {
 
     const patrimonyModel = new PatrimonyModel()
 
-    const patrimonies = await patrimonyModel.getAll()
+    const { patrimonies } = await patrimonyModel.getAll({})
 
     const { orders, count } = await getOrdersService.execute({
       isOpen: false,
@@ -86,6 +86,7 @@ class OrdersController {
 
   async renderOrderPage(request, response) {
     const { user } = request.session
+    const { order_id } = request.params
 
     const orderModel = new OrderModel()
 
@@ -95,7 +96,7 @@ class OrdersController {
 
     const { patrimonies } = await patrimonyModel.getAll({})
 
-    const order = await getOrderById.execute(request.params.orderId)
+    const order = await getOrderById.execute(order_id)
 
     if (order === 'Solicitação não encontrada') {
       const flashMessage = new FlashMessage(response.flash)

@@ -3,7 +3,7 @@ const { Router } = require('express')
 const OrdersController = require('../controllers/OrdersController')
 
 const checkRole = require('../middlewares/checkRole')
-const checkUserId = require('../middlewares/checkUserId')
+const checkSessionUserId = require('../middlewares/checkSessionUserId')
 
 const ordersRouter = new Router()
 
@@ -30,14 +30,14 @@ ordersRouter.post(
 ordersRouter.post(
   '/order/:order_id/edit',
   checkRole('tech', 'Você precisa ser um Tech para editar uma solicitação'),
-  checkUserId('Somente o criador da solicitação pode editá-lo'),
+  checkSessionUserId('Somente o criador da solicitação pode editá-la'),
   ordersController.editOrder
 )
 
 ordersRouter.post(
   '/order/:order_id/delete',
   checkRole('tech', 'Você precisa ser um Tech para deletar uma solicitação'),
-  checkUserId('Somente o criador da solicitação pode deletá-lo'),
+  checkSessionUserId('Somente o criador da solicitação pode deletá-la'),
   ordersController.deleteOrder
 )
 
@@ -50,7 +50,7 @@ ordersRouter.post(
 ordersRouter.post(
   '/order/:order_id/reopen',
   checkRole('tech', 'Você precisa ser um Tech para reabrir uma solicitação'),
-  checkUserId('Somente o criador da solicitação pode reabrí-lo'),
+  checkSessionUserId('Somente o criador da solicitação pode reabrí-lo'),
   ordersController.reopenOrder
 )
 
