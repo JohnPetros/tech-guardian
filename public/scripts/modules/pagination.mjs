@@ -6,6 +6,18 @@ export class Pagination {
 
     if (this.pages.length) {
       this.pages.forEach((page) => this.setPageLink(page))
+      this.setUrl()
+    }
+  }
+
+  setUrl() {
+    const url = new URL(location.href)
+
+    const { currentPage } = this.pagination.dataset
+
+    if (!url.searchParams.has('page')) {
+      url.searchParams.append('page', currentPage)
+      history.pushState(null, null, url.href)
     }
   }
 
