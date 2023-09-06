@@ -6,12 +6,13 @@
 @import './modules/form.css';
 @import './modules/toast.css';
 @import './modules/modal.css';
+@import './modules/back-button.css';
 
 main.container {
   width: 90%;
   max-width: 540px;
 
-  margin: 4rem auto;
+  margin: 8px auto;
 }
 
 h2 {
