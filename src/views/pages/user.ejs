@@ -8,7 +8,7 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <title>Tech Guardian | Usuário <%= user.name %></title>
   </head>
-  
+
     <%- include("../partials/header.ejs", { user: sessionUser }) %>
 
     <%- include("../partials/toasts.ejs", { type: 'error', messages: getFlashMessages('error') }) %>
@@ -17,6 +17,12 @@
 
     <main class="container">
 
+      <%- include(
+          "../partials/back-button.ejs", 
+          { page: sessionUser.role === 'admin' ? '/users' : '/open-orders' }
+        ) 
+      %>
+
       <form class="form" action="" method="post" enctype="multipart/form-data" data-form>
         <fieldset class="inputs">
           <%-
@@ -24,7 +30,7 @@
               "../partials/input-avatar.ejs",
               {
                 value: user.avatar,
-                isEditable: user.id === sessionUser.id,
+                isEditable: sessionUser.role === 'admin' || user.id === sessionUser.id,
                 validations: [
                   { type: 'required' },
                 ]
@@ -132,6 +138,19 @@
               %>
             <% } %>
 
+            <% if (roles[2].id === user.role_id || user.id === sessionUser.id || sessionUser.role === 'admin') { %>
+              <%- 
+                include("../partials/radio.ejs",
+                  { 
+                    id: roles[2].id,
+                    title: roles[2].title,
+                    name: 'role_id',
+                    color: 'yellow',
+                    isChecked: roles[2].id === user.role_id,
+                  }) 
+                %>
+              <% } %>
+
           </div>
 
         </fieldset>
@@ -162,7 +181,7 @@
               id="delete"
               class="button red" 
               name="action" 
-              value="/user/<%= user.id %>/edit" 
+              value="/user/<%= user.id %>/delete" 
               type="button" 
               data-button
             >
