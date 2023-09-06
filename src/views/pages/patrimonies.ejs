@@ -89,7 +89,7 @@
         <%- include("../partials/pagination.ejs", 
             { 
               pages: Math.ceil(patrimoniesCount / 9), 
-              currentPage: page,
+              currentPage: page ?? 1,
               limit: 4,
             }
           ) 

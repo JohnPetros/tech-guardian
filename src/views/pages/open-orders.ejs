@@ -85,7 +85,7 @@
         <%- include("../partials/pagination.ejs", 
             { 
               pages: Math.ceil(openOrdersCount / 9), 
-              currentPage: page,
+              currentPage: isNaN(page) ? 1 : page,
               limit: 4,
             }
           ) 
