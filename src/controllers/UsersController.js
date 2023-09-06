@@ -1,8 +1,11 @@
 const RoleModel = require('../models/RoleModel')
 const UserModel = require('../models/UserModel')
+
 const CreateUserService = require('../services/userServices/CreateUserService')
+const DeleteUserService = require('../services/userServices/DeleteUserService')
 const EditUserService = require('../services/userServices/EditUserService')
 const GetUserByIdService = require('../services/userServices/GetUserByIdService')
+
 const FlashMessage = require('../utils/FlashMessage')
 
 class UsersController {
@@ -139,8 +142,6 @@ class UsersController {
       avatarFile,
     })
 
-    console.log(errors)
-
     const flashMessage = new FlashMessage(response.flash)
 
     if (errors) {
@@ -154,6 +155,28 @@ class UsersController {
     flashMessage.add('success', 'Usuário cadastrado com sucesso')
 
     response.redirect('/users')
+  }
+
+  async deleteUser(request, response) {
+    const { user_id } = request.params
+
+    const userModel = new UserModel()
+
+    const deleteOrderService = new DeleteUserService(userModel)
+
+    const error = await deleteOrderService.execute(user_id)
+
+    const flashMessage = new FlashMessage(response.flash)
+
+    if (error) {
+      flashMessage.add('error', error)
+
+      response.redirect('/user/' + user_id)
+    }
+
+    flashMessage.add('success', 'Usuário deletado com sucesso')
+
+    return response.redirect('/users')
   }
 }
 

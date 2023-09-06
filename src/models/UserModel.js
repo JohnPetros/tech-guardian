@@ -106,6 +106,10 @@ class UserModel {
         .returning('id')
     )
   }
+
+  async delete(id) {
+    await this.execute(() => knex.from('users').del().where({ id }))
+  }
 }
 
 module.exports = UserModel
