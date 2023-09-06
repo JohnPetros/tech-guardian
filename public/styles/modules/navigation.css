@@ -1,5 +1,5 @@
 .navigation {
-  width: max-content;
+  width: 100%;
 }
 
 .navigation > div {
@@ -24,7 +24,7 @@
 .navigation nav ul {
   display: flex;
   align-items: center;
-  gap: 2.4rem;
+  gap: 2rem;
 
   flex-wrap: wrap;
 
@@ -36,9 +36,12 @@
 
   border-radius: 8px;
   border: 1px solid var(--gray-100);
-  padding: 8px 3.2rem;
+  padding: 8px 2.4rem;
 
   font-size: 1.2rem;
+
+  display: grid;
+  place-content: center;
 
   color: var(--gray-100);
   text-transform: uppercase;
@@ -59,13 +62,14 @@
   color: var(--purple-700);
 }
 
-@media (max-width: 420px) {
+@media (max-width: 540px) {
   .navigation {
     width: 100%;
   }
 
   .navigation nav ul {
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 2.4rem;
     width: 100%;
   }

@@ -18,6 +18,13 @@
     <%- include("../partials/toasts.ejs", { type: 'success', messages: getFlashMessages('success') }) %>
 
     <main class="container">
+
+      <%- include(
+        "../partials/back-button.ejs", 
+        { page: order.is_open ? '/open-orders' : '/closed-orders' }
+      ) 
+      %>
+
       <form action="#" method="post" data-form>
         <%- 
           include("../partials/order-field.ejs", 
@@ -25,7 +32,7 @@
               id: 'title',
               title: 'Título',
               icon: 'flag-pennant',
-              isDisabled: order.creator_id !== user.id,
+              isDisabled: user.role !== 'admin' && order.creator_id !== user.id,
               text: order.title,
               isBig: false,
               validations: [
@@ -40,7 +47,7 @@
               id: 'patrimony_id',
               title: 'Patrimônio',
               icon: 'desktop-tower',
-              isDisabled: order.creator_id !== user.id || user.role !== 'tech',
+              isDisabled: user.role !== 'admin' && (order.creator_id !== user.id || user.role !== 'tech'),
               options: patrimonies.map(patrimony => ({ id: patrimony.id, value: patrimony.number })),
               selectedOptionId: order.patrimony_id
             })
@@ -52,7 +59,7 @@
               id: 'description',
               title: 'Descrição do problema',
               icon: 'clipboard-text',
-              isDisabled: order.creator_id !== user.id || user.role !== 'tech',
+              isDisabled: user.role !== 'admin' && (order.creator_id !== user.id || user.role !== 'tech'),
               text: order.description ?? 'Problema sem descrição',
               isBig: user.role === 'tech' && !order.resolved_at,
               validations: [
@@ -72,16 +79,15 @@
            }) 
           %>
 
-         <% if ((user.role === 'guardian' && order.is_open) || !order.is_open) { %>
+         <% if (user.role === 'admin' || user.role === 'tech' || !order.is_open) { %>
           <%- 
             include("../partials/order-field.ejs", 
               { 
                 id: 'solution',
                 title: 'Solução',
                 icon: 'seal-check',
-                isDisabled: user.role === 'tech' || !order.is_open,
+                isDisabled: !order.is_open,
                 text: order.solution,
-                hasAutoFocus: true,
                 placeholder: 'Escreva uma solução para o problema',
                 isBig: order.is_open,
                 validations: [
@@ -106,7 +112,7 @@
 
         <input type="hidden" name="user_id" value="<%= user.id %>">
 
-        <% if (order.creator_id === user.id && order.is_open && user.role === 'tech') { %>
+        <% if (((order.creator_id === user.id && user.role === 'tech') || user.role === 'admin') && order.is_open) { %>
           <div class="buttons">
             <button 
               id="edit"
@@ -133,7 +139,7 @@
           </div>
         <% } %>
 
-        <% if (order.creator_id === user.id && !order.is_open && user.role === 'tech') { %>
+        <% if (((order.creator_id === user.id && user.role === 'tech') || user.role === 'admin') && !order.is_open) { %>
           <div class="buttons">
             <button 
               id="reopen"
@@ -160,7 +166,7 @@
           </div>
         <% } %>
 
-        <% if (user.role === 'guardian' && order.is_open) { %>
+        <% if ((user.role === 'admin' || user.role === 'guardian') && order.is_open) { %>
             <button 
               id="resolve"
               class="button" 
