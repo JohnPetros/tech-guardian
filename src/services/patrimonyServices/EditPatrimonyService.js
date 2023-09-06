@@ -13,7 +13,7 @@ class EditPatrimonyService {
 
     const validator = new Validator()
 
-    const errors = await validator.validatePatrimony(number)
+    const errors = await validator.validatePatrimonyNumber(number)
 
     if (errors) return errors
 

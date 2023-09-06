@@ -1,7 +1,7 @@
 const PatrimonyModel = require('../models/PatrimonyModel')
 const FlashMessage = require('../utils/FlashMessage')
 const CreatePatrimonyService = require('../services/patrimonyServices/CreatePatrimonyService')
-const GetPatrimonyById = require('../services/patrimonyServices/GetPatrimonyById')
+const GetPatrimonyByIdService = require('../services/patrimonyServices/GetPatrimonyByIdService')
 const EditPatrimonyService = require('../services/patrimonyServices/EditPatrimonyService')
 const DeletePatrimonyService = require('../services/patrimonyServices/DeletePatrimonyService')
 
@@ -35,9 +35,9 @@ class PatrimoniesController {
 
     const patrimonyModel = new PatrimonyModel()
 
-    const getPatrimonyById = new GetPatrimonyById(patrimonyModel)
+    const getPatrimonyByIdServGetPatrimonyByIdService = new GetPatrimonyByIdService(patrimonyModel)
 
-    const patrimony = await getPatrimonyById.execute(patrimony_id)
+    const patrimony = await getPatrimonyByIdServGetPatrimonyByIdService.execute(patrimony_id)
 
     if (patrimony === 'Patrimônio não encontrado') {
       const flashMessage = new FlashMessage(response.flash)
