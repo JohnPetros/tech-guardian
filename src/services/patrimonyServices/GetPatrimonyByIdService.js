@@ -1,6 +1,6 @@
 const uuid = require('uuid')
 
-class GetPatrimonyById {
+class GetPatrimonyByIdService {
   constructor(patrimonyModel) {
     this.patrimonyModel = patrimonyModel
   }
@@ -18,4 +18,4 @@ class GetPatrimonyById {
   }
 }
 
-module.exports = GetPatrimonyById
+module.exports = GetPatrimonyByIdService
