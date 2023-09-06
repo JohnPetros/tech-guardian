@@ -25,4 +25,21 @@ describe('Create User Service', () => {
 
     expect(errors).toEqual(['E-mail já em uso'])
   })
+
+  it('should not be able to create a user', async () => {
+    const user = {
+      name: 'John',
+      email: 'john@example.com',
+      password: 'jonhDOE77$',
+      password_confirmation: 'jonhDOE77$',
+      role_id: 'ixtxutxouxyil',
+    }
+
+    await createUserService.execute(user)
+
+    const createdUser = await userMock.getById(user.id)
+
+    expect(createdUser.name).toBe(user.name)
+    expect(createdUser.email).toBe(user.email)
+  })
 })
