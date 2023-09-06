@@ -16,6 +16,7 @@ class UsersController {
       search,
       page,
       sessionUserId: user.id,
+      roles_ids,
     })
 
     const roleModel = new RoleModel()

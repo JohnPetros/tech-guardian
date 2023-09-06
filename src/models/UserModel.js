@@ -4,7 +4,7 @@ const ServerError = require('../errors/ServerError')
 
 class UserModel {
   limit = 9
-  
+
   async execute(method) {
     try {
       return await method()
@@ -13,11 +13,18 @@ class UserModel {
     }
   }
 
-  async create({ name, email, password, role_id }) {
+  async create({ name, email, password, avatar, role_id }) {
     const createdUser = await this.execute(() =>
       knex('users')
         .returning(['id', 'name', 'email', 'avatar', 'role_id'])
-        .insert({ id: uuid.v4(), name, email, password, role_id })
+        .insert({
+          id: uuid.v4(),
+          name,
+          email,
+          password,
+          avatar: avatar ?? 'default.png',
+          role_id,
+        })
     )
 
     return createdUser
@@ -45,11 +52,16 @@ class UserModel {
     return await this.execute(() => knex('users').where({ email }).first())
   }
 
-  async getAll({ search = '', page = 1, sessionUserId }) {
+  async getAll({ search = '', page = 1, roles_ids = [], sessionUserId }) {
     const [{ count }] = await this.execute(() =>
       knex('users')
         .where(knex.raw('lower(name)'), 'like', `%${search.toLowerCase()}%`)
         .whereNot('users.id', sessionUserId)
+        .modify((queryBuilder) => {
+          if (roles_ids.length) {
+            queryBuilder.whereIn('users.role_id', roles_ids)
+          }
+        })
         .count()
     )
 
@@ -66,6 +78,11 @@ class UserModel {
         .join('roles', 'roles.id', '=', 'users.role_id')
         .where(knex.raw('lower(name)'), 'like', `%${search.toLowerCase()}%`)
         .whereNot('users.id', sessionUserId)
+        .modify((queryBuilder) => {
+          if (roles_ids.length) {
+            queryBuilder.whereIn('users.role_id', roles_ids)
+          }
+        })
         .limit(this.limit)
         .offset((page - 1) * this.limit)
     )
