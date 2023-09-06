@@ -64,9 +64,7 @@ export class Form {
   }
 
   setInputAvatar(inputAvatar, file) {
-    const avatar = inputAvatar.querySelector('.avatar')
-
-    console.log(avatar)
+    const avatar = inputAvatar.querySelector('[data-avatar]')
 
     const reader = new FileReader()
     reader.onload = ({ target }) => (avatar.src = target.result)
