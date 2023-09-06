@@ -20,9 +20,9 @@
     <main class="container">
 
       <%- include(
-        "../partials/back-button.ejs", 
-        { page: order.is_open ? '/open-orders' : '/closed-orders' }
-      ) 
+          "../partials/back-button.ejs", 
+          { page: order.is_open ? '/open-orders' : '/closed-orders' }
+        ) 
       %>
 
       <form action="#" method="post" data-form>
@@ -79,7 +79,7 @@
            }) 
           %>
 
-         <% if (user.role === 'admin' || user.role === 'tech' || !order.is_open) { %>
+         <% if (user.role === 'admin' || user.role === 'guardian' || !order.is_open) { %>
           <%- 
             include("../partials/order-field.ejs", 
               { 
@@ -118,7 +118,7 @@
               id="edit"
               class="button purple" 
               name="action" 
-              value="/order/<%= order.id %>/edit" 
+              value="/order/<%= order.id %>/<%= user.id %>/edit"
               type="button" 
               data-button
             >
@@ -129,7 +129,7 @@
               id="delete"
               class="button red" 
               name="action" 
-              value="/order/<%= order.id %>/delete" 
+              value="/order/<%= order.id %>/<%= user.id %>/delete"
               type="button" 
               data-button
             >
@@ -145,7 +145,7 @@
               id="reopen"
               class="button purple" 
               name="action" 
-              value="/order/<%= order.id %>/reopen" 
+              value="/order/<%= order.id %>/<%= user.id %>/reopen" 
               type="button" 
               data-button
             >
@@ -156,7 +156,7 @@
               id="delete"
               class="button red" 
               name="action" 
-              value="/order/<%= order.id %>/delete" 
+              value="/order/<%= order.id %>/<%= user.id %>/delete" 
               type="button" 
               data-button
             >
@@ -171,7 +171,7 @@
               id="resolve"
               class="button" 
               name="action" 
-              value="/order/<%= order.id %>/resolve" 
+              value="/order/<%= order.id %>/<%= user.id %>/resolve" 
               type="button" 
               data-button
             >
