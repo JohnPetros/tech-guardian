@@ -86,13 +86,13 @@ const orderValidation = yup.object().shape({
     .required('Uma solicitção deve estar associado a um patrimônio'),
 })
 
-const patrimonyValidation = yup.object().shape({
+const patrimonyNumberValidation = yup.object().shape({
   number: yup
     .string()
     .required('Patrimônio deve ser associado a um número')
     .test(
       'len',
-      'Número de patrimônio deve conter pelo menos seis números',
+      'Número de patrimônio deve conter exatamente seis números',
       (number) => number.toString().length === 6
     ),
 })
@@ -140,9 +140,9 @@ class Validator {
     )
   }
 
-  async validatePatrimony(number) {
+  async validatePatrimonyNumber(number) {
     return this.validate(() =>
-      patrimonyValidation.validate(
+      patrimonyNumberValidation.validate(
         {
           number,
         },

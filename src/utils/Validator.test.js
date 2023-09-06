@@ -159,4 +159,16 @@ describe('Validator', () => {
       ])
     )
   })
+
+  it('should validate incorrect patrimony number', async () => {
+    const patrimonyNumber = '5555555555555555'
+
+    const errors = await validator.validatePatrimonyNumber(patrimonyNumber)
+
+    expect(errors).toEqual(
+      expect.arrayContaining([
+        'Número de patrimônio deve conter exatamente seis números',
+      ])
+    )
+  })
 })
