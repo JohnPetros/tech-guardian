@@ -138,7 +138,7 @@
               %>
             <% } %>
 
-            <% if (roles[2].id === user.role_id || user.id === sessionUser.id || sessionUser.role === 'admin') { %>
+            <% if (sessionUser.role === 'admin') { %>
               <%- 
                 include("../partials/radio.ejs",
                   { 
