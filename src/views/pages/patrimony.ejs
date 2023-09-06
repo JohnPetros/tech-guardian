@@ -16,6 +16,13 @@
     <%- include("../partials/toasts.ejs", { type: 'success', messages: getFlashMessages('success') }) %>
 
     <main class="container">
+
+      <%- include(
+          "../partials/back-button.ejs", 
+          { page: '/patrimonies' }
+        ) 
+      %>
+
       <h2>Patrimônio</h2>
 
       <form class="form" action="#" method="post" data-form>

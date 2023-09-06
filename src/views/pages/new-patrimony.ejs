@@ -16,6 +16,12 @@
 
   <main class="container">
 
+    <%- include(
+        "../partials/back-button.ejs", 
+        { page: '/patrimonies' }
+      ) 
+    %>
+
     <h2>Nova solicitação</h2>
 
    <form action="/patrimony/create" method="post" class="form" data-form>
