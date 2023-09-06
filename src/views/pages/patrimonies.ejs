@@ -30,6 +30,9 @@
             <li>
               <a href="/patrimonies" class="nav-link purple">Patrimônios</a>
             </li>
+            <li>
+              <a href="/users" class="nav-link">Usuários</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -56,21 +59,19 @@
         <div class="buttons">
           <button type="submit" class="filter button">
             <i class="ph-bold ph-funnel"></i>
-            Filtrar patrimônios
+            filtrar patrimônios
           </button>
       
-          <% if (user.role === 'tech') { %>
             <a class="new-patrimony button" href="/new-patrimony">
              <i class="ph-bold ph-plus"></i>
-             Cadastrar novo patrimônio
+             cadastrar novo patrimônio
            </a>
-         <% } %>
         </div>
       </form>
 
       
       <% if (!patrimonies.length) { %>
-          <p class="no-orders-found-message">Nenhuma solicitação encontrada.</p>
+          <p class="no-orders-found-message">Nenhum patrimônio encontrado.</p>
      <% } %>
 
       <div class="patrimonies-cards">
