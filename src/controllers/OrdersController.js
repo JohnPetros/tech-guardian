@@ -240,6 +240,7 @@ class OrdersController {
 
     const error = await reopenOrderService.execute(order_id)
 
+
     const flashMessage = new FlashMessage(response.flash)
 
     if (error) {
@@ -248,7 +249,7 @@ class OrdersController {
       response.redirect('/order/' + order_id)
     }
 
-    flashMessage.add('success', 'Solução reaberta com sucesso')
+    flashMessage.add('success', 'Solicitação reaberta com sucesso')
 
     return response.redirect('/open-orders')
   }

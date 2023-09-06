@@ -28,27 +28,27 @@ ordersRouter.post(
 )
 
 ordersRouter.post(
-  '/order/:order_id/edit',
+  '/order/:order_id/:user_id/edit',
   checkRole('tech', 'Você precisa ser um Tech para editar uma solicitação'),
   checkSessionUserId('Somente o criador da solicitação pode editá-la'),
   ordersController.editOrder
 )
 
 ordersRouter.post(
-  '/order/:order_id/delete',
+  '/order/:order_id/:user_id/delete',
   checkRole('tech', 'Você precisa ser um Tech para deletar uma solicitação'),
   checkSessionUserId('Somente o criador da solicitação pode deletá-la'),
   ordersController.deleteOrder
 )
 
 ordersRouter.post(
-  '/order/:order_id/resolve',
+  '/order/:order_id/:user_id/resolve',
   checkRole('guardian', 'Você precisa ser um Guardian para enviar uma solução'),
   ordersController.resolveOrder
 )
 
 ordersRouter.post(
-  '/order/:order_id/reopen',
+  '/order/:order_id/:user_id/reopen',
   checkRole('tech', 'Você precisa ser um Tech para reabrir uma solicitação'),
   checkSessionUserId('Somente o criador da solicitação pode reabrí-lo'),
   ordersController.reopenOrder

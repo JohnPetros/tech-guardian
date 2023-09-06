@@ -13,23 +13,28 @@ function checkSessionUserId(errorMessage) {
     const previousPage =
       request.session.previousRoute ?? user ? '/open-orders' : '/'
 
+    request.session.previousRoute = currentRoute
+
     if (sessionUser.role === 'admin') {
       return next()
     }
+    const flashMessage = new FlashMessage(response.flash)
 
     if (sessionUser.id !== user_id && isPublicRoute) {
-      const flashMessage = new FlashMessage(response.flash)
 
       if (errorMessage) flashMessage.add('error', errorMessage)
 
       return response.redirect(previousPage)
     }
 
+    console.log(sessionUser.id !== user_id)
+
+
     if (sessionUser.id !== user_id && !isPublicRoute) {
+      if (errorMessage) flashMessage.add('error', errorMessage)
+
       return response.redirect('/')
     }
-
-    request.session.previousRoute = currentRoute
 
     next()
   }

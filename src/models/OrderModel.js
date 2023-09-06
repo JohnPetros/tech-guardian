@@ -59,6 +59,7 @@ class OrderModel {
         })
         .limit(this.limit)
         .offset((page - 1) * this.limit)
+        .orderBy('created_at', 'desc')
     )
 
     return { orders, count: ordersAmount.count }
@@ -138,6 +139,7 @@ class OrderModel {
   }
 
   async reopen(id) {
+    console.log(id);
     await this.execute(() =>
       knex
         .from('orders')
