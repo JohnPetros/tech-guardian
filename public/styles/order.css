@@ -6,16 +6,23 @@
 @import './modules/button.css';
 @import './modules/avatar.css';
 @import './modules/modal.css';
+@import './modules/back-button.css';
 
 main.container {
   width: 90%;
-  max-width: 540px;
+  max-width: 1200px;
 
-  margin: 3.2rem auto;
+  margin: 8px auto;
+}
+
+.back-button {
+  margin-bottom: 1.2rem;
 }
 
 form {
-  width: 100%;
+  width: 540px;
+
+  margin: 0 auto;
 
   display: flex;
   align-items: center;
