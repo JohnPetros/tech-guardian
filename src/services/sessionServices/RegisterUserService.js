@@ -10,7 +10,7 @@ class RegisterUserService {
   async execute({ name, email, password, password_confirmation, role_id }) {
     const validator = new Validator()
 
-    const errors = await validator.validateRegister({
+    const errors = await validator.validateUser({
       name,
       email,
       password,
@@ -22,24 +22,24 @@ class RegisterUserService {
       return { errors, user: null }
     }
 
-    const userAlreadyExist = await this.userModel.getByEmail(email)
+    const user = await this.userModel.getByEmail(email)
 
-    if (userAlreadyExist) {
+    if (user) {
       return { errors: ['E-mail já em uso'], user: null }
     }
 
     const hashedPassword = await bcrypt.hash(password, 8)
 
-    const createdUser = await this.userModel.create({
+    const [createdUser] = await this.userModel.create({
       name,
       email,
       password: hashedPassword,
       role_id,
     })
 
-    const role = await this.roleModel.getTitleById(createdUser[0].role_id)
+    const role = await this.roleModel.getTitleById(createdUser.role_id)
 
-    return { errors: null, user: { ...createdUser[0], role: role.title } }
+    return { errors: null, user: { ...createdUser, role: role.title } }
   }
 }
 

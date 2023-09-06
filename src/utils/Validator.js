@@ -41,7 +41,7 @@ const loginValidation = emailValidation.concat(
   })
 )
 
-const registerValidation = nameValidation
+const userValidation = nameValidation
   .concat(emailValidation)
   .concat(passwordValidation)
   .concat(roleValidation)
@@ -112,7 +112,7 @@ class Validator {
     )
   }
 
-  async validateRegister({
+  async validateUser({
     name,
     email,
     password,
@@ -120,7 +120,7 @@ class Validator {
     role_id,
   }) {
     return this.validate(() =>
-      registerValidation.validate(
+      userValidation.validate(
         { name, email, password, password_confirmation, role_id },
         { abortEarly: false }
       )

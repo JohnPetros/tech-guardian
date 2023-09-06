@@ -55,7 +55,7 @@ describe('Validator', () => {
       role_id: 'bc1cebbc-f20e-409d-ad7f-f567490c0953',
     }
 
-    const errors = await validator.validateRegister(correctInput)
+    const errors = await validator.validateUser(correctInput)
 
     expect(errors).toBe(undefined)
   })
@@ -69,7 +69,7 @@ describe('Validator', () => {
       roleId: '',
     }
 
-    const errors = await validator.validateRegister(correctInput)
+    const errors = await validator.validateUser(correctInput)
 
     expect(errors).toEqual(
       expect.arrayContaining([
@@ -93,7 +93,7 @@ describe('Validator', () => {
       roleId: '555',
     }
 
-    const errors = await validator.validateRegister(incorrectInput)
+    const errors = await validator.validateUser(incorrectInput)
 
     expect(errors).toEqual(
       expect.arrayContaining([
@@ -113,7 +113,7 @@ describe('Validator', () => {
       password: 'john',
     }
 
-    const errors = await validator.validateRegister(user)
+    const errors = await validator.validateUser(user)
 
     expect(errors).toEqual(
       expect.not.arrayContaining([
@@ -132,7 +132,7 @@ describe('Validator', () => {
       role_id: 'bc1cebbc-f20e-409d-ad7f-f567490c0953',
     }
 
-    const errors = await validator.validateRegister(user)
+    const errors = await validator.validateUser(user)
 
     expect(errors).toEqual(
       expect.arrayContaining([
