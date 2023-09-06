@@ -4,6 +4,7 @@
 @import './modules/input.css';
 @import './modules/button.css';
 @import './modules/toast.css';
+@import './modules/radio.css';
 
 main.container {
   display: flex;
