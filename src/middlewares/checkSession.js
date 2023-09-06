@@ -1,11 +1,11 @@
-const publicRoutes = ['/', '/register', '/login-user', '/register-user']
+const PUBLIC_ROUTES = require("../constants/puplic-routes")
 
 function checkSession(request, response, next) {
   const { user } = request.session
 
   const currentRoute = request.originalUrl
 
-  const isPublicRoute = publicRoutes.includes(currentRoute)
+  const isPublicRoute = PUBLIC_ROUTES.includes(currentRoute)
 
   const previousPage =
     request.session.previousRoute ?? user ? '/open-orders' : '/'
