@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/open-orders.css" />
-    <script type="module" src="/scripts/open-orders.mjs" defer></script>
+    <link rel="stylesheet" href="/styles/orders.css" />
+    <script type="module" src="/scripts/orders.mjs" defer></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <title>TechGuardian | Solicitações abertas</title>
   </head>
@@ -30,18 +30,40 @@
             <li>
               <a href="/closed-orders" class="nav-link">Finalizados</a>
             </li>
-            <li>
-              <a href="/patrimonies" class="nav-link">Patrimônios</a>
-            </li>
+            <% if (user.role === 'admin') { %>
+              <li>
+                <a href="/patrimonies" class="nav-link">Patrimônios</a>
+              </li>
+              <li>
+                <a href="/users" class="nav-link">Usuários</a>
+              </li>
+           <% } %>
           </ul>
         </nav>
       </div>
 
+      <form action="">
+        <%- include("../partials/orders-filters.ejs") %>
+
+        <div class="buttons">
+          <button type="submit" class="filter button">
+            <i class="ph-bold ph-funnel"></i>
+            filtrar
+          </button>
       
-      <%- include("../partials/orders-filters.ejs") %>
+          <% if (user.role === 'admin' || user.role === 'tech') { %>
+            <a class="new-order button" href="/new-order">
+             <i class="ph-bold ph-plus"></i>
+             abrir nova solicitação
+           </a>
+         <% } %>
+        </div>
+
+      </form>
+      
 
       <% if (!openOrders.length) { %>
-          <p class="no-orders-found-message">Nenhuma solicitação encontrada.</p>
+        <p class="no-orders-found-message">Nenhuma solicitação encontrada.</p>
      <% } %>
 
       <div class="order-cards">
