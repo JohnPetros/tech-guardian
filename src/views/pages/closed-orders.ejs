@@ -30,15 +30,38 @@
             <li>
               <a href="/closed-orders" class="nav-link green">Finalizados</a>
             </li>
-            <li>
-              <a href="/patrimonies" class="nav-link">Patrimônios</a>
-            </li>
+            <% if (user.role === 'admin') { %>
+              <li>
+                <a href="/patrimonies" class="nav-link">Patrimônios</a>
+              </li>
+              <li>
+                <a href="/users" class="nav-link">Usuários</a>
+              </li>
+           <% } %>
           </ul>
         </nav>
 
       </div>
 
-      <%- include("../partials/orders-filters.ejs") %>
+      <form action="">
+        <%- include("../partials/orders-filters.ejs") %>
+
+        <div class="buttons">
+          <button type="submit" class="filter button">
+            <i class="ph-bold ph-funnel"></i>
+            filtrar
+          </button>
+      
+          <% if (user.role === 'admin' || user.role === 'tech') { %>
+            <a class="new-order button" href="/new-order">
+             <i class="ph-bold ph-plus"></i>
+             abrir nova solicitação
+           </a>
+         <% } %>
+        </div>
+
+      </form>
+
 
       <% if (!closedOrders.length) { %>
         <p class="no-orders-found-message">Nenhuma solicitação encontrada.</p>
@@ -59,10 +82,10 @@
           <% }) %>
       </div>
 
-      <% if (openOrdersCount > 9) { %>
+      <% if (closedOrdersCount > 9) { %>
         <%- include("../partials/pagination.ejs", 
             { 
-              pages: Math.ceil(openOrdersCount / 9), 
+              pages: Math.ceil(closedOrdersCount / 9), 
               currentPage: page,
               limit: 4,
             }
