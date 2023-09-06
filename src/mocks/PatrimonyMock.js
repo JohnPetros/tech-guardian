@@ -1,4 +1,5 @@
-class PatrimonyModel {
+const uuid = require('uuid')
+class PatrimonyMock {
   patrimonies = [
     {
       id: 'b2737076-dcfe-4d8f-b4b3-76dcafdd99ef',
@@ -17,6 +18,17 @@ class PatrimonyModel {
   async getById(id) {
     return this.patrimonies.find((patrimony) => patrimony.id === id)
   }
+
+  async getByNumber(number) {
+    return this.patrimonies.find((patrimony) => patrimony.number === number)
+  }
+
+  async create(number) {
+    this.patrimonies.push({
+      id: uuid.v4(),
+      number,
+    })
+  }
 }
 
-module.exports = PatrimonyModel
+module.exports = PatrimonyMock
