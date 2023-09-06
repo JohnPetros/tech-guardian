@@ -5,12 +5,13 @@
 @import './modules/input.css';
 @import './modules/form.css';
 @import './modules/modal.css';
+@import './modules/back-button.css';
 
 main.container {
   width: 90%;
   max-width: 540px;
 
-  margin: 3.2rem auto;
+  margin: 8px auto;
 }
 
 h2 {
