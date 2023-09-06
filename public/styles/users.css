@@ -7,6 +7,7 @@
 @import './modules/user-card.css';
 @import './modules/avatar.css';
 @import './modules/filters.css';
+@import './modules/checkbox-list.css';
 @import './modules/input.css';
 @import './modules/search.css';
 @import './modules/pagination.css';
@@ -21,7 +22,7 @@ main.container {
 }
 
 .filters {
-  max-width: 40rem;
+  max-width: 64rem;
 }
 
 .button {
@@ -52,7 +53,7 @@ main.container {
 }
 
 .users-cards {
-  margin-top: 3.2rem;
+  margin-top: 2rem;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
