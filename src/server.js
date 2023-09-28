@@ -4,6 +4,7 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const flash = require('express-flash-message').default
+const ejs = require('ejs')
 
 const handleServerError = require('./middlewares/handleServerError')
 const checkSession = require('./middlewares/checkSession')
