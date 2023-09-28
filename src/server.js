@@ -4,7 +4,6 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const flash = require('express-flash-message').default
-const ejs = require('ejs')
 
 const handleServerError = require('./middlewares/handleServerError')
 const checkSession = require('./middlewares/checkSession')
@@ -22,7 +21,6 @@ const routes = require('./routes')
 server.use(express.static('public'))
 
 server.set('view engine', 'ejs')
-server.engine('ejs', ejs)
 server.set('views', path.join(__dirname, 'views'))
 
 server.use(express.urlencoded({ extended: false }))
