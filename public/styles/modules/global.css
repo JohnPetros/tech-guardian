@@ -46,7 +46,7 @@ body {
   overflow-x: hidden;
 }
 
-@media (max-width: 1080px) {
+/* @media (max-width: 1080px) {
   body {
     font-size: 94.75%;
   }
@@ -54,9 +54,9 @@ body {
 
 @media (max-width: 720px) {
   body {
-    font-size: 90.5%;
+    font-size: 98.75%;
   }
-}
+} */
 
 button {
   cursor: pointer;
