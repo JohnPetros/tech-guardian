@@ -6,7 +6,7 @@
   "scripts": {
     "build:server:dev": "webpack --mode development ./webpack.server.js --watch",
     "build:client:dev": "webpack --mode development ./webpack.client.js",
-    "dev": "nodemon ./dist/bundle_server.js",
+    "dev": "nodemon .src/server.js",
     "start:prod": "pm2-runtime start ecosystem.config.js --env production",
     "start:dev": "npm-run-all --parallel dev build:dev",
     "test": "jest"
