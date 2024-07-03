@@ -250,7 +250,7 @@ $ git push origin minha-feature
 
 ## 🎨 Layout
 
-O design do projeto, assim como a ideia geral é inpirado no [RocketHelp](https://github.com/rocketseat-education/ignite-lab-rockethelp), aplicativo desenvolvido no evento Ignite Lab 03 - React Native da [Rocketseat](CjwKCAjw69moBhBgEiwAUFCx2CWmOAmXu);
+O design do projeto, assim como a ideia geral é inpirado no [RocketHelp](https://github.com/rocketseat-education/ignite-lab-rockethelp), aplicativo desenvolvido no evento Ignite Lab 03 - React Native da [Rocketseat](CjwKCAjw69moBhBgEiwAUFCx2CWmOAmXu).
 
 ---
 
