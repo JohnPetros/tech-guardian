@@ -40,17 +40,6 @@ No caso do **Tech Guardian**, há dois tipos de usuário: aquele que pode abrir 
 
 O objetivo para a construção desse projeto foi estudar e aplicar conceitos básicos de backend, como autenticação, permissão de usuário, renderização estática, CRUD, paginação e filtragem de dados utilizando [NodeJs](https://nodejs.org/en/about) e [EJS](https://ejs.co/).
 
-### ⏹️ Demonstração
-
-<table align="center">
-  <tr>
-    <td align="center" width="700">
-    <span>Página da Urna funcionando<br/></span>
-    <img alt="Home page" src=".github/tech-guardian-funcionando.gif" alt="Demonstração da urna funcionando" />
-    </td>
-  </tr>
-</table>
-
 ---
 
 ## ✨ Funcionalidades
