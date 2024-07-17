@@ -63,7 +63,7 @@ O objetivo para a construção desse projeto foi estudar e aplicar conceitos bá
 - [x] Deve ser possível paginar os chamados 
 - [x] Deve ser possível aplicar uma ou mais filtragens ao mesmo tempo
 - [x] Qualquer tipo de usuário pode ver os chamados listados
-- [] Na listagem de chamados fechados deve ser possível ver os dados do usuário que solucionou o chamado
+- [ ] Na listagem de chamados fechados deve ser possível ver os dados do usuário que solucionou o chamado
 
 ### Criação de chamado
 - [x] Deve ser possível criar um novo chamado
