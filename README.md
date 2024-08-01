@@ -34,7 +34,7 @@
 
 ## 🖥️ Sobre o Projeto
 
-Esse é um projeto **help desk**, ou seja, uma aplicação voltada para registrar e solucionar problemas relacionado a algum hardware ou sistema de uma empresa.
+Esse é um projeto **Help Desk**, ou seja, uma aplicação voltada para registrar e solucionar problemas relacionado a algum hardware ou sistema de uma empresa.
 
 No caso do **Tech Guardian**, há dois tipos de usuário: aquele que pode abrir chamados relatando a ocorrência de um problema relacionado a um patrimônio da empresa (denominado como **Tech**), e aquele que pode sugerir uma solução para resolver o problema em questão (denominado como **Guardian**).
 
